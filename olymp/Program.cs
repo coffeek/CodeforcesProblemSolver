@@ -28,7 +28,7 @@ namespace Olymp
 
     public string ReadToEnd()
     {
-      return this.reader.ReadToEnd();
+      return reader.ReadToEnd();
     }
 
     public int ReadInt()
@@ -40,20 +40,20 @@ namespace Olymp
       if (c == '-' || c == '+')
       {
         isNegative = c == '-';
-        c = this.reader.Read();
+        c = reader.Read();
         if (c == -1)
           throw new EndOfStreamException("Digit expected, but end of stream occurs");
       }
       if (!char.IsDigit((char)c))
         throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
       var result = (char)c - '0';
-      c = this.reader.Read();
+      c = reader.Read();
       while (c > 0 && !char.IsWhiteSpace((char)c))
       {
         if (!char.IsDigit((char)c))
           throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
         result = result * 10 + (char)c - '0';
-        c = this.reader.Read();
+        c = reader.Read();
       }
       if (isNegative)
         result = -result;
@@ -67,12 +67,12 @@ namespace Olymp
 
     public long ReadLong()
     {
-      return long.Parse(this.ReadToken());
+      return long.Parse(ReadToken());
     }
 
     public double ReadDouble()
     {
-      return double.Parse(this.ReadToken(), CultureInfo.InvariantCulture);
+      return double.Parse(ReadToken(), CultureInfo.InvariantCulture);
     }
 
     public int[] ReadIntArray(int n)
@@ -84,13 +84,13 @@ namespace Olymp
     }
 
     public (int, int) Read2Int() =>
-      (this.ReadInt(), this.ReadInt());
+      (ReadInt(), ReadInt());
 
     public (int, int, int) Read3Int() =>
-      (this.ReadInt(), this.ReadInt(), this.ReadInt());
+      (ReadInt(), ReadInt(), ReadInt());
 
     public (int, int, int, int) Read4Int() =>
-      (this.ReadInt(), this.ReadInt(), this.ReadInt(), this.ReadInt());
+      (ReadInt(), ReadInt(), ReadInt(), ReadInt());
 
     public long[] ReadLongArray(int n)
     {
@@ -117,18 +117,18 @@ namespace Olymp
       while (c > 0 && !char.IsWhiteSpace((char)c))
       {
         sb.Append((char)c);
-        c = this.reader.Read();
+        c = reader.Read();
       }
       return sb.ToString();
     }
 
     private int SkipWS()
     {
-      var c = this.reader.Read();
+      var c = reader.Read();
       if (c == -1)
         return c;
       while (c > 0 && char.IsWhiteSpace((char)c))
-        c = this.reader.Read();
+        c = reader.Read();
       return c;
     }
 

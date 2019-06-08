@@ -12,7 +12,7 @@ namespace Olymp
     {
       Assert.AreEqual(
 @"",
-        this.GetResult(
+        GetResult(
 @""));
     }
 
@@ -21,7 +21,7 @@ namespace Olymp
     {
       Assert.AreEqual(
 @"",
-        this.GetResult(
+        GetResult(
 @""));
     }
 
@@ -30,7 +30,7 @@ namespace Olymp
     {
       Assert.AreEqual(
 @"",
-        this.GetResult(
+        GetResult(
 @""));
     }
 
