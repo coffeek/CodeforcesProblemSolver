@@ -5,7 +5,7 @@ namespace Olymp
 {
   public class Utils
   {
-    private static int IncCount<T>(Dictionary<T, int> counter, T item)
+    public static int IncCount<T>(Dictionary<T, int> counter, T item)
     {
       if (counter.TryGetValue(item, out var count))
         return (counter[item] = count + 1);
@@ -13,7 +13,7 @@ namespace Olymp
       return 1;
     }
 
-    private static void DecCount<T>(Dictionary<T, int> counter, T item)
+    public static void DecCount<T>(Dictionary<T, int> counter, T item)
     {
       if (counter.TryGetValue(item, out var count))
       {
@@ -24,12 +24,12 @@ namespace Olymp
       }
     }
 
-    private static int GetCount<T>(Dictionary<T, int> counter, T item)
+    public static int GetCount<T>(Dictionary<T, int> counter, T item)
     {
       return counter.TryGetValue(item, out var count) ? count : 0;
     }
 
-    private static int GCD(int a, int b)
+    public static int GCD(int a, int b)
     {
       while (b != 0)
       {
@@ -41,7 +41,7 @@ namespace Olymp
       return a;
     }
 
-    private static void Permute<T>(T[] a, int i, int n, Action<T[]> process)
+    public static void Permute<T>(T[] a, int i, int n, Action<T[]> process)
     {
       if (i == n - 1)
       {
@@ -58,12 +58,32 @@ namespace Olymp
       }
     }
 
-    private static void Swap<T>(ref T a, ref T b)
+    public static void Swap<T>(ref T a, ref T b)
     {
       T t;
       t = a;
       a = b;
       b = t;
+    }
+
+    public static bool Odd(int x) => x % 2 == 1;
+
+    public static bool Even(int x) => x % 2 == 0;
+
+    public static bool Odd(long x) => x % 2 == 1;
+
+    public static bool Even(long x) => x % 2 == 0;
+
+    public static bool IsPrime(int x)
+    {
+      if (x < 2)
+        return false;
+      for (var i = 2; i * i <= x; i++)
+      {
+        if (x % i == 0)
+          return false;
+      }
+      return true;
     }
   }
 }

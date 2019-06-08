@@ -83,6 +83,15 @@ namespace Olymp
       return a;
     }
 
+    public (int, int) Read2Int() =>
+      (this.ReadInt(), this.ReadInt());
+
+    public (int, int, int) Read3Int() =>
+      (this.ReadInt(), this.ReadInt(), this.ReadInt());
+
+    public (int, int, int, int) Read4Int() =>
+      (this.ReadInt(), this.ReadInt(), this.ReadInt(), this.ReadInt());
+
     public long[] ReadLongArray(int n)
     {
       var a = new long[n];

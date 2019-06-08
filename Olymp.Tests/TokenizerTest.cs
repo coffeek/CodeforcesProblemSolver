@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Olymp.Tests
 {
@@ -67,7 +65,7 @@ a");
     }
 
     [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
+    [ExpectedException(typeof(EndOfStreamException))]
     public void TestParseIntFail2()
     {
       Assert.AreEqual(-1, new Tokenizer(new StringReader("-")).ReadInt());
@@ -121,6 +119,20 @@ a");
 
       Assert.AreEqual(100500, tokenizer.ReadInt());
       Assert.IsNull(tokenizer.ReadToken());
+    }
+
+    [TestMethod]
+    public void TestParseIntTuples()
+    {
+      var input = new StringReader(@"1 2 3
+4
+5 6 7    8
+9");
+      var tokenizer = new Tokenizer(input);
+
+      Assert.AreEqual((1, 2), tokenizer.Read2Int());
+      Assert.AreEqual((3, 4, 5), tokenizer.Read3Int());
+      Assert.AreEqual((6, 7, 8, 9), tokenizer.Read4Int());
     }
 
     [TestMethod]
