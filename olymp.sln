@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olymp", "olymp\Olymp.csproj", "{7719CB81-73F5-4FE2-8687-6FEF14989735}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksProjectGeneratorVSIX", "TasksProjectGeneratorVSIX\TasksProjectGeneratorVSIX.csproj", "{270421A8-B9DA-4793-9EE0-328F6F5A368C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksProjectGeneratorVSIX.Tests", "TasksProjectGeneratorVSIX.Tests\TasksProjectGeneratorVSIX.Tests.csproj", "{405289E6-A765-4F0F-A279-0D0AD8C43912}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5F2FBD1-BAC2-4E0D-A879-56E45BD33575}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,5 +59,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4ACD12F3-11BE-4DC5-8B9C-036EB94FD7F1}
 	EndGlobalSection
 EndGlobal
