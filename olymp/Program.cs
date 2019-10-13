@@ -24,7 +24,7 @@ namespace Olymp
 
   public class Tokenizer
   {
-    private TextReader reader;
+    private readonly TextReader reader;
 
     public string ReadToEnd()
     {
@@ -140,7 +140,7 @@ namespace Olymp
 
   internal class Program
   {
-    public static void Main(string[] args)
+    public static void Main()
     {
       var solver = new ProblemSolver(In);
       solver.Solve();

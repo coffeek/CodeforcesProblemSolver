@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Olymp
 {
@@ -85,5 +86,7 @@ namespace Olymp
       }
       return true;
     }
+
+    public bool IsVovel(char c) => "aeiouy".Contains(c);
   }
 }
