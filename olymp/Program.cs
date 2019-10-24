@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using static System.Console;
+using static System.Math;
 
 namespace Olymp
 {
@@ -33,7 +36,7 @@ namespace Olymp
 
     public int ReadInt()
     {
-      var c = SkipWS();
+      var c = SkipWs();
       if (c == -1)
         throw new EndOfStreamException();
       var isNegative = false;
@@ -44,6 +47,7 @@ namespace Olymp
         if (c == -1)
           throw new EndOfStreamException("Digit expected, but end of stream occurs");
       }
+
       if (!char.IsDigit((char)c))
         throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
       var result = (char)c - '0';
@@ -55,6 +59,7 @@ namespace Olymp
         result = result * 10 + (char)c - '0';
         c = reader.Read();
       }
+
       if (isNegative)
         result = -result;
       return result;
@@ -110,7 +115,7 @@ namespace Olymp
 
     public string ReadToken()
     {
-      var c = SkipWS();
+      var c = SkipWs();
       if (c == -1)
         return null;
       var sb = new StringBuilder();
@@ -119,10 +124,11 @@ namespace Olymp
         sb.Append((char)c);
         c = reader.Read();
       }
+
       return sb.ToString();
     }
 
-    private int SkipWS()
+    private int SkipWs()
     {
       var c = reader.Read();
       if (c == -1)

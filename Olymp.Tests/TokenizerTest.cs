@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Olymp.Tests
 {
-  [TestClass]
+  [TestFixture]
   public class TokenizerTest
   {
-    [TestMethod]
+    [Test]
     public void TestParseEmptyString()
     {
       var input = new StringReader("");
@@ -15,7 +15,7 @@ namespace Olymp.Tests
       Assert.IsNull(tokenizer.ReadToken());
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseTokensSingleLine()
     {
       var input = new StringReader(" aSdf A 1234 *.%()(JFLD __   ad   a  \t");
@@ -30,7 +30,7 @@ namespace Olymp.Tests
       Assert.IsNull(tokenizer.ReadToken());
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseTokensMultiLine()
     {
       var input = new StringReader(@" aSdf A 123
@@ -49,7 +49,7 @@ a");
       Assert.IsNull(tokenizer.ReadToken());
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseInt()
     {
       Assert.AreEqual(-1, new Tokenizer(new StringReader("-1")).ReadInt());
@@ -57,35 +57,35 @@ a");
       Assert.AreEqual(0, new Tokenizer(new StringReader("-00")).ReadInt());
     }
 
-    [TestMethod]
-    [ExpectedException(typeof(EndOfStreamException))]
+    [Test]
     public void TestParseIntFail1()
     {
-      Assert.AreEqual(-1, new Tokenizer(new StringReader("")).ReadInt());
+      Assert.Throws<EndOfStreamException>(() =>
+        Assert.AreEqual(-1, new Tokenizer(new StringReader("")).ReadInt()));
     }
 
-    [TestMethod]
-    [ExpectedException(typeof(EndOfStreamException))]
+    [Test]
     public void TestParseIntFail2()
     {
-      Assert.AreEqual(-1, new Tokenizer(new StringReader("-")).ReadInt());
+      Assert.Throws<EndOfStreamException>(() => 
+        Assert.AreEqual(-1, new Tokenizer(new StringReader("-")).ReadInt()));
     }
 
-    [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
+    [Test]
     public void TestParseIntFail3()
     {
-      Assert.AreEqual(-1, new Tokenizer(new StringReader("-w")).ReadInt());
+      Assert.Throws<InvalidOperationException>(() =>
+        Assert.AreEqual(-1, new Tokenizer(new StringReader("-w")).ReadInt()));
     }
 
-    [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
+    [Test]
     public void TestParseIntFail4()
     {
-      Assert.AreEqual(-1, new Tokenizer(new StringReader("w")).ReadInt());
+      Assert.Throws<InvalidOperationException>(() =>
+        Assert.AreEqual(-1, new Tokenizer(new StringReader("w")).ReadInt()));
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseIntegers()
     {
       var input = new StringReader(@"-1 135 +4390 0000987654321
@@ -101,7 +101,7 @@ a");
       Assert.IsNull(tokenizer.ReadToken());
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseIntArray()
     {
       var input = new StringReader(@"-1 135 +4390 0000987654321
@@ -121,7 +121,7 @@ a");
       Assert.IsNull(tokenizer.ReadToken());
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseIntTuples()
     {
       var input = new StringReader(@"1 2 3
@@ -135,7 +135,7 @@ a");
       Assert.AreEqual((6, 7, 8, 9), tokenizer.Read4Int());
     }
 
-    [TestMethod]
+    [Test]
     public void TestParseReadLine()
     {
       var input = new StringReader(@"

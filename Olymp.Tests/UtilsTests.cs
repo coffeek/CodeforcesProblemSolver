@@ -1,11 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Linq;
+using NUnit.Framework;
 
 namespace Olymp.Tests
 {
-  [TestClass]
+  [TestFixture]
   public class UtilsTests
   {
-    [TestMethod]
+    [Test]
     public void IsPrimeTests()
     {
       Assert.IsFalse(Utils.IsPrime(-199));
@@ -17,6 +19,48 @@ namespace Olymp.Tests
       Assert.IsFalse(Utils.IsPrime(4));
       Assert.IsTrue(Utils.IsPrime(199));
       Assert.IsFalse(Utils.IsPrime(200));
+    }
+
+    private static void AssertArrayEquals<T>(T[] expected, T[] actual)
+    {
+      Assert.AreEqual(expected.Length, actual.Length);
+      for (int j = 0; j < expected.Length; j++)
+        Assert.AreEqual(expected[j], actual[j]);
+    }
+
+    [Test]
+    public void ToBaseTests()
+    {
+      for (int i = 0; i < 1024; i++)
+      {
+        var expected = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
+        var actual = Utils.ToBase(i, 2);
+        AssertArrayEquals(expected, actual);
+      }
+
+      AssertArrayEquals(new[] { 0 }, Utils.ToBase(0, 3));
+      AssertArrayEquals(new[] { 1 }, Utils.ToBase(1, 3));
+      AssertArrayEquals(new[] { 2 }, Utils.ToBase(2, 3));
+      AssertArrayEquals(new[] { 1, 0 }, Utils.ToBase(3, 3));
+      AssertArrayEquals(new[] { 2, 2, 2 }, Utils.ToBase(26, 3));
+      AssertArrayEquals(new[] { 1, 0, 0, 0 }, Utils.ToBase(27, 3));
+    }
+
+    [Test]
+    public void ToLongTests()
+    {
+      for (int i = 0; i < 1024; i++)
+      {
+        var arg = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
+        Assert.AreEqual(i, Utils.ToLong(arg, 2));
+      }
+
+      Assert.AreEqual(0, Utils.ToLong(new[] { 0 }, 3));
+      Assert.AreEqual(1, Utils.ToLong(new[] { 1 }, 3));
+      Assert.AreEqual(2, Utils.ToLong(new[] { 2 }, 3));
+      Assert.AreEqual(3, Utils.ToLong(new[] { 1, 0 }, 3));
+      Assert.AreEqual(26, Utils.ToLong(new[] { 2, 2, 2 }, 3));
+      Assert.AreEqual(27, Utils.ToLong(new[] { 1, 0, 0, 0 }, 3));
     }
   }
 }

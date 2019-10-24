@@ -87,6 +87,39 @@ namespace Olymp
       return true;
     }
 
-    public bool IsVovel(char c) => "aeiouy".Contains(c);
+    public static bool IsVovel(char c) => "aeiouy".Contains(c);
+
+    public static int[] ToBase(long n, int b)
+    {
+      if (n <= 0)
+        return new[] { 0 };
+      var s = new int[64];
+      while (n != 0)
+      {
+        int i = 0;
+        long d = 1;
+        while (b * d <= n)
+        {
+          d *= b;
+          i++;
+        }
+        var k = n / d;
+        s[i] += (int)k;
+        n -= d * k;
+      }
+      return s.Reverse().SkipWhile(d => d == 0).ToArray();
+    }
+
+    public static long ToLong(int[] n, int b)
+    {
+      long val = 0;
+      long mul = 1;
+      foreach (var d in n.Reverse())
+      {
+        val += mul * d;
+        mul *= b;
+      }
+      return val;
+    }
   }
 }

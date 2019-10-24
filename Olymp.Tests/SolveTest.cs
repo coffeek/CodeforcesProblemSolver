@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Olymp
 {
-  [TestClass]
+  [TestFixture]
   public class SolveTest
   {
-    [TestMethod]
+    [Test]
     public void Case1()
     {
       Assert.AreEqual(
@@ -16,7 +16,7 @@ namespace Olymp
 @""));
     }
 
-    [TestMethod]
+    [Test]
     public void Case2()
     {
       Assert.AreEqual(
@@ -25,8 +25,17 @@ namespace Olymp
 @""));
     }
 
-    [TestMethod]
+    [Test]
     public void Case3()
+    {
+      Assert.AreEqual(
+@"",
+        GetResult(
+@""));
+    }
+
+    [Test]
+    public void Case4()
     {
       Assert.AreEqual(
 @"",
