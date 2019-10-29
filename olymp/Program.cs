@@ -50,19 +50,23 @@ namespace Olymp
 
       if (!char.IsDigit((char)c))
         throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
-      var result = (char)c - '0';
-      c = reader.Read();
-      while (c > 0 && !char.IsWhiteSpace((char)c))
-      {
-        if (!char.IsDigit((char)c))
-          throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
-        result = result * 10 + (char)c - '0';
-        c = reader.Read();
-      }
 
-      if (isNegative)
-        result = -result;
-      return result;
+      checked
+      {
+        var result = (char)c - '0';
+        c = reader.Read();
+        while (c > 0 && !char.IsWhiteSpace((char)c))
+        {
+          if (!char.IsDigit((char)c))
+            throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
+          result = result * 10 + (char)c - '0';
+          c = reader.Read();
+        }
+
+        if (isNegative)
+          result = -result;
+        return result;
+      }
     }
 
     public string ReadLine()
