@@ -1,0 +1,1 @@
+web-ext build --overwrite-dest --artifacts-dir ./artifacts --source-dir ./src
