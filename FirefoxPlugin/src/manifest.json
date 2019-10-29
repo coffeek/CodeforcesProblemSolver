@@ -1,0 +1,26 @@
+﻿{
+  "description": "Добавляет кнопку для копирования тестовых примеров задачи из codeforces.com в формате NUnit-тестов проекта Olymp.Tests",
+  "manifest_version": 2,
+  "name": "CodeforcesProblemSamplesCopier",
+  "homepage_url": "https://github.com/coffeek/olymp_cs",
+  "version": "1.0",
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "ya.kofeek@yandex.ru"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://codeforces.com/problemset/problem/*",
+        "*://codeforces.com/contest/*/problem/*"
+      ],
+      "js": [
+        "add_copy_button.js"
+      ]
+    }
+  ]
+}
