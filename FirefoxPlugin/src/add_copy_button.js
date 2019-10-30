@@ -7,14 +7,20 @@ button.onclick = function (e) {
 }
 sampleTestsElement.getElementsByClassName("section-title")[0].appendChild(button);
 
+function prepare_text(s) {
+    return s
+        .replace(/([~\r]|^)\n/, '\r\n') // Заменить \n на \r\n
+        .replace(/(.*)\s+$/, '$1') // Убрать переводы строк и пробелы в конце.
+}
+
 function create_and_copy_tests() {
     var testMethods = []
     var inputs = document.getElementsByClassName("input");
     var outputs = document.getElementsByClassName("output");
     var n = inputs.length;
     for (var i = 0; i < n; i++) {
-        var input = inputs[i].lastChild.textContent.replace(/(.*)(\r\n|\n)$/, '$1');
-        var output = outputs[i].lastChild.textContent.replace(/(.*)(\r\n|\n)$/, '$1');
+        var input = prepare_text(inputs[i].lastChild.innerText);
+        var output = prepare_text(outputs[i].lastChild.innerText);
         var testMethod =
             `    [Test]
     public void Case${i + 1}()
