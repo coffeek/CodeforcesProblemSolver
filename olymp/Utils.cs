@@ -121,5 +121,24 @@ namespace Olymp
       }
       return val;
     }
+    
+    public static IEnumerable<T> Compact<T>(IEnumerable<T> a) where T : IEquatable<T>
+    {
+      using (var e = a.GetEnumerator())
+      {
+        if (!e.MoveNext())
+          yield break;
+        var lastA = e.Current;
+        while (e.MoveNext())
+        {
+          var val = e.Current;
+          if (val.Equals(lastA))
+            continue;
+          yield return lastA;
+          lastA = val;
+        }
+        yield return lastA;
+      }
+    }
   }
 }

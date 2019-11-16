@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
@@ -61,6 +62,21 @@ namespace Olymp.Tests
       Assert.AreEqual(3, Utils.ToLong(new[] { 1, 0 }, 3));
       Assert.AreEqual(26, Utils.ToLong(new[] { 2, 2, 2 }, 3));
       Assert.AreEqual(27, Utils.ToLong(new[] { 1, 0, 0, 0 }, 3));
+    }
+
+    [Test]
+    public void CompactTests()
+    {
+      int[] Call(IEnumerable<int> a) => Utils.Compact(a).ToArray();
+
+      Assert.That(Call(new[] { 0 }), Is.EquivalentTo(new[] { 0 }));
+      Assert.That(Call(new[] { 1 }), Is.EquivalentTo(new[] { 1 }));
+      Assert.That(Call(new[] { 0, 0, 0 }), Is.EquivalentTo(new[] { 0 }));
+      Assert.That(Call(new[] { 1, 0, 1 }), Is.EquivalentTo(new[] { 1, 0, 1 }));
+      Assert.That(Call(new[] { 1, 0, 1, 1, 1, 0 }), Is.EquivalentTo(new[] { 1, 0, 1, 0 }));
+      Assert.That(Call(new[] { 1, 2, 3, 4, 5 }), Is.EquivalentTo(new[] { 1, 2, 3, 4, 5 }));
+      Assert.That(Call(new[] { 1, 1, 1, 2, 2, 2, 0, 0, 3, 1, 2 }), Is.EquivalentTo(new[] { 1, 2, 0, 3, 1, 2 }));
+      Assert.That(Call(new[] { 0, 0, 1, 1, 1, 0 }), Is.EquivalentTo(new[] { 0, 1, 0 }));
     }
   }
 }

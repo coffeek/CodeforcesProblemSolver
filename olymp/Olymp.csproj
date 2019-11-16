@@ -37,6 +37,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MinMaxQueue.cs" />
     <Compile Include="SegmentTree.cs" />
     <Compile Include="SparseTable.cs" />
     <Compile Include="Utils.cs" />

@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Olymp.Tests
 {
+  [TestFixture]
   public class SparseTableTests
   {
     [Test]
