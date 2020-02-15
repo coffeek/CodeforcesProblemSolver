@@ -30,10 +30,7 @@ namespace Olymp
   {
     private readonly TextReader reader;
 
-    public string ReadToEnd()
-    {
-      return reader.ReadToEnd();
-    }
+    public string ReadToEnd() => reader.ReadToEnd();
 
     public int ReadInt()
     {
@@ -70,20 +67,11 @@ namespace Olymp
       }
     }
 
-    public string ReadLine()
-    {
-      return reader.ReadLine();
-    }
+    public string ReadLine() => reader.ReadLine();
 
-    public long ReadLong()
-    {
-      return long.Parse(ReadToken());
-    }
+    public long ReadLong() => long.Parse(ReadToken());
 
-    public double ReadDouble()
-    {
-      return double.Parse(ReadToken(), CultureInfo.InvariantCulture);
-    }
+    public double ReadDouble() => double.Parse(ReadToken(), CultureInfo.InvariantCulture);
 
     public int[] ReadIntArray(int n)
     {
@@ -93,14 +81,13 @@ namespace Olymp
       return a;
     }
 
-    public (int, int) Read2Int() =>
-      (ReadInt(), ReadInt());
+    public (int, int) Read2Int() => (ReadInt(), ReadInt());
 
-    public (int, int, int) Read3Int() =>
-      (ReadInt(), ReadInt(), ReadInt());
+    public (int, int, int) Read3Int() => (ReadInt(), ReadInt(), ReadInt());
 
-    public (int, int, int, int) Read4Int() =>
-      (ReadInt(), ReadInt(), ReadInt(), ReadInt());
+    public (int, int, int, int) Read4Int() => (ReadInt(), ReadInt(), ReadInt(), ReadInt());
+
+    public (long, long) Read2Long() => (ReadLong(), ReadLong());
 
     public long[] ReadLongArray(int n)
     {
