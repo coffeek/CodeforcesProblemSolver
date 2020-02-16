@@ -1,0 +1,1 @@
+~/node_modules/web-ext/bin/web-ext build --overwrite-dest --artifacts-dir ./artifacts --source-dir ./src
