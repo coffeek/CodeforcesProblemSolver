@@ -2,7 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 
-namespace Olymp
+namespace Olymp.Tests
 {
   [TestFixture]
   public class SolveTest
@@ -43,7 +43,7 @@ namespace Olymp
 @""));
     }
 
-    private string GetResult(string inputData)
+    private static string GetResult(string inputData)
     {
       var input = new StringReader(inputData);
       var output = new StringWriter();
