@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using static System.Math;
-using static Olymp.Geometry;
 
-namespace Olymp
+namespace Olymp.Utils
 {
   public struct Vector2
   {
@@ -39,7 +38,7 @@ namespace Olymp
     public Vector2[] v;
 
     public bool ContainsPoint(Vector2 p) =>
-      Enumerable.Range(0, 4).All(i => Cross(v[(i + 1) % 4] - v[i], p - v[i]) <= 0);
+      Enumerable.Range(0, 4).All(i => Geometry.Cross(v[(i + 1) % 4] - v[i], p - v[i]) <= 0);
 
     public IEnumerable<Vector2> Points() => v;
 

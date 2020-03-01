@@ -1,7 +1,8 @@
 using System.Linq;
 using NUnit.Framework;
+using Olymp.Utils;
 
-namespace Olymp.Tests
+namespace Olymp.Tests.Utils
 {
   [TestFixture]
   public class BitTests
@@ -23,13 +24,13 @@ namespace Olymp.Tests
     public void SumAfterChangeTest()
     {
       var a = new[] { -1, -2, 0, 5, 5, 3 };
-      
+
       var t = new Bit(a);
-      
+
       Assert.That(t.Sum(0, 1), Is.EqualTo(-3));
       t.Add(1, 2);
       Assert.That(t.Sum(0, 1), Is.EqualTo(-1));
-      
+
       Assert.That(t.Sum(2, 5), Is.EqualTo(13));
       t.Add(3, 1);
       t.Add(4, -2);

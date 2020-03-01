@@ -1,4 +1,4 @@
-﻿namespace Olymp
+﻿namespace Olymp.Utils
 {
   public struct StackElement
   {

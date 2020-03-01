@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Olymp
+namespace Olymp.Utils
 {
-  public class Utils
+  public static class Functions
   {
-    public static int IncCount<T>(Dictionary<T, int> counter, T item)
+    public static int IncCount<T>(IDictionary<T, int> counter, T item)
     {
       if (counter.TryGetValue(item, out var count))
         return (counter[item] = count + 1);
@@ -14,7 +14,7 @@ namespace Olymp
       return 1;
     }
 
-    public static void DecCount<T>(Dictionary<T, int> counter, T item)
+    public static void DecCount<T>(IDictionary<T, int> counter, T item)
     {
       if (counter.TryGetValue(item, out var count))
       {
@@ -25,7 +25,7 @@ namespace Olymp
       }
     }
 
-    public static int GetCount<T>(Dictionary<T, int> counter, T item)
+    public static int GetCount<T>(IDictionary<T, int> counter, T item)
     {
       return counter.TryGetValue(item, out var count) ? count : 0;
     }
@@ -121,7 +121,7 @@ namespace Olymp
       }
       return val;
     }
-    
+
     public static IEnumerable<T> Compact<T>(IEnumerable<T> a) where T : IEquatable<T>
     {
       using (var e = a.GetEnumerator())
@@ -139,6 +139,26 @@ namespace Olymp
         }
         yield return lastA;
       }
+    }
+
+    public static int UpperBound(int[] a, int value)
+    {
+      var n = a.Length;
+      if (n == 0)
+        return -1;
+      var l = 0;
+      var r = n - 1;
+      while (l < r)
+      {
+        var m = l + (r - l) / 2;
+        if (a[m] <= value)
+          l = m + 1;
+        else
+          r = m;
+      }
+      if (a[l] <= value)
+        return -1;
+      return l;
     }
   }
 }

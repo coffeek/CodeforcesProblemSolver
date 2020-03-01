@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Olymp
+namespace Olymp.Utils
 {
   public class MinMaxStack
   {

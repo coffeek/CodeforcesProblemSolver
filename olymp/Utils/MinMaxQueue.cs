@@ -1,6 +1,6 @@
 ﻿using static System.Math;
 
-namespace Olymp
+namespace Olymp.Utils
 {
   public class MinMaxQueue
   {

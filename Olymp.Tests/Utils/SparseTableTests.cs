@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Olymp.Utils;
 
-namespace Olymp.Tests
+namespace Olymp.Tests.Utils
 {
   [TestFixture]
   public class SparseTableTests
