@@ -6,6 +6,11 @@ namespace Olymp.Utils
     {
       QuickSortHoare(a, 0, a.Length - 1);
     }
+    
+    public static void QuickSortLomuto(int[] a)
+    {
+      QuickSortLomuto(a, 0, a.Length - 1);
+    }
 
     private static void QuickSortLomuto(int[] a, int l, int r)
     {
@@ -41,7 +46,6 @@ namespace Olymp.Utils
       }
 
       Swap(a, i, r);
-
       return i;
     }
 
@@ -80,6 +84,24 @@ namespace Olymp.Utils
 
     public static int QuickSelect(int[] a, int k)
     {
+      return QuickSelect(a, 0, a.Length - 1, k);
+    }
+
+    private static int QuickSelect(int[] a, int l, int r, int k)
+    {
+      while (l < r)
+      {
+        var q = HoarePartition(a, l, r);
+        if (k <= q)
+          r = q;
+        else
+          l = q + 1;
+      }
+      return a[k];
+    }
+
+    public static int QuickSelectEMaxx(int[] a, int k)
+    {
       var n = a.Length;
 
       var l = 0;
@@ -112,16 +134,16 @@ namespace Olymp.Utils
             i++;
           }
           while (a[i] < cur);
-          
+
           do
           {
             j--;
           }
           while (a[j] > cur);
-          
+
           if (i > j)
             break;
-          
+
           Swap(a, i, j);
         }
 
