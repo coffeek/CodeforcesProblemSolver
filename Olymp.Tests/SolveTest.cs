@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using NUnit.Framework;
 
 namespace Olymp.Tests
@@ -47,8 +46,7 @@ namespace Olymp.Tests
     {
       var input = new StringReader(inputData);
       var output = new StringWriter();
-      Console.SetOut(output);
-      var solver = new ProblemSolver(input);
+      var solver = new ProblemSolver(input, output);
       solver.Solve();
       return output.ToString().TrimEnd();
     }

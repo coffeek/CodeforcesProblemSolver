@@ -13,14 +13,23 @@ namespace Olymp
   public class ProblemSolver
   {
     private readonly Tokenizer input;
+    private readonly TextWriter output;
 
     public void Solve()
     {
+      var t = input.ReadInt();
+      var ans = new List<string>(t);
+      for (int _ = 0; _ < t; _++)
+      {
+        
+      }
+      output.WriteLine(string.Join(Environment.NewLine, ans));
     }
 
-    public ProblemSolver(TextReader input)
+    public ProblemSolver(TextReader input, TextWriter output)
     {
       this.input = new Tokenizer(input);
+      this.output = output;
     }
   }
 
@@ -136,11 +145,15 @@ namespace Olymp
     }
   }
 
-  internal class Program
+  internal static class Program
   {
+    private const int BufferSize = 1024 * 10;
+    
     public static void Main()
     {
-      var solver = new ProblemSolver(In);
+      using var reader = new StreamReader(OpenStandardInput(BufferSize), Encoding.ASCII, false, BufferSize);
+      using var writer = new StreamWriter(OpenStandardOutput(BufferSize), Encoding.ASCII, BufferSize);
+      var solver = new ProblemSolver(reader, writer);
       solver.Solve();
     }
   }

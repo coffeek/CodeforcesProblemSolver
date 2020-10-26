@@ -27,8 +27,8 @@ namespace Olymp.Utils
       if (l < r)
       {
         var q = HoarePartition(a, l, r);
-        QuickSortLomuto(a, l, q);
-        QuickSortLomuto(a, q + 1, r);
+        QuickSortHoare(a, l, q);
+        QuickSortHoare(a, q + 1, r);
       }
     }
 

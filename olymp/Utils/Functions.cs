@@ -6,6 +6,16 @@ namespace Olymp.Utils
 {
   public static class Functions
   {
+    public static int Min(params int[] values)
+    {
+      return values.Min();
+    }
+    
+    public static int Max(params int[] values)
+    {
+      return values.Max();
+    }
+    
     public static int IncCount<T>(IDictionary<T, int> counter, T item)
     {
       if (counter.TryGetValue(item, out var count))
