@@ -33,8 +33,7 @@ function create_and_copy_tests() {
         testMethods.push(testMethod);
     }
 
-    const testModule = `using System;
-using System.IO;
+    const testModule = `using System.IO;
 using NUnit.Framework;
 
 namespace Olymp.Tests
@@ -48,8 +47,7 @@ ${testMethods.join("\n\n")}
     {
       var input = new StringReader(inputData);
       var output = new StringWriter();
-      Console.SetOut(output);
-      var solver = new ProblemSolver(input);
+      var solver = new ProblemSolver(input, output);
       solver.Solve();
       return output.ToString().TrimEnd();
     }
