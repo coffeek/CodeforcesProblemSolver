@@ -83,14 +83,14 @@ namespace Olymp.Tests.Utils
     [Test]
     public void UpperBoundTests()
     {
-      Assert.That(Functions.UpperBound(new int[] { }, 1), Is.EqualTo(-1));
+      Assert.That(Functions.UpperBound(new int[] { }, 1), Is.EqualTo(0));
 
       var f = (Action<int[]>)(a =>
       {
         Assert.That(Functions.UpperBound(a, -1), Is.EqualTo(0));
         for (int i = 0; i < 10; i++)
         {
-          var expected = Enumerable.Range(0, a.Length).Cast<int?>().FirstOrDefault(j => a[j.Value] > i) ?? -1;
+          var expected = Enumerable.Range(0, a.Length).Cast<int?>().FirstOrDefault(j => a[j.Value] > i) ?? a.Length;
           Assert.That(Functions.UpperBound(a, i), Is.EqualTo(expected));
         }
       });

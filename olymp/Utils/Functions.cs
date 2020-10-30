@@ -153,11 +153,15 @@ namespace Olymp.Utils
 
     public static int UpperBound(int[] a, int value)
     {
-      var n = a.Length;
-      if (n == 0)
-        return -1;
-      var l = 0;
-      var r = n - 1;
+      return UpperBound(a, 0, a.Length, value);
+    }
+    
+    private static int UpperBound(int[] a, int beginIndex, int endIndex, int value)
+    {
+      if (beginIndex >= endIndex)
+        return endIndex;
+      var l = beginIndex;
+      var r = endIndex - 1;
       while (l < r)
       {
         var m = l + (r - l) / 2;
@@ -166,9 +170,7 @@ namespace Olymp.Utils
         else
           r = m;
       }
-      if (a[l] <= value)
-        return -1;
-      return l;
+      return a[l] <= value ? endIndex : l;
     }
   }
 }
