@@ -21,7 +21,7 @@ namespace Olymp
       var ans = new List<string>(t);
       for (int _ = 0; _ < t; _++)
       {
-        
+
       }
       output.WriteLine(string.Join(Environment.NewLine, ans));
     }
@@ -41,54 +41,13 @@ namespace Olymp
 
     public string ReadToEnd() => reader.ReadToEnd();
 
-    public int ReadInt()
-    {
-      var c = SkipWs();
-      if (c == -1)
-        throw new EndOfStreamException();
-      var isNegative = false;
-      if (c == '-' || c == '+')
-      {
-        isNegative = c == '-';
-        c = reader.Read();
-        if (c == -1)
-          throw new EndOfStreamException("Digit expected, but end of stream occurs");
-      }
-
-      if (!char.IsDigit((char)c))
-        throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
-
-      checked
-      {
-        var result = (char)c - '0';
-        c = reader.Read();
-        while (c > 0 && !char.IsWhiteSpace((char)c))
-        {
-          if (!char.IsDigit((char)c))
-            throw new InvalidOperationException($"Digit expected, but was: '{(char)c}'");
-          result = result * 10 + (char)c - '0';
-          c = reader.Read();
-        }
-
-        if (isNegative)
-          result = -result;
-        return result;
-      }
-    }
-
     public string ReadLine() => reader.ReadLine();
+
+    public int ReadInt() => int.Parse(ReadToken());
 
     public long ReadLong() => long.Parse(ReadToken());
 
     public double ReadDouble() => double.Parse(ReadToken(), CultureInfo.InvariantCulture);
-
-    public int[] ReadIntArray(int n)
-    {
-      var a = new int[n];
-      for (var i = 0; i < n; i++)
-        a[i] = ReadInt();
-      return a;
-    }
 
     public (int, int) Read2Int() => (ReadInt(), ReadInt());
 
@@ -98,21 +57,11 @@ namespace Olymp
 
     public (long, long) Read2Long() => (ReadLong(), ReadLong());
 
-    public long[] ReadLongArray(int n)
-    {
-      var a = new long[n];
-      for (var i = 0; i < n; i++)
-        a[i] = ReadLong();
-      return a;
-    }
+    public int[] ReadIntArray(int n) => ReadArray(n, ReadInt);
 
-    public double[] ReadDoubleArray(int n)
-    {
-      var a = new double[n];
-      for (var i = 0; i < n; i++)
-        a[i] = ReadDouble();
-      return a;
-    }
+    public long[] ReadLongArray(int n) => ReadArray(n, ReadLong);
+
+    public double[] ReadDoubleArray(int n) => ReadArray(n, ReadDouble);
 
     public string ReadToken()
     {
@@ -125,8 +74,15 @@ namespace Olymp
         sb.Append((char)c);
         c = reader.Read();
       }
-
       return sb.ToString();
+    }
+
+    private static T[] ReadArray<T>(int n, Func<T> reader)
+    {
+      var a = new T[n];
+      for (var i = 0; i < n; i++)
+        a[i] = reader();
+      return a;
     }
 
     private int SkipWs()
@@ -148,7 +104,9 @@ namespace Olymp
   internal static class Program
   {
     private const int BufferSize = 1024 * 10;
-    
+
+    public static void WriteArray<T>(this TextWriter s, T[] a) => s.WriteLine(string.Join(" ", a));
+
     public static void Main()
     {
       using var reader = new StreamReader(OpenStandardInput(BufferSize), Encoding.ASCII, false, BufferSize);

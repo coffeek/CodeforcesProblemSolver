@@ -58,34 +58,6 @@ a");
     }
 
     [Test]
-    public void TestParseIntFail1()
-    {
-      Assert.Throws<EndOfStreamException>(() =>
-        Assert.AreEqual(-1, new Tokenizer(new StringReader("")).ReadInt()));
-    }
-
-    [Test]
-    public void TestParseIntFail2()
-    {
-      Assert.Throws<EndOfStreamException>(() => 
-        Assert.AreEqual(-1, new Tokenizer(new StringReader("-")).ReadInt()));
-    }
-
-    [Test]
-    public void TestParseIntFail3()
-    {
-      Assert.Throws<InvalidOperationException>(() =>
-        Assert.AreEqual(-1, new Tokenizer(new StringReader("-w")).ReadInt()));
-    }
-
-    [Test]
-    public void TestParseIntFail4()
-    {
-      Assert.Throws<InvalidOperationException>(() =>
-        Assert.AreEqual(-1, new Tokenizer(new StringReader("w")).ReadInt()));
-    }
-
-    [Test]
     public void TestParseIntegers()
     {
       var input = new StringReader(@"-1 135 +4390 0000987654321
