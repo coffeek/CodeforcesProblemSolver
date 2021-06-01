@@ -103,14 +103,12 @@ namespace Olymp
 
   internal static class Program
   {
-    private const int BufferSize = 1024 * 10;
-
     public static void WriteArray<T>(this TextWriter s, T[] a) => s.WriteLine(string.Join(" ", a));
 
     public static void Main()
     {
-      using var reader = new StreamReader(OpenStandardInput(BufferSize), Encoding.ASCII, false, BufferSize);
-      using var writer = new StreamWriter(OpenStandardOutput(BufferSize), Encoding.ASCII, BufferSize);
+      using var reader = new StreamReader(OpenStandardInput(), Encoding.ASCII, false);
+      using var writer = new StreamWriter(OpenStandardOutput(), Encoding.ASCII);
       var solver = new ProblemSolver(reader, writer);
       solver.Solve();
     }
