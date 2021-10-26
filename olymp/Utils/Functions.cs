@@ -40,14 +40,23 @@ namespace Olymp.Utils
       return counter.TryGetValue(item, out var count) ? count : 0;
     }
 
-    public static int GCD(int a, int b)
+    public static int Gcd(params int[] values)
     {
+      if (values.Length == 0)
+        return 0;
+      if (values.Length == 1)
+        return values[0];
+      return values.Aggregate(Gcd);
+    }
+    
+    public static int Gcd(int a, int b)
+    {
+      if (a <= 0 || b <= 0)
+        return 0;
       while (b != 0)
       {
         a %= b;
-        var t = b;
-        b = a;
-        a = t;
+        (b, a) = (a, b);
       }
       return a;
     }
@@ -62,19 +71,11 @@ namespace Olymp.Utils
       {
         for (var j = i; j < n; j++)
         {
-          Swap(ref a[i], ref a[j]);
+          (a[i], a[j]) = (a[j], a[i]); 
           Permute(a, i + 1, n, process);
-          Swap(ref a[i], ref a[j]);
+          (a[i], a[j]) = (a[j], a[i]);
         }
       }
-    }
-
-    public static void Swap<T>(ref T a, ref T b)
-    {
-      T t;
-      t = a;
-      a = b;
-      b = t;
     }
 
     public static bool Odd(int x) => x % 2 == 1;
@@ -134,21 +135,19 @@ namespace Olymp.Utils
 
     public static IEnumerable<T> Compact<T>(IEnumerable<T> a) where T : IEquatable<T>
     {
-      using (var e = a.GetEnumerator())
+      using var e = a.GetEnumerator();
+      if (!e.MoveNext())
+        yield break;
+      var lastA = e.Current;
+      while (e.MoveNext())
       {
-        if (!e.MoveNext())
-          yield break;
-        var lastA = e.Current;
-        while (e.MoveNext())
-        {
-          var val = e.Current;
-          if (val.Equals(lastA))
-            continue;
-          yield return lastA;
-          lastA = val;
-        }
+        var val = e.Current;
+        if (val.Equals(lastA))
+          continue;
         yield return lastA;
+        lastA = val;
       }
+      yield return lastA;
     }
 
     public static int UpperBound(int[] a, int value)

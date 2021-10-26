@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 using Olymp.Utils;
 
@@ -102,6 +103,23 @@ namespace Olymp.Tests.Utils
       f(new[] { 1, 2, 3 });
       f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
       f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
+    }
+
+    [Test]
+    public void GcdTest()
+    {
+      Functions.Gcd(0, 0).Should().Be(0);
+      Functions.Gcd(0, 1).Should().Be(0);
+      Functions.Gcd(1, 0).Should().Be(0);
+      Functions.Gcd(1, 1).Should().Be(1);
+      Functions.Gcd(12, 4).Should().Be(4);
+      Functions.Gcd(12, 9).Should().Be(3);
+      Functions.Gcd(12, 7).Should().Be(1);
+
+      Functions.Gcd().Should().Be(0);
+      Functions.Gcd(16).Should().Be(16);
+      Functions.Gcd(12, 24, 6).Should().Be(6);
+      Functions.Gcd(10, 7, 13, 1024).Should().Be(1);
     }
   }
 }
