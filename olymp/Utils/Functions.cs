@@ -42,11 +42,12 @@ namespace Olymp.Utils
 
     public static int Gcd(params int[] values)
     {
-      if (values.Length == 0)
-        return 0;
-      if (values.Length == 1)
-        return values[0];
-      return values.Aggregate(Gcd);
+      return values.Length switch
+      {
+        0 => 0,
+        1 => values[0],
+        _ => values.Aggregate(Gcd)
+      };
     }
     
     public static int Gcd(int a, int b)
