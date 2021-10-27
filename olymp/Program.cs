@@ -18,12 +18,9 @@ namespace Olymp
     public void Solve()
     {
       var t = input.ReadInt();
-      var ans = new List<string>(t);
       for (int _ = 0; _ < t; _++)
       {
-
       }
-      output.WriteLine(string.Join(Environment.NewLine, ans));
     }
 
     public ProblemSolver(TextReader input, TextWriter output)
