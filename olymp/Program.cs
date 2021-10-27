@@ -100,14 +100,11 @@ namespace Olymp
 
   internal static class Program
   {
-    public static void WriteArray<T>(this TextWriter s, T[] a) => s.WriteLine(string.Join(" ", a));
-
     public static void Main()
     {
       using var reader = new StreamReader(OpenStandardInput(), Encoding.ASCII, false);
       using var writer = new StreamWriter(OpenStandardOutput(), Encoding.ASCII);
-      var solver = new ProblemSolver(reader, writer);
-      solver.Solve();
+      new ProblemSolver(reader, writer).Solve();
     }
   }
 
