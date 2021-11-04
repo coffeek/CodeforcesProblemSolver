@@ -17,7 +17,7 @@ namespace Olymp.Tests.Utils
       StringUtils.ZFunc("aaabaab").Should().BeEquivalentTo(new[] { 0, 2, 1, 0, 2, 1, 0 });
       StringUtils.ZFunc("abacaba").Should().BeEquivalentTo(new[] { 0, 0, 1, 0, 3, 0, 1 });
     }
-    
+
     [Test]
     public void ZMatchTest()
     {
@@ -37,6 +37,15 @@ namespace Olymp.Tests.Utils
     public void KmpMatchTest()
     {
       CheckMatch(StringUtils.KmpMatch);
+    }
+
+    [Test]
+    public void FastIntJoinTest()
+    {
+      StringUtils.FastIntJoin(" ", new[] { 1, 0, -44, -1899923 }).Should().Be("1 0 -44 -1899923");
+      StringUtils.FastIntJoin(" ", new[] { 0 }).Should().Be("0");
+      StringUtils.FastIntJoin(" ", new[] { -10 }).Should().Be("-10");
+      StringUtils.FastIntJoin(" ", new int[] { }).Should().Be("");
     }
 
     private static void CheckMatch(Func<string, string, int> match)

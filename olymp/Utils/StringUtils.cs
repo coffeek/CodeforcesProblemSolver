@@ -93,5 +93,54 @@ namespace Olymp.Utils
       }
       return -1;
     }
+    
+    public static string FastIntJoin(string sep, int[] data)
+    {
+      if (data.Length == 0)
+        return string.Empty;
+      
+      int Len(int k) => k >= 0 ? Numbers.GetDigitsCount(k) : Numbers.GetDigitsCount(-k) + 1;
+
+      int Write(int k, Span<char> s)
+      {
+        var n = Len(k);
+        if (k < 0)
+        {
+          s[0] = '-';
+          k = -k;
+        }
+        int i = n - 1;
+        do
+        {
+          var d = k % 10;
+          s[i] = (char)(d + '0');
+          i--;
+          k /= 10;
+        }
+        while (k != 0);
+
+        return n;
+      }
+
+      var n = 0;
+      for (int i = 0; i < data.Length; i++)
+        n += Len(data[i]);
+      n += sep.Length * (data.Length - 1);
+
+      return string.Create<object>(n, null, (s, _) =>
+      {
+        var ss = sep.AsSpan();
+        var pos = 0;
+        for (int i = 0; i < data.Length; i++)
+        {
+          pos += Write(data[i], s[pos..]);
+          if (i != data.Length - 1 && sep.Length != 0)
+          {
+            ss.CopyTo(s[pos..]);
+            pos += sep.Length;
+          }
+        }
+      });
+    }
   }
 }
