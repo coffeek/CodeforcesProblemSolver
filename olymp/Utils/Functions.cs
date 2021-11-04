@@ -10,12 +10,12 @@ namespace Olymp.Utils
     {
       return values.Min();
     }
-    
+
     public static int Max(params int[] values)
     {
       return values.Max();
     }
-    
+
     public static int IncCount<T>(IDictionary<T, int> counter, T item)
     {
       if (counter.TryGetValue(item, out var count))
@@ -49,7 +49,7 @@ namespace Olymp.Utils
         _ => values.Aggregate(Gcd)
       };
     }
-    
+
     public static int Gcd(int a, int b)
     {
       if (a <= 0 || b <= 0)
@@ -72,7 +72,7 @@ namespace Olymp.Utils
       {
         for (var j = i; j < n; j++)
         {
-          (a[i], a[j]) = (a[j], a[i]); 
+          (a[i], a[j]) = (a[j], a[i]);
           Permute(a, i + 1, n, process);
           (a[i], a[j]) = (a[j], a[i]);
         }
@@ -97,6 +97,28 @@ namespace Olymp.Utils
           return false;
       }
       return true;
+    }
+
+    /// <summary>
+    /// Вернуть список простых делителей числа.
+    /// Если число простое, функция вернет само число.
+    /// Делители могут повторяться (для 1024 вернет 10 двоек).
+    /// </summary>
+    public static List<int> PrimeDivisors(int number)
+    {
+      var p = new List<int>();
+      var q = number;
+      for (var i = 2; i * i <= number; i++)
+      {
+        while (q % i == 0)
+        {
+          p.Add(i);
+          q /= i;
+        }
+      }
+      if (q > 1)
+        p.Add(q);
+      return p;
     }
 
     public static bool IsVovel(char c) => "aeiouy".Contains(c);
@@ -155,7 +177,7 @@ namespace Olymp.Utils
     {
       return UpperBound(a, 0, a.Length, value);
     }
-    
+
     private static int UpperBound(int[] a, int beginIndex, int endIndex, int value)
     {
       if (beginIndex >= endIndex)

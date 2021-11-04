@@ -121,5 +121,17 @@ namespace Olymp.Tests.Utils
       Functions.Gcd(12, 24, 6).Should().Be(6);
       Functions.Gcd(10, 7, 13, 1024).Should().Be(1);
     }
+
+    [Test]
+    public void PrimeDivisorsTest()
+    {
+      Functions.PrimeDivisors(0).Should().BeEmpty();
+      Functions.PrimeDivisors(1).Should().BeEmpty();
+      Functions.PrimeDivisors(5).Should().BeEquivalentTo(5);
+      Functions.PrimeDivisors(10).Should().BeEquivalentTo(2, 5);
+      Functions.PrimeDivisors(12).Should().BeEquivalentTo(2, 2, 3);
+      Functions.PrimeDivisors(36).Should().BeEquivalentTo(2, 2, 3, 3);
+      Functions.PrimeDivisors(1024).Should().BeEquivalentTo(2, 2, 2, 2, 2, 2, 2, 2, 2, 2);
+    }
   }
 }
