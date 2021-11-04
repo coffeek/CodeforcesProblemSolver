@@ -99,7 +99,7 @@ namespace Olymp.Utils
       if (data.Length == 0)
         return string.Empty;
       
-      int Len(int k) => k >= 0 ? Numbers.GetDigitsCount(k) : Numbers.GetDigitsCount(-k) + 1;
+      int Len(int k) => k >= 0 ? Numbers.DigitsCount(k) : Numbers.DigitsCount(-k) + 1;
 
       int Write(int k, Span<char> s)
       {
