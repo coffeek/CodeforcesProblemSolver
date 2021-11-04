@@ -35,16 +35,18 @@ namespace Olymp
   public class Tokenizer
   {
     private readonly TextReader reader;
+    private readonly char[] numBuffer = new char[50];
 
     public string ReadToEnd() => reader.ReadToEnd();
 
     public string ReadLine() => reader.ReadLine();
 
-    public int ReadInt() => int.Parse(ReadToken());
+    public int ReadInt() => int.Parse(ReadToken(numBuffer));
 
-    public long ReadLong() => long.Parse(ReadToken());
+    public long ReadLong() => long.Parse(ReadToken(numBuffer));
 
-    public double ReadDouble() => double.Parse(ReadToken(), CultureInfo.InvariantCulture);
+    public double ReadDouble() => double.Parse(ReadToken(numBuffer), NumberStyles.Float | NumberStyles.AllowThousands,
+      CultureInfo.InvariantCulture);
 
     public (int, int) Read2Int() => (ReadInt(), ReadInt());
 
@@ -59,6 +61,18 @@ namespace Olymp
     public long[] ReadLongArray(int n) => ReadArray(n, ReadLong);
 
     public double[] ReadDoubleArray(int n) => ReadArray(n, ReadDouble);
+
+    public ReadOnlySpan<char> ReadToken(Span<char> buffer)
+    {
+      var c = SkipWs();
+      var pos = 0;
+      while (c > 0 && !char.IsWhiteSpace((char)c))
+      {
+        buffer[pos++] = (char)c;
+        c = reader.Read();
+      }
+      return buffer[..pos];
+    }
 
     public string ReadToken()
     {
