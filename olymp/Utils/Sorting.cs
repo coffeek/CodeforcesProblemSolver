@@ -1,12 +1,26 @@
+using System;
+using System.Runtime.CompilerServices;
+
 namespace Olymp.Utils
 {
   public static class Sorting
   {
+    public static void HeapSort(int[] a)
+    {
+      Heap.Sort(a);
+    }
+    
+    public static void HeapSort<T>(T[] a, Comparison<T> comparer)
+    {
+      Heap.Sort(a, comparer);
+    }
+    
     public static void QuickSort(int[] a)
     {
       QuickSortHoare(a, 0, a.Length - 1);
     }
     
+    /// <remarks>На отсортированном массиве ведёт себя паршиво.</remarks>
     public static void QuickSortLomuto(int[] a)
     {
       QuickSortLomuto(a, 0, a.Length - 1);
@@ -75,11 +89,10 @@ namespace Olymp.Utils
       }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void Swap(int[] a, int i, int j)
     {
-      var t = a[j];
-      a[j] = a[i];
-      a[i] = t;
+      (a[j], a[i]) = (a[i], a[j]);
     }
 
     public static int QuickSelect(int[] a, int k)

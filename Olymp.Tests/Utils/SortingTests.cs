@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -12,53 +13,76 @@ namespace Olymp.Tests.Utils
     [Test]
     public void QuickSortTest()
     {
-      QuickSortTestCase(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSort);
-      QuickSortTestCase(new int[] { }, Sorting.QuickSort);
-      QuickSortTestCase(new[] { 1 }, Sorting.QuickSort);
-      QuickSortTestCase(new[] { -1, -99 }, Sorting.QuickSort);
-      QuickSortTestCase(new[] { 1, 5, -10 }, Sorting.QuickSort);
-      QuickSortTestCase(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSort);
+      TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSort);
+      TestSort(new int[] { }, Sorting.QuickSort);
+      TestSort(new[] { 1 }, Sorting.QuickSort);
+      TestSort(new[] { -1, -99 }, Sorting.QuickSort);
+      TestSort(new[] { 1, 5, -10 }, Sorting.QuickSort);
+      TestSort(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSort);
     }
     
     [Test]
     public void QuickSortLomutoTest()
     {
-      QuickSortTestCase(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSortLomuto);
-      QuickSortTestCase(new int[] { }, Sorting.QuickSortLomuto);
-      QuickSortTestCase(new[] { 1 }, Sorting.QuickSortLomuto);
-      QuickSortTestCase(new[] { -1, -99 }, Sorting.QuickSortLomuto);
-      QuickSortTestCase(new[] { 1, 5, -10 }, Sorting.QuickSortLomuto);
-      QuickSortTestCase(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSortLomuto);
+      TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSortLomuto);
+      TestSort(new int[] { }, Sorting.QuickSortLomuto);
+      TestSort(new[] { 1 }, Sorting.QuickSortLomuto);
+      TestSort(new[] { -1, -99 }, Sorting.QuickSortLomuto);
+      TestSort(new[] { 1, 5, -10 }, Sorting.QuickSortLomuto);
+      TestSort(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSortLomuto);
+    }
+    
+    [Test]
+    public void HeapSortTest()
+    {
+      TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.HeapSort);
+      TestSort(new int[] { }, Sorting.HeapSort);
+      TestSort(new[] { 1 }, Sorting.HeapSort);
+      TestSort(new[] { -1, -99 }, Sorting.HeapSort);
+      TestSort(new[] { 1, 5, -10 }, Sorting.HeapSort);
+      TestSort(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.HeapSort);
+    }
+    
+    [Test]
+    public void HeapSortGenericTest()
+    {
+      void HeapSort(int[] a) => Sorting.HeapSort(a, Comparer<int>.Default.Compare);
+      TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, HeapSort);
+      TestSort(new int[] { }, HeapSort);
+      TestSort(new[] { 1 }, HeapSort);
+      TestSort(new[] { -1, -99 }, HeapSort);
+      TestSort(new[] { 1, 5, -10 }, HeapSort);
+      TestSort(new[] { 6, 5, 4, 1, 2, 3 }, HeapSort);
     }
 
     [Test]
     public void QuickSelectEMaxxTest()
     {
-      QuickSelectTestCase(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSelectEMaxx);
-      QuickSelectTestCase(new[] { 1 }, Sorting.QuickSelectEMaxx);
-      QuickSelectTestCase(new[] { -1, -99 }, Sorting.QuickSelectEMaxx);
-      QuickSelectTestCase(new[] { 1, 5, -10 }, Sorting.QuickSelectEMaxx);
-      QuickSelectTestCase(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSelectEMaxx);
+      TestSelect(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSelectEMaxx);
+      TestSelect(new[] { 1 }, Sorting.QuickSelectEMaxx);
+      TestSelect(new[] { -1, -99 }, Sorting.QuickSelectEMaxx);
+      TestSelect(new[] { 1, 5, -10 }, Sorting.QuickSelectEMaxx);
+      TestSelect(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSelectEMaxx);
     }
     
     [Test]
     public void QuickSelectTest()
     {
-      QuickSelectTestCase(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSelect);
-      QuickSelectTestCase(new[] { 1 }, Sorting.QuickSelect);
-      QuickSelectTestCase(new[] { -1, -99 }, Sorting.QuickSelect);
-      QuickSelectTestCase(new[] { 1, 5, -10 }, Sorting.QuickSelect);
-      QuickSelectTestCase(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSelect);
+      TestSelect(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Sorting.QuickSelect);
+      TestSelect(new[] { 1 }, Sorting.QuickSelect);
+      TestSelect(new[] { -1, -99 }, Sorting.QuickSelect);
+      TestSelect(new[] { 1, 5, -10 }, Sorting.QuickSelect);
+      TestSelect(new[] { 6, 5, 4, 1, 2, 3 }, Sorting.QuickSelect);
     }
     
-    private static void QuickSortTestCase(int[] a, Action<int[]> sort)
+    private static void TestSort(int[] a, Action<int[]> sort)
     {
       var expected = a.OrderBy(x => x).ToArray();
       sort(a);
       a.Should().BeEquivalentTo(expected);
     }
 
-    private static void QuickSelectTestCase(int[] a, Func<int[], int, int> select)
+    private static void TestSelect(int[] a, Func<int[], int, int> select)
     {
       var b = a.OrderBy(x => x).ToArray();
       for (int i = 0; i < a.Length; i++)
