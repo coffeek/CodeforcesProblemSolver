@@ -133,5 +133,29 @@ namespace Olymp.Tests.Utils
       Functions.PrimeDivisors(36).Should().BeEquivalentTo(2, 2, 3, 3);
       Functions.PrimeDivisors(1024).Should().BeEquivalentTo(2, 2, 2, 2, 2, 2, 2, 2, 2, 2);
     }
+
+    [Test]
+    public void CountsTest()
+    {
+      Functions.Counts(Array.Empty<int>()).Should().BeEquivalentTo(new Dictionary<int, int>());
+      
+      Functions.Counts(1).Should().BeEquivalentTo(new Dictionary<int, int>
+      {
+        [1] = 1
+      });
+      
+      Functions.Counts(1, 1, 1).Should().BeEquivalentTo(new Dictionary<int, int>
+      {
+        [1] = 3
+      });
+      
+      Functions.Counts(59, -2, 1, 1, -1, 59, -2).Should().BeEquivalentTo(new Dictionary<int, int>
+      {
+        [59] = 2,
+        [-2] = 2,
+        [1] = 2,
+        [-1] = 1
+      });
+    }
   }
 }

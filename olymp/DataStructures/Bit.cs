@@ -1,4 +1,4 @@
-namespace Olymp.Utils
+namespace Olymp.DataStructures
 {
   public class Bit
   {

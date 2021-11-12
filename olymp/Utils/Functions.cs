@@ -40,6 +40,14 @@ namespace Olymp.Utils
       return counter.TryGetValue(item, out var count) ? count : 0;
     }
 
+    public static Dictionary<T, int> Counts<T>(params T[] a)
+    {
+      var c = new Dictionary<T, int>();
+      foreach (var t in a)
+        IncCount(c, t);
+      return c;
+    }
+
     public static int Gcd(params int[] values)
     {
       return values.Length switch

@@ -1,6 +1,7 @@
-﻿using static System.Math;
+﻿using Olymp.Utils;
+using static System.Math;
 
-namespace Olymp.Utils
+namespace Olymp.DataStructures
 {
   public class MinMaxQueue
   {

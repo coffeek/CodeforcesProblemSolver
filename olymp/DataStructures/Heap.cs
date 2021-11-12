@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Olymp.Utils
+namespace Olymp.DataStructures
 {
   public static class Heap
   {
@@ -45,7 +45,7 @@ namespace Olymp.Utils
       }
     }
 
-    private static void DownHeap<T>(Span<T> a, int i, int n, Comparison<T> comparer)
+    public static void DownHeap<T>(Span<T> a, int i, int n, Comparison<T> comparer)
     {
       T d = a[i - 1];
       while (i <= n >> 1)
@@ -64,6 +64,30 @@ namespace Olymp.Utils
       }
 
       a[i - 1] = d;
+    }
+    
+    public static void UpHeap<T>(Span<T> a, int i, int n, Comparison<T> comparer)
+    {
+      while (i > 0)
+      {
+        int p = (i - 1) >> 1;
+        if (comparer(a[i], a[p]) >= 0)
+          break;
+        (a[p], a[i]) = (a[i], a[p]);
+        i = p;
+      }
+    }
+    
+    private static void PushUp(Span<int> a, int i)
+    {
+      while (i > 0)
+      {
+        int p = (i - 1) >> 1;
+        if (a[p] >= a[i])
+          break;
+        (a[p], a[i]) = (a[i], a[p]);
+        i = p;
+      }
     }
 
     private static void PushDown(Span<int> a, int i, int n)

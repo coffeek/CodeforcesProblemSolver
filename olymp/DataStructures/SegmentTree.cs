@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Math;
 
-namespace Olymp.Utils
+namespace Olymp.DataStructures
 {
   namespace SegmentTree
   {
