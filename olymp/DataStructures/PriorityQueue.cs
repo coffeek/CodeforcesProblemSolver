@@ -44,9 +44,9 @@ namespace Olymp.DataStructures
       var last = heap.Count - 1;
       var lastItem = heap[^1];
       var i = 0;
-      while (((i << 1) | 1) < last)
+      var lch = (i << 1) | 1;
+      while (lch < last)
       {
-        var lch = (i << 1) | 1;
         var rch = lch + 1;
         if (rch < last && compare(heap[rch], heap[lch]) < 0)
           lch = rch;
@@ -54,6 +54,7 @@ namespace Olymp.DataStructures
           break;
         heap[i] = heap[lch];
         i = lch;
+        lch = (i << 1) | 1;
       }
       heap[i] = lastItem;
       heap.RemoveAt(last);
