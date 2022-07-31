@@ -9,21 +9,23 @@ namespace Olymp.DataStructures
 
     public int Size => s.Count;
 
-    public int Min => s.Count > 0 ? s[s.Count - 1].Min : int.MaxValue;
+    public int Min => s.Count > 0 ? s[^1].Min : int.MaxValue;
 
-    public int Max => s.Count > 0 ? s[s.Count - 1].Max : int.MinValue;
+    public int Max => s.Count > 0 ? s[^1].Max : int.MinValue;
 
     public void Push(int value)
     {
+      StackElement se;
       if (s.Count > 0)
-        s.Add(new StackElement(value, Math.Min(value, s[s.Count - 1].Min), Math.Max(value, s[s.Count - 1].Max)));
+        se = new StackElement(value, Math.Min(value, s[^1].Min), Math.Max(value, s[^1].Max));
       else
-        s.Add(new StackElement(value, value, value));
+        se = new StackElement(value, value, value);
+      s.Add(se);
     }
 
     public int Pop()
     {
-      var result = s[s.Count - 1];
+      var result = s[^1];
       s.RemoveAt(s.Count - 1);
       return result.Value;
     }

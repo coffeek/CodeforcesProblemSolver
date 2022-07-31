@@ -1,5 +1,4 @@
-﻿using Olymp.Utils;
-using static System.Math;
+﻿using static System.Math;
 
 namespace Olymp.DataStructures
 {

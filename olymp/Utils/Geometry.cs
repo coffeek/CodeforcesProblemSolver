@@ -6,19 +6,19 @@ namespace Olymp.Utils
 {
   public struct Vector2
   {
-    public int x;
-    public int y;
+    public int X;
+    public int Y;
 
     public static Vector2 operator +(Vector2 v1, Vector2 v2) =>
-      new Vector2(v1.x + v2.x, v1.y + v2.y);
+      new(v1.X + v2.X, v1.Y + v2.Y);
 
     public static Vector2 operator -(Vector2 v1, Vector2 v2) =>
-      new Vector2(v1.x - v2.x, v1.y - v2.y);
+      new(v1.X - v2.X, v1.Y - v2.Y);
 
     public Vector2(int x, int y)
     {
-      this.x = x;
-      this.y = y;
+      X = x;
+      Y = y;
     }
   }
 
@@ -35,25 +35,25 @@ namespace Olymp.Utils
 
   public class Quad
   {
-    public Vector2[] v;
+    public Vector2[] V;
 
     public bool ContainsPoint(Vector2 p) =>
-      Enumerable.Range(0, 4).All(i => Geometry.Cross(v[(i + 1) % 4] - v[i], p - v[i]) <= 0);
+      Enumerable.Range(0, 4).All(i => Geometry.Cross(V[(i + 1) % 4] - V[i], p - V[i]) <= 0);
 
-    public IEnumerable<Vector2> Points() => v;
+    public IEnumerable<Vector2> Points() => V;
 
-    public IEnumerable<Segment2> Edjes() =>
-      Enumerable.Range(0, 4).Select(i => new Segment2(v[i], v[(i + 1) % 4]));
+    public IEnumerable<Segment2> Edges() =>
+      Enumerable.Range(0, 4).Select(i => new Segment2(V[i], V[(i + 1) % 4]));
 
     public Quad(Vector2 a, Vector2 b, Vector2 c, Vector2 d) =>
-      v = new[] { a, b, c, d };
+      V = new[] { a, b, c, d };
   }
 
   public static class Geometry
   {
-    public static int Dot(Vector2 v1, Vector2 v2) => v1.x * v2.x + v1.y * v2.y;
+    public static int Dot(Vector2 v1, Vector2 v2) => v1.X * v2.X + v1.Y * v2.Y;
 
-    public static int Cross(Vector2 v1, Vector2 v2) => v1.x * v2.y - v2.x * v1.y;
+    public static int Cross(Vector2 v1, Vector2 v2) => v1.X * v2.Y - v2.X * v1.Y;
 
     public static bool Intersect(Segment2 a, Segment2 b) =>
       Intersect(a.a, a.b, b.a, b.b);
@@ -79,15 +79,15 @@ namespace Olymp.Utils
 
     public static bool PointOnEdge(Vector2 p, Vector2 a, Vector2 b)
     {
-      return p.x <= Max(a.x, b.x) && p.x >= Min(a.x, b.x) &&
-             p.y <= Max(a.y, b.y) && p.y >= Min(a.y, b.y);
+      return p.X <= Max(a.X, b.X) && p.X >= Min(a.X, b.X) &&
+             p.Y <= Max(a.Y, b.Y) && p.Y >= Min(a.Y, b.Y);
     }
 
     public static bool Intersect(Quad q1, Quad q2)
     {
       return q1.Points().Any(q2.ContainsPoint) ||
              q2.Points().Any(q1.ContainsPoint) ||
-             q1.Edjes().Any(e1 => q2.Edjes().Any(e2 => Intersect(e1, e2)));
+             q1.Edges().Any(e1 => q2.Edges().Any(e2 => Intersect(e1, e2)));
     }
   }
 }
