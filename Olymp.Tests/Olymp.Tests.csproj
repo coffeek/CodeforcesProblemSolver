@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <ProjectGuid>{E4984BB2-6633-4A77-A835-CB75B75E71A3}</ProjectGuid>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
