@@ -1,39 +1,38 @@
 ﻿using static System.Math;
 
-namespace Olymp.DataStructures
+namespace Olymp.DataStructures;
+
+public class MinMaxQueue
 {
-  public class MinMaxQueue
+  private readonly MinMaxStack front;
+  private readonly MinMaxStack back;
+
+  public MinMaxQueue(int capacity)
   {
-    private readonly MinMaxStack front;
-    private readonly MinMaxStack back;
+    front = new MinMaxStack(capacity);
+    back = new MinMaxStack(capacity);
+  }
 
-    public MinMaxQueue(int capacity)
-    {
-      front = new MinMaxStack(capacity);
-      back = new MinMaxStack(capacity);
-    }
+  public int Min => Min(front.Min, back.Min);
 
-    public int Min => Min(front.Min, back.Min);
-
-    public int Max => Max(front.Max, back.Max);
+  public int Max => Max(front.Max, back.Max);
     
-    public int Size => front.Size + back.Size;
+  public int Size => front.Size + back.Size;
 
-    public void Enqueue(int value)
-    {
-      front.Push(value);
-    }
+  public void Enqueue(int value)
+  {
+    front.Push(value);
+  }
 
-    public int Dequeue()
+  public int Dequeue()
+  {
+    if (back.Size == 0)
     {
-      if (back.Size == 0)
+      while (front.Size > 0)
       {
-        while (front.Size > 0)
-        {
-          back.Push(front.Pop());
-        }
+        back.Push(front.Pop());
       }
-      return back.Pop();
     }
+    return back.Pop();
   }
 }

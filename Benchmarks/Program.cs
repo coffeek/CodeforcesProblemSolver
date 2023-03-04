@@ -2,13 +2,12 @@
 using BenchmarkDotNet.Running;
 using Benchmarks.Benchmarks;
 
-namespace Benchmarks
+namespace Benchmarks;
+
+class Program
 {
-  class Program
+  static void Main()
   {
-    static void Main()
-    {
-      Console.WriteLine(BenchmarkRunner.Run<GetDigitsCount>());
-    }
+    Console.WriteLine(BenchmarkRunner.Run<GetDigitsCount>());
   }
 }

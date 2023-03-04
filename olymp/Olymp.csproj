@@ -4,6 +4,7 @@
     <ProjectGuid>{7719CB81-73F5-4FE2-8687-6FEF14989735}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
 </Project>
