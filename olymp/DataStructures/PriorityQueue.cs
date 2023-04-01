@@ -7,9 +7,9 @@ public class PriorityQueue<T>
 {
   private readonly Comparison<T> compare;
   private readonly List<T> heap;
-    
+
   public int Count => heap.Count;
-    
+
   public T Top
   {
     get
@@ -19,7 +19,7 @@ public class PriorityQueue<T>
       return heap[0];
     }
   }
-    
+
   public void Enqueue(T item)
   {
     var i = heap.Count;
@@ -39,7 +39,7 @@ public class PriorityQueue<T>
   {
     if (heap.Count == 0)
       throw new InvalidOperationException("Queue is empty");
-      
+
     var result = heap[0];
     var last = heap.Count - 1;
     var lastItem = heap[^1];
@@ -61,9 +61,24 @@ public class PriorityQueue<T>
     return result;
   }
 
-  public PriorityQueue(Comparison<T> comparison = null)
+  public PriorityQueue()
+    : this(0, Comparer<T>.Default.Compare)
   {
-    compare = comparison ?? Comparer<T>.Default.Compare;
-    heap = new List<T>();
+  }
+
+  public PriorityQueue(int capacity)
+    : this(capacity, Comparer<T>.Default.Compare)
+  {
+  }
+
+  public PriorityQueue(Comparison<T> comparison)
+    : this(0, comparison)
+  {
+  }
+
+  public PriorityQueue(int capacity, Comparison<T> comparison)
+  {
+    compare = comparison ?? throw new ArgumentNullException(nameof(comparison));
+    heap = new List<T>(capacity);
   }
 }
