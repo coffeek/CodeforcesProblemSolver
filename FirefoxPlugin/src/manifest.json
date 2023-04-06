@@ -1,9 +1,9 @@
 ﻿{
-  "description": "Добавляет кнопку для копирования тестовых примеров задачи из codeforces.com в формате NUnit-тестов проекта Olymp.Tests",
+  "description": "Adds a button to copy sample test inputs of task from codeforces.com as NUnit tests",
   "manifest_version": 2,
   "name": "CodeforcesProblemSamplesCopier",
   "homepage_url": "https://github.com/coffeek/olymp_cs",
-  "version": "1.4",
+  "version": "1.5",
   "icons": {
     "48": "icons/icon-48.png"
   },
