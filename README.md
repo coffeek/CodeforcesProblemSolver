@@ -6,8 +6,7 @@ This is a project for solving problems from the site https://codeforces.com/ in 
 
 Firefox browser plugin for easy copying of test samples as code for test project (SolveTests.cs). Extension adds a button for copying test inputs: 
 
-![image](https://user-images.githubusercontent.com/829589/229304662-6c7ee9a6-790c-4dc0-bcba-64a7f195975d.png)
-
+![image](https://user-images.githubusercontent.com/829589/230470542-7fbe56ea-ce0d-45ae-b26d-e240c3de018a.png)
 
 ## Olymp.Tests
 
