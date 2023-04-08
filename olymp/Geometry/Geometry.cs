@@ -1,53 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using static System.Math;
 
-namespace Olymp.Utils;
-
-public struct Vector2
-{
-  public int X;
-  public int Y;
-
-  public static Vector2 operator +(Vector2 v1, Vector2 v2) =>
-    new(v1.X + v2.X, v1.Y + v2.Y);
-
-  public static Vector2 operator -(Vector2 v1, Vector2 v2) =>
-    new(v1.X - v2.X, v1.Y - v2.Y);
-
-  public Vector2(int x, int y)
-  {
-    X = x;
-    Y = y;
-  }
-}
-
-public class Segment2
-{
-  public Vector2 a;
-  public Vector2 b;
-  public Segment2(Vector2 a, Vector2 b)
-  {
-    this.a = a;
-    this.b = b;
-  }
-}
-
-public class Quad
-{
-  public Vector2[] V;
-
-  public bool ContainsPoint(Vector2 p) =>
-    Enumerable.Range(0, 4).All(i => Geometry.Cross(V[(i + 1) % 4] - V[i], p - V[i]) <= 0);
-
-  public IEnumerable<Vector2> Points() => V;
-
-  public IEnumerable<Segment2> Edges() =>
-    Enumerable.Range(0, 4).Select(i => new Segment2(V[i], V[(i + 1) % 4]));
-
-  public Quad(Vector2 a, Vector2 b, Vector2 c, Vector2 d) =>
-    V = new[] { a, b, c, d };
-}
+namespace Olymp.Geometry;
 
 public static class Geometry
 {
@@ -56,7 +10,7 @@ public static class Geometry
   public static int Cross(Vector2 v1, Vector2 v2) => v1.X * v2.Y - v2.X * v1.Y;
 
   public static bool Intersect(Segment2 a, Segment2 b) =>
-    Intersect(a.a, a.b, b.a, b.b);
+    Intersect(a.A, a.B, b.A, b.B);
 
   public static bool Intersect(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
   {
