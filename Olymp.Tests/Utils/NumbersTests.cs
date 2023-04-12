@@ -28,15 +28,14 @@ public class NumbersTests
     {
       var expected = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
       var actual = Numbers.ToBase(i, 2);
-      AssertArrayEquals(expected, actual);
+      CollectionAssert.AreEqual(expected, actual);
     }
-
-    AssertArrayEquals(new[] { 0 }, Numbers.ToBase(0, 3));
-    AssertArrayEquals(new[] { 1 }, Numbers.ToBase(1, 3));
-    AssertArrayEquals(new[] { 2 }, Numbers.ToBase(2, 3));
-    AssertArrayEquals(new[] { 1, 0 }, Numbers.ToBase(3, 3));
-    AssertArrayEquals(new[] { 2, 2, 2 }, Numbers.ToBase(26, 3));
-    AssertArrayEquals(new[] { 1, 0, 0, 0 }, Numbers.ToBase(27, 3));
+    CollectionAssert.AreEqual(new[] { 0 }, Numbers.ToBase(0, 3));
+    CollectionAssert.AreEqual(new[] { 1 }, Numbers.ToBase(1, 3));
+    CollectionAssert.AreEqual(new[] { 2 }, Numbers.ToBase(2, 3));
+    CollectionAssert.AreEqual(new[] { 1, 0 }, Numbers.ToBase(3, 3));
+    CollectionAssert.AreEqual(new[] { 2, 2, 2 }, Numbers.ToBase(26, 3));
+    CollectionAssert.AreEqual(new[] { 1, 0, 0, 0 }, Numbers.ToBase(27, 3));
   }
 
   [Test]
@@ -147,11 +146,42 @@ public class NumbersTests
     Numbers.PrimeDivisors(36).Should().BeEquivalentTo(2, 2, 3, 3);
     Numbers.PrimeDivisors(1024).Should().BeEquivalentTo(2, 2, 2, 2, 2, 2, 2, 2, 2, 2);
   }
-  
-  private static void AssertArrayEquals<T>(T[] expected, T[] actual)
+
+  [TestCase(1, 1, 1)]
+  [TestCase(1, 0, 1)]
+  [TestCase(1, 1000, 1)]
+  [TestCase(2, 0, 1)]
+  [TestCase(2, 10, 1024)]
+  [TestCase(13, 2, 169)]
+  [TestCase(13, 13, 302875106592253L)]
+  public void BinPowTest(long a, int n, long expected)
   {
-    Assert.AreEqual(expected.Length, actual.Length);
-    for (int j = 0; j < expected.Length; j++)
-      Assert.AreEqual(expected[j], actual[j]);
+    Numbers.BinPow(a, n).Should().Be(expected);
+  }
+  
+  [TestCase(1, 1, 10, 1)]
+  [TestCase(1, 0, 10, 1)]
+  [TestCase(1, 1000, 10, 1)]
+  [TestCase(2, 0, 10, 1)]
+  [TestCase(2, 10, 2000, 1024)]
+  [TestCase(13, 2, 100, 69)]
+  [TestCase(13, 13, 1000, 253)]
+  [TestCase(595, 703, 991, 342)]
+  [TestCase(1289037501823, 15883819104444, 679849203948, 169858412521)]
+  public void BinPowModTest(long a, long n, long mod, long expected)
+  {
+    Numbers.BinPow(a, n, mod).Should().Be(expected);
+  }
+
+  [TestCase(0, 0, 10, 0)]
+  [TestCase(1, 0, 10, 0)]
+  [TestCase(0, 1, 10, 0)]
+  [TestCase(10, 10, 10, 0)]
+  [TestCase(11, 11, 10, 1)]
+  [TestCase(11, 11, 56, 9)]
+  [TestCase(38472837282994394, 45998918239, 10000, 2166)]
+  public void BinMulTest(long x, long y, long mod, long expected)
+  {
+    Numbers.BinMul(x, y, mod).Should().Be(expected);
   }
 }

@@ -59,11 +59,11 @@ public static class Numbers
   }
 
   public static bool Odd(int x) => (x & 1) != 0;
-  
+
   public static bool Even(int x) => (x & 1) == 0;
-  
+
   public static bool Odd(long x) => (x & 1) != 0;
-  
+
   public static bool Even(long x) => (x & 1) == 0;
 
   public static bool IsPrime(int x)
@@ -131,5 +131,50 @@ public static class Numbers
       mul *= b;
     }
     return val;
+  }
+
+  public static long BinPow(long a, int n)
+  {
+    if (n == 0)
+      return 1;
+    long res = 1;
+    while (n != 0)
+    {
+      if ((n & 1) == 1)
+        res *= a;
+      a *= a;
+      n >>= 1;
+    }
+    return res;
+  }
+
+  public static long BinMul(long x, long y, long mod)
+  {
+    if (x == 0 || y == 0)
+      return 0;
+    long res = 0;
+    while (y != 0)
+    {
+      if ((y & 1) == 1)
+        res = (res + x) % mod;
+      x = (x + x) % mod;
+      y >>= 1;
+    }
+    return res;
+  }
+  
+  public static long BinPow(long a, long n, long mod)
+  {
+    if (n == 0)
+      return 1;
+    long res = 1;
+    while (n != 0)
+    {
+      if ((n & 1) == 1)
+        res = BinMul(res, a, mod);
+      a = BinMul(a, a, mod);
+      n >>= 1;
+    }
+    return res;
   }
 }
