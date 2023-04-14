@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\olymp\Olymp.csproj" />
+      <ProjectReference Include="..\Solver\Solver.csproj" />
     </ItemGroup>
 
 </Project>

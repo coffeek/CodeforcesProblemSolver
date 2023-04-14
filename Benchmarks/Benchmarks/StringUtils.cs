@@ -1,6 +1,6 @@
 ﻿using System;
 using BenchmarkDotNet.Attributes;
-using Olymp.Utils;
+using Solver.Utils;
 
 namespace Benchmarks.Benchmarks;
 

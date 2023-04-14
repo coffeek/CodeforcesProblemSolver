@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using BenchmarkDotNet.Attributes;
-using Olymp.Utils;
+using Solver.Utils;
 
 namespace Benchmarks.Benchmarks;
 
