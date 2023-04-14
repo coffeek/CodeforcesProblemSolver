@@ -36,7 +36,7 @@ function create_and_copy_tests() {
     const testModule = `using System.IO;
 using NUnit.Framework;
 
-namespace Olymp.Tests;
+namespace Solver.Tests;
 
 [TestFixture]
 public class SolveTest
