@@ -3,7 +3,7 @@ using static System.Math;
 
 namespace Solver.Utils;
 
-public static class StringUtils
+public static class Strings
 {
   public static int[] ZFunc(string s)
   {

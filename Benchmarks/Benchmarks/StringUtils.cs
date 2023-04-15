@@ -27,7 +27,7 @@ public class JoinIntegersBenchmark
   [Benchmark]
   public string FastIntJoin()
   {
-    return StringUtils.FastIntJoin(Separator, data);
+    return Strings.FastIntJoin(Separator, data);
   }
 }
 
