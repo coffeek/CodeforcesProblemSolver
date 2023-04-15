@@ -35,4 +35,13 @@ public class FunctionsTests
   {
     Functions.Max(values).Should().Be(values.Max());
   }
+
+  [Test]
+  public void PermuteTest()
+  {
+    var expected = new[] { "1 2 3", "1 3 2", "2 1 3", "2 3 1", "3 2 1", "3 1 2" };
+    var actual = new List<string>();
+    Functions.Permute(new[] { 1, 2, 3 }, 0, 3, p => actual.Add(string.Join(" ", p)));
+    CollectionAssert.AreEqual(expected, actual);
+  }
 }
