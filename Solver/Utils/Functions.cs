@@ -51,26 +51,4 @@ public static class Functions
     }
     yield return lastA;
   }
-
-  public static int UpperBound(int[] a, int value)
-  {
-    return UpperBound(a, 0, a.Length, value);
-  }
-
-  private static int UpperBound(int[] a, int beginIndex, int endIndex, int value)
-  {
-    if (beginIndex >= endIndex)
-      return endIndex;
-    var l = beginIndex;
-    var r = endIndex - 1;
-    while (l < r)
-    {
-      var m = l + (r - l) / 2;
-      if (a[m] <= value)
-        l = m + 1;
-      else
-        r = m;
-    }
-    return a[l] <= value ? endIndex : l;
-  }
 }

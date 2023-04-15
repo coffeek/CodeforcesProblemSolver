@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using BenchmarkDotNet.Attributes;
-using Solver.Utils;
+using Solver.Sorting;
 
 namespace Benchmarks.Benchmarks;
 
