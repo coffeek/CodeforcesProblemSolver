@@ -134,6 +134,15 @@ public class NumbersTests
     Numbers.Gcd(12, 24, 6).Should().Be(6);
     Numbers.Gcd(10, 7, 13, 1024).Should().Be(1);
   }
+  
+  [Test]
+  public void LcmTest()
+  {
+    Numbers.Lcm(1, 1).Should().Be(1);
+    Numbers.Lcm(12, 4).Should().Be(12);
+    Numbers.Lcm(12, 9).Should().Be(36);
+    Numbers.Lcm(12, 7).Should().Be(84);
+  }
 
   [Test]
   public void PrimeDivisorsTest()

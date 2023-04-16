@@ -57,6 +57,11 @@ public static class Numbers
     }
     return a;
   }
+  
+  public static int Lcm(int a, int b)
+  {
+    return a * (b / Gcd(a, b));
+  }
 
   public static bool Odd(int x) => (x & 1) != 0;
 
