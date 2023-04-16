@@ -142,6 +142,11 @@ public class NumbersTests
     Numbers.Lcm(12, 4).Should().Be(12);
     Numbers.Lcm(12, 9).Should().Be(36);
     Numbers.Lcm(12, 7).Should().Be(84);
+    
+    Numbers.Lcm().Should().Be(0);
+    Numbers.Lcm(16).Should().Be(16);
+    Numbers.Lcm(12, 24, 6).Should().Be(24);
+    Numbers.Lcm(10, 5, 13, 130).Should().Be(130);
   }
 
   [Test]

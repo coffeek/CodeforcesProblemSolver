@@ -62,6 +62,16 @@ public static class Numbers
   {
     return a * (b / Gcd(a, b));
   }
+  
+  public static int Lcm(params int[] values)
+  {
+    return values.Length switch
+    {
+      0 => 0,
+      1 => values[0],
+      _ => values.Aggregate(Lcm)
+    };
+  }
 
   public static bool Odd(int x) => (x & 1) != 0;
 
