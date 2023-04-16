@@ -57,12 +57,12 @@ public static class Numbers
     }
     return a;
   }
-  
+
   public static int Lcm(int a, int b)
   {
     return a * (b / Gcd(a, b));
   }
-  
+
   public static int Lcm(params int[] values)
   {
     return values.Length switch
@@ -94,24 +94,39 @@ public static class Numbers
   }
 
   /// <summary>
-  /// Вернуть список простых делителей числа.
-  /// Если число простое, функция вернет само число.
-  /// Делители могут повторяться (для 1024 вернет 10 двоек).
+  /// Euler's totient function.
+  /// https://en.wikipedia.org/wiki/Euler%27s_totient_function
   /// </summary>
-  public static List<int> PrimeDivisors(int number)
+  public static int Phi(int n)
   {
-    var p = new List<int>();
-    var q = number;
-    for (var i = 2; i * i <= number; i++)
+    var result = n;
+    for (var i = 2; i * i <= n; i++)
     {
-      while (q % i == 0)
+      if (n % i == 0)
       {
-        p.Add(i);
-        q /= i;
+        do { n /= i; }
+        while (n % i == 0);
+        result -= result / i;
       }
     }
-    if (q > 1)
-      p.Add(q);
+    if (n > 1)
+      result -= result / n;
+    return result;
+  }
+
+  public static List<int> Factorize(int n)
+  {
+    var p = new List<int>();
+    for (var i = 2; i * i <= n; i++)
+    {
+      while (n % i == 0)
+      {
+        p.Add(i);
+        n /= i;
+      }
+    }
+    if (n > 1)
+      p.Add(n);
     return p;
   }
 
@@ -177,7 +192,7 @@ public static class Numbers
     }
     return res;
   }
-  
+
   public static long BinPow(long a, long n, long mod)
   {
     if (n == 0)
