@@ -43,4 +43,18 @@ public static class Geometry
            q2.Points().Any(q1.ContainsPoint) ||
            q1.Edges().Any(e1 => q2.Edges().Any(e2 => Intersect(e1, e2)));
   }
+
+  private const float Epsilon = 0.00000001f;
+  
+  public static int CmpZ(float value)
+  {
+    return value switch
+    {
+      > Epsilon => 1,
+      < -Epsilon => -1,
+      _ => 0
+    };
+  }
+
+  public static int Cmp(float value1, float value2) => CmpZ(value1 - value2);
 }
