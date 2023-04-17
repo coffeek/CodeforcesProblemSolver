@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using static System.Math;
 
 namespace Solver.Geometry;
@@ -57,4 +58,13 @@ public static class Geometry
   }
 
   public static int Cmp(float value1, float value2) => CmpZ(value1 - value2);
+  
+  /// <summary>
+  /// Reflect vector off the plane.
+  /// </summary>
+  public static Vector3 Reflect(Vector3 d, Vector3 normal)
+  {
+    // R = D - 2 * Dot(D,N) * N, |N| = 1;
+    return d - 2.0f * Vector3.Dot(d, normal) * normal;
+  }
 }
