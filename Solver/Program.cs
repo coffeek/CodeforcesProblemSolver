@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using static System.Array;
-using static System.Console;
 using static System.Math;
 
 namespace Solver;
@@ -121,8 +120,8 @@ internal static class Program
 {
   public static void Main()
   {
-    using var reader = new StreamReader(OpenStandardInput(), Encoding.ASCII, false);
-    using var writer = new StreamWriter(OpenStandardOutput(), Encoding.ASCII);
+    using var reader = new StreamReader(Console.OpenStandardInput(), Encoding.ASCII, false);
+    using var writer = new StreamWriter(Console.OpenStandardOutput(), Encoding.ASCII);
     new ProblemSolver(reader, writer).Solve();
   }
 }
