@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -215,5 +216,45 @@ public class NumbersTests
   public void BinMulTest(long x, long y, long mod, long expected)
   {
     Numbers.BinMul(x, y, mod).Should().Be(expected);
+  }
+
+  [TestFixture]
+  public class SieveTests
+  {
+    [Test]
+    public void Sieve()
+    {
+      RunTest(Numbers.Sieve);
+    }
+  
+    [Test]
+    public void BitSieve()
+    {
+      RunTest(Numbers.BitSieve);
+    }
+  
+    [Test]
+    public void EnhancedSieve()
+    {
+      RunTest(Numbers.EnhancedSieve);
+    }
+  
+    [Test]
+    public void LinearSieve()
+    {
+      RunTest(Numbers.LinearSieve);
+    }
+
+    private static void RunTest(Func<int, IReadOnlyList<int>> sieve)
+    {
+      sieve(0).Should().BeEmpty();
+      sieve(1).Should().BeEmpty();
+      sieve(2).Should().BeEquivalentTo(2);
+      sieve(3).Should().BeEquivalentTo(2, 3);
+      sieve(101).Should().BeEquivalentTo(
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 
+        53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101);
+      sieve(1000000).Should().HaveCount(78498);
+    }
   }
 }
