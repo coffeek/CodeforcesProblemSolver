@@ -2,4 +2,4 @@
 using BenchmarkDotNet.Running;
 using Benchmarks.Benchmarks;
 
-Console.WriteLine(BenchmarkRunner.Run<Eratosthenes>());
+Console.WriteLine(BenchmarkRunner.Run<DigitsCount>());

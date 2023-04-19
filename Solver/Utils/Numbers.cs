@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Solver.DataStructures;
 
@@ -7,6 +8,7 @@ namespace Solver.Utils;
 
 public static class Numbers
 {
+  [SuppressMessage("ReSharper", "ConvertIfStatementToSwitchStatement")]
   public static int FastDigitsCount(int n)
   {
     if (n == int.MinValue)
