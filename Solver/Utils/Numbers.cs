@@ -261,12 +261,10 @@ public static class Numbers
 
   public static long BinPow(long a, int n)
   {
-    if (n == 0)
-      return 1;
     long res = 1;
     while (n != 0)
     {
-      if ((n & 1) == 1)
+      if ((n & 1) != 0)
         res *= a;
       a *= a;
       n >>= 1;
@@ -281,7 +279,7 @@ public static class Numbers
     long res = 0;
     while (y != 0)
     {
-      if ((y & 1) == 1)
+      if ((y & 1) != 0)
         res = (res + x) % mod;
       x = (x + x) % mod;
       y >>= 1;
@@ -291,14 +289,25 @@ public static class Numbers
 
   public static long BinPow(long a, long n, long mod)
   {
-    if (n == 0)
-      return 1;
     long res = 1;
     while (n != 0)
     {
-      if ((n & 1) == 1)
+      if ((n & 1) != 0)
         res = BinMul(res, a, mod);
       a = BinMul(a, a, mod);
+      n >>= 1;
+    }
+    return res;
+  }
+  
+  public static int BinPow(int a, int n, int mod)
+  {
+    int res = 1;
+    while (n != 0)
+    {
+      if ((n & 1) != 0)
+        res = (int)(((long)res * a) % mod);
+      a = (int)(((long)a * a) % mod);
       n >>= 1;
     }
     return res;

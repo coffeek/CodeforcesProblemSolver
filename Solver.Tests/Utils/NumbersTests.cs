@@ -200,8 +200,23 @@ public class NumbersTests
   [TestCase(13, 2, 100, 69)]
   [TestCase(13, 13, 1000, 253)]
   [TestCase(595, 703, 991, 342)]
+  [TestCase(128903750, 158838191, 679849203, 400886120)]
   [TestCase(1289037501823, 15883819104444, 679849203948, 169858412521)]
-  public void BinPowModTest(long a, long n, long mod, long expected)
+  public void BinPowModLongTest(long a, long n, long mod, long expected)
+  {
+    Numbers.BinPow(a, n, mod).Should().Be(expected);
+  }
+  
+  [TestCase(1, 1, 10, 1)]
+  [TestCase(1, 0, 10, 1)]
+  [TestCase(1, 1000, 10, 1)]
+  [TestCase(2, 0, 10, 1)]
+  [TestCase(2, 10, 2000, 1024)]
+  [TestCase(13, 2, 100, 69)]
+  [TestCase(13, 13, 1000, 253)]
+  [TestCase(595, 703, 991, 342)]
+  [TestCase(128903750, 158838191, 679849203, 400886120)]
+  public void BinPowModIntTest(int a, int n, int mod, int expected)
   {
     Numbers.BinPow(a, n, mod).Should().Be(expected);
   }
