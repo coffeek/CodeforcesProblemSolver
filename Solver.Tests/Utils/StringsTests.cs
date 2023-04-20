@@ -6,8 +6,20 @@ using Solver.Utils;
 namespace Solver.Tests.Utils;
 
 [TestFixture]
-public class StringUtilsTests
+public class StringsTests
 {
+  [Test]
+  public void IsPalindromeTest()
+  {
+    Strings.IsPalindrome("a").Should().BeTrue();
+    Strings.IsPalindrome("aba").Should().BeTrue();
+    Strings.IsPalindrome("aa").Should().BeTrue();
+    Strings.IsPalindrome("caccac").Should().BeTrue();
+    Strings.IsPalindrome("ca").Should().BeFalse();
+    Strings.IsPalindrome("aac").Should().BeFalse();
+    Strings.IsPalindrome("abcdef").Should().BeFalse();
+  }
+  
   [Test]
   public void ZFuncTest()
   {

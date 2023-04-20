@@ -5,6 +5,17 @@ namespace Solver.Utils;
 
 public static class Strings
 {
+  public static bool IsPalindrome(string s)
+  {
+    var n = s.Length;
+    for (int i = 0; i < n / 2; i++)
+    {
+      if (s[i] != s[n - i - 1])
+        return false;
+    }
+    return true;
+  }
+  
   public static int[] ZFunc(string s)
   {
     if (s.Length == 0)
