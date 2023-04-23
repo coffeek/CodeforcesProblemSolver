@@ -55,6 +55,14 @@ a");
     Assert.AreEqual(1, new Tokenizer(new StringReader("+01")).ReadInt());
     Assert.AreEqual(0, new Tokenizer(new StringReader("-00")).ReadInt());
   }
+  
+  [Test]
+  public void TestParseLong()
+  {
+    Assert.AreEqual(-59829934957459, new Tokenizer(new StringReader("-59829934957459")).ReadLong());
+    Assert.AreEqual(59829934957459, new Tokenizer(new StringReader("+059829934957459")).ReadLong());
+    Assert.AreEqual(0, new Tokenizer(new StringReader("-00")).ReadLong());
+  }
 
   [Test]
   public void TestParseIntegers()
@@ -69,6 +77,22 @@ a");
     Assert.AreEqual(987654321, tokenizer.ReadInt());
     Assert.AreEqual(0, tokenizer.ReadInt());
     Assert.AreEqual(0, tokenizer.ReadInt());
+    Assert.IsNull(tokenizer.ReadToken());
+  }
+  
+  [Test]
+  public void TestParseLongs()
+  {
+    var input = new StringReader(@"-1 135 +439056812903734939 00009876543218589493
+0 -00000
+");
+    var tokenizer = new Tokenizer(input);
+    Assert.AreEqual(-1, tokenizer.ReadLong());
+    Assert.AreEqual(135, tokenizer.ReadLong());
+    Assert.AreEqual(439056812903734939, tokenizer.ReadLong());
+    Assert.AreEqual(9876543218589493, tokenizer.ReadLong());
+    Assert.AreEqual(0, tokenizer.ReadLong());
+    Assert.AreEqual(0, tokenizer.ReadLong());
     Assert.IsNull(tokenizer.ReadToken());
   }
 
