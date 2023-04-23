@@ -9,6 +9,20 @@ public class DigitsCount
   public int D { get; set; }
   
   [Benchmark(Baseline = true)]
+  public int SimpleLoop()
+  {
+    var k = D;
+    var ans = k < 0 ? 1 : 0;
+    do
+    {
+      ans++;
+      k /= 10;
+    }
+    while (k != 0);
+    return ans;
+  }
+  
+  [Benchmark]
   public int BaseDigitsCount()
   {
     return Numbers.DigitsCount(D);

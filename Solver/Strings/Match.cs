@@ -1,21 +1,10 @@
 ﻿using System;
 using static System.Math;
 
-namespace Solver.Utils;
+namespace Solver.Strings;
 
-public static class Strings
+public static class Match
 {
-  public static bool IsPalindrome(string s)
-  {
-    var n = s.Length;
-    for (int i = 0; i < n / 2; i++)
-    {
-      if (s[i] != s[n - i - 1])
-        return false;
-    }
-    return true;
-  }
-  
   public static int[] ZFunc(string s)
   {
     if (s.Length == 0)
@@ -103,58 +92,5 @@ public static class Strings
         return i - m + 1;
     }
     return -1;
-  }
-    
-  public static string FastIntJoin(string sep, int[] data)
-  {
-    if (data.Length == 0)
-      return string.Empty;
-      
-    int Len(int k)
-    {
-      var len = Numbers.FastDigitsCount(k);
-      return k < 0 ? len + 1 : len;
-    }
-
-    int Write(int k, Span<char> s)
-    {
-      var n = Len(k);
-      if (k < 0)
-      {
-        s[0] = '-';
-        k = -k;
-      }
-      int i = n - 1;
-      do
-      {
-        var d = k % 10;
-        s[i] = (char)(d + '0');
-        i--;
-        k /= 10;
-      }
-      while (k != 0);
-
-      return n;
-    }
-
-    var n = 0;
-    for (int i = 0; i < data.Length; i++)
-      n += Len(data[i]);
-    n += sep.Length * (data.Length - 1);
-
-    return string.Create<object>(n, null, (s, _) =>
-    {
-      var ss = sep.AsSpan();
-      var pos = 0;
-      for (int i = 0; i < data.Length; i++)
-      {
-        pos += Write(data[i], s[pos..]);
-        if (i != data.Length - 1 && sep.Length != 0)
-        {
-          ss.CopyTo(s[pos..]);
-          pos += sep.Length;
-        }
-      }
-    });
   }
 }
