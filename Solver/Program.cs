@@ -66,9 +66,11 @@ public class Tokenizer
 
   public double[] ReadDoubleArray(int n) => ReadArray(n, ReadDouble);
 
-  public ReadOnlySpan<char> ReadToken(Span<char> buffer)
+  public Span<char> ReadToken(Span<char> buffer)
   {
     var c = SkipWs();
+    if (c == -1)
+      return Span<char>.Empty;
     var pos = 0;
     while (c > 0 && !char.IsWhiteSpace((char)c))
     {
