@@ -69,8 +69,6 @@ public class Tokenizer
   public Span<char> ReadToken(Span<char> buffer)
   {
     var c = SkipWs();
-    if (c == -1)
-      return Span<char>.Empty;
     var pos = 0;
     while (c > 0 && !char.IsWhiteSpace((char)c))
     {
@@ -104,9 +102,7 @@ public class Tokenizer
 
   private int SkipWs()
   {
-    var c = reader.Read();
-    if (c == -1)
-      return c;
+    int c = reader.Read();
     while (c > 0 && char.IsWhiteSpace((char)c))
       c = reader.Read();
     return c;
