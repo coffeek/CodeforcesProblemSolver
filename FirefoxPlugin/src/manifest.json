@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "CodeforcesProblemSamplesCopier",
   "homepage_url": "https://github.com/coffeek/CodeforcesProblemSolver",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "icons": {
     "48": "icons/icon-48.png"
   },
