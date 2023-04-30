@@ -1,0 +1,11 @@
+.protocol-popup-input-output-copier {
+  font-size: 1.2rem;
+  float: right;
+  color: #888 !important;
+  cursor: pointer;
+  border: 1px solid rgb(185, 185, 185);
+  padding: 3px;
+  margin: 1px;
+  line-height: 1.1rem;
+  text-transform: none;
+}
