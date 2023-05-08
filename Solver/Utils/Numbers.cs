@@ -38,6 +38,14 @@ public static class Numbers
       n = -n;
     return n == 0 ? 1 : (int)Math.Log10(n) + 1;
   }
+  
+  public static bool IsSquare(int n)
+  {
+    if (n < 0)
+      return false;
+    var sqrt = (int)Math.Sqrt(n);
+    return sqrt * sqrt == n;
+  }
 
   public static int Gcd(params int[] values)
   {

@@ -260,6 +260,21 @@ public class NumbersTests
       RunTest(Numbers.LinearSieve);
     }
 
+    [TestCase(-4, false)]
+    [TestCase(0, true)]
+    [TestCase(1, true)]
+    [TestCase(2, false)]
+    [TestCase(3, false)]
+    [TestCase(4, true)]
+    [TestCase(9, true)]
+    [TestCase(10, false)]
+    [TestCase(111, false)]
+    [TestCase(1024, true)]
+    public void IsSquareTest(int n, bool expected)
+    {
+      Numbers.IsSquare(n).Should().Be(expected);
+    }
+
     private static void RunTest(Func<int, IReadOnlyList<int>> sieve)
     {
       sieve(0).Should().BeEmpty();
