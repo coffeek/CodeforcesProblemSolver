@@ -16,8 +16,8 @@ public class MinMaxQueue
   public int Min => Min(front.Min, back.Min);
 
   public int Max => Max(front.Max, back.Max);
-    
-  public int Size => front.Size + back.Size;
+
+  public int Count => front.Count + back.Count;
 
   public void Enqueue(int value)
   {
@@ -26,9 +26,9 @@ public class MinMaxQueue
 
   public int Dequeue()
   {
-    if (back.Size == 0)
+    if (back.Count == 0)
     {
-      while (front.Size > 0)
+      while (front.Count > 0)
       {
         back.Push(front.Pop());
       }

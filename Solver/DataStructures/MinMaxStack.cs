@@ -5,47 +5,27 @@ namespace Solver.DataStructures;
 
 public class MinMaxStack
 {
-  private readonly List<StackElement> s;
+  private readonly record struct StackElement(int Value, int Min, int Max);
 
-  public int Size => s.Count;
+  private readonly Stack<StackElement> s;
+  public int Count => s.Count;
 
-  public int Min => s.Count > 0 ? s[^1].Min : int.MaxValue;
+  public int Min => s.TryPeek(out var top) ? top.Min : int.MaxValue;
 
-  public int Max => s.Count > 0 ? s[^1].Max : int.MinValue;
+  public int Max => s.TryPeek(out var top) ? top.Max : int.MinValue;
 
   public void Push(int value)
   {
-    StackElement se;
-    if (s.Count > 0)
-      se = new StackElement(value, Math.Min(value, s[^1].Min), Math.Max(value, s[^1].Max));
-    else
-      se = new StackElement(value, value, value);
-    s.Add(se);
+    var se = s.TryPeek(out var top) ?
+      new StackElement(value, Math.Min(value, top.Min), Math.Max(value, top.Max)) :
+      new StackElement(value, value, value);
+    s.Push(se);
   }
 
-  public int Pop()
-  {
-    var result = s[^1];
-    s.RemoveAt(s.Count - 1);
-    return result.Value;
-  }
+  public int Pop() => s.Pop().Value;
 
   public MinMaxStack(int capacity)
   {
-    s = new List<StackElement>(capacity);
-  }
-
-  private readonly struct StackElement
-  {
-    public readonly int Value;
-    public readonly int Min;
-    public readonly int Max;
-
-    public StackElement(int value, int min, int max)
-    {
-      Value = value;
-      Min = min;
-      Max = max;
-    }
+    s = new Stack<StackElement>(capacity);
   }
 }
