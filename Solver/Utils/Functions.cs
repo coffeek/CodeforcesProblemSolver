@@ -16,6 +16,25 @@ public static class Functions
     return values.Max();
   }
 
+  public static (int m1, int m2) Find2Max(Span<int> a)
+  {
+    var m1 = int.MinValue;
+    var m2 = int.MinValue;
+    for (int i = 0; i < a.Length; i++)
+    {
+      if (a[i] >= m1)
+      {
+        m2 = m1;
+        m1 = a[i];
+      }
+      else if (a[i] > m2)
+      {
+        m2 = a[i];
+      }
+    }
+    return (m1, m2);
+  }
+
   public static void Permute<T>(T[] a, int i, int n, Action<T[]> process)
   {
     if (i == n - 1)

@@ -38,7 +38,7 @@ public static class Numbers
       n = -n;
     return n == 0 ? 1 : (int)Math.Log10(n) + 1;
   }
-  
+
   public static bool IsSquare(int n)
   {
     if (n < 0)
@@ -128,7 +128,7 @@ public static class Numbers
         result.Add(i);
     return result;
   }
-  
+
   /// <summary>
   /// Sieve of Eratosthenes (via a bit array).
   /// </summary>
@@ -309,7 +309,7 @@ public static class Numbers
     }
     return res;
   }
-  
+
   public static int BinPow(int a, int n, int mod)
   {
     int res = 1;
