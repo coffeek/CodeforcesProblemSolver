@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -23,17 +24,27 @@ public class FunctionsTests
     Assert.That(Call(new[] { 1, 1, 1, 2, 2, 2, 0, 0, 3, 1, 2 }), Is.EquivalentTo(new[] { 1, 2, 0, 3, 1, 2 }));
     Assert.That(Call(new[] { 0, 0, 1, 1, 1, 0 }), Is.EquivalentTo(new[] { 0, 1, 0 }));
   }
-  
+
   [TestCase(new[] { 1, 1, 1, 2, 2, -2, 0, 0, 3, 1, 2 })]
   public void MinTest(int[] values)
   {
     Functions.Min(values).Should().Be(values.Min());
   }
-  
+
   [TestCase(new[] { 1, 1, 1, 2, 2, -2, 0, 0, 3, 1, 2 })]
   public void MaxTest(int[] values)
   {
     Functions.Max(values).Should().Be(values.Max());
+  }
+
+  [TestCase(new[] { 1, 2, 3, 4, 5 }, 5, 4)]
+  [TestCase(new[] { -1 }, -1, int.MinValue)]
+  [TestCase(new[] { -1, -10 }, -1, -10)]
+  [TestCase(new[] { 7, -10, 1014, 895, 1014, 0 }, 1014, 1014)]
+  [TestCase(new int[] { }, int.MinValue, int.MinValue)]
+  public void Find2MaxTest(int[] values, int expectedMax1, int expectedMax2)
+  {
+    Functions.Find2Max(values).Should().Be((expectedMax1, expectedMax2));
   }
 
   [Test]
