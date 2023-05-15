@@ -4,23 +4,22 @@ if (sampleTestsElement) {
   button.className = "input-output-copier";
   button.textContent = "Copy as SolveTest.cs";
   button.onclick = function (e) {
-      create_and_copy_tests();
+      createAndCopyTests();
   };
   sampleTestsElement.getElementsByClassName("section-title")[0].appendChild(button);
 
-  function prepare_text(s) {
-      return s
-          .replace(/(.*)\s+$/, '$1') // Remove line breaks and spaces at the end of the text.
+  function prepareText(s) {
+      return s.replace(/(.*)\s+$/, '$1') // Remove line breaks and spaces at the end of the text.
   }
 
-  function create_and_copy_tests() {
+  function createAndCopyTests() {
       const testMethods = [];
       const inputs = document.getElementsByClassName("input");
       const outputs = document.getElementsByClassName("output");
       const n = inputs.length;
       for (let i = 0; i < n; i++) {
-          const input = prepare_text(inputs[i].lastChild.innerText);
-          const output = prepare_text(outputs[i].lastChild.innerText);
+          const input = prepareText(inputs[i].lastChild.innerText);
+          const output = prepareText(outputs[i].lastChild.innerText);
           const testMethod =
               `  [Test]
     public void Case${i + 1}()

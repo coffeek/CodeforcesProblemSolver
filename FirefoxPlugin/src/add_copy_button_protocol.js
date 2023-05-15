@@ -20,39 +20,38 @@ function addPopupCopyButton() {
     for (let submissionElement of submissionTests) {
       const testHeader = submissionElement.getElementsByClassName("test-header")[0];
       if (testHeader) {
-        const button = CreateButton(submissionElement);
+        const button = createButton(submissionElement);
         testHeader.appendChild(button);
       }
     }
 
-    function CreateButton(parentElement) {
+    function createButton(parentElement) {
       const button = document.createElement("div");
       button.className = "protocol-popup-input-output-copier";
       button.textContent = "Copy test case";
       button.onclick = function (e) {
-          create_and_copy_tests(parentElement);
+        createAndCopyTests(parentElement);
       };
       return button;
     }
 
-    function prepare_text(s) {
-        return s
-            .replace(/(.*)\s+$/, '$1') // Remove line breaks and spaces at the end of the text.
+    function prepareText(s) {
+        return s.replace(/(.*)\s+$/, '$1') // Remove line breaks and spaces at the end of the text.
     }
 
-    function create_and_copy_tests(parentElement) {
+    function createAndCopyTests(parentElement) {
         const testNumberElement = parentElement.getElementsByClassName("test")[0];
         const inputElement = parentElement.getElementsByClassName("input")[0];
-        const outputElement = parentElement.getElementsByClassName("output")[0];
+        const answerElement = parentElement.getElementsByClassName("answer")[0];
         const testNumber = testNumberElement.innerText;
-        const input = prepare_text(inputElement.innerText);
-        const output = prepare_text(outputElement.innerText);
+        const input = prepareText(inputElement.innerText);
+        const answer = prepareText(answerElement.innerText);
         const testMethod =
                 `[Test]
       public void Case${testNumber}()
       {
         Assert.AreEqual(
-          @"${output}",
+          @"${answer}",
           GetResult(
             @"${input}"));
       }`;
