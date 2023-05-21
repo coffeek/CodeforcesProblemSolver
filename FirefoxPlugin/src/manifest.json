@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "CodeforcesProblemSamplesCopier",
   "homepage_url": "https://github.com/coffeek/CodeforcesProblemSolver",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "icons": {
     "48": "icons/icon-48.png"
   },
@@ -25,7 +25,8 @@
     {
       "matches": [
         "*://codeforces.com/problemset/status*",
-        "*://codeforces.com/submissions/*"
+        "*://codeforces.com/submissions/*",
+        "*://codeforces.com/contest/*"
       ],
       "js": [
         "add_copy_button_protocol.js"
