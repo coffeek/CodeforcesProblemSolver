@@ -1,4 +1,4 @@
-[![Unit Tests](https://github.com/coffeek/CodeforcesProblemSolver/blob/master/.github/workflows/dotnet.yml/badge.svg)](https://github.com/coffeek/CodeforcesProblemSolver/blob/master/.github/workflows/dotnet.yml)
+![Unit Tests](https://github.com/coffeek/CodeforcesProblemSolver/actions/workflows/dotnet.yml/badge.svg)
 
 # What is it?
 
