@@ -322,4 +322,9 @@ public static class Numbers
     }
     return res;
   }
+
+  public static int CeilDiv(int value, int div)
+  {
+    return (value + div - 1) / div;
+  }
 }

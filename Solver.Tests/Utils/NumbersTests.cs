@@ -15,13 +15,13 @@ public class NumbersTests
   {
     TestDigitsCount(Numbers.FastDigitsCount);
   }
-    
+
   [Test]
   public void DigitsCountTest()
   {
     TestDigitsCount(Numbers.DigitsCount);
   }
-  
+
   [Test]
   public void ToBaseTests()
   {
@@ -55,7 +55,7 @@ public class NumbersTests
     Assert.AreEqual(26, Numbers.ToLong(new[] { 2, 2, 2 }, 3));
     Assert.AreEqual(27, Numbers.ToLong(new[] { 1, 0, 0, 0 }, 3));
   }
-  
+
   [Test]
   public void IsPrimeTests()
   {
@@ -78,7 +78,7 @@ public class NumbersTests
     foreach (var value in new[] { 1, -1, 3, 1023, -31, int.MaxValue })
       Assert.IsFalse(Numbers.Even(value), $"\"{value}\" should not be even");
   }
-  
+
   [Test]
   public void OddIntTests()
   {
@@ -87,7 +87,7 @@ public class NumbersTests
     foreach (var value in new[] { 1, -1, 3, 1023, -31, int.MaxValue })
       Assert.IsTrue(Numbers.Odd(value), $"\"{value}\" should be odd");
   }
-  
+
   [Test]
   public void EvenLongTests()
   {
@@ -96,7 +96,7 @@ public class NumbersTests
     foreach (var value in new[] { 1, -1, 3, 1023, -31, long.MaxValue })
       Assert.IsFalse(Numbers.Even(value), $"\"{value}\" should not be even");
   }
-  
+
   [Test]
   public void OddLongTests()
   {
@@ -105,7 +105,7 @@ public class NumbersTests
     foreach (var value in new[] { 1, -1, 3, 1023, -31, long.MaxValue })
       Assert.IsTrue(Numbers.Odd(value), $"\"{value}\" should be odd");
   }
-    
+
   public static void TestDigitsCount(Func<int, int> digitsCount)
   {
     digitsCount(0).Should().Be(1);
@@ -118,7 +118,7 @@ public class NumbersTests
     digitsCount(int.MaxValue).Should().Be(10);
     digitsCount(int.MinValue).Should().Be(10);
   }
-  
+
   [Test]
   public void GcdTest()
   {
@@ -135,7 +135,7 @@ public class NumbersTests
     Numbers.Gcd(12, 24, 6).Should().Be(6);
     Numbers.Gcd(10, 7, 13, 1024).Should().Be(1);
   }
-  
+
   [Test]
   public void LcmTest()
   {
@@ -143,22 +143,22 @@ public class NumbersTests
     Numbers.Lcm(12, 4).Should().Be(12);
     Numbers.Lcm(12, 9).Should().Be(36);
     Numbers.Lcm(12, 7).Should().Be(84);
-    
+
     Numbers.Lcm().Should().Be(0);
     Numbers.Lcm(16).Should().Be(16);
     Numbers.Lcm(12, 24, 6).Should().Be(24);
     Numbers.Lcm(10, 5, 13, 130).Should().Be(130);
   }
-  
+
   [Test]
   public void PhiTest()
   {
     // https://oeis.org/A000010
     var expected = new[]
     {
-      1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8, 
-      12, 10, 22, 8, 20, 12, 18, 12, 28, 8, 30, 16, 20, 16, 24, 12, 
-      36, 18, 24, 16, 40, 12, 42, 20, 24, 22, 46, 16, 42, 20, 32, 24, 
+      1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8,
+      12, 10, 22, 8, 20, 12, 18, 12, 28, 8, 30, 16, 20, 16, 24, 12,
+      36, 18, 24, 16, 40, 12, 42, 20, 24, 22, 46, 16, 42, 20, 32, 24,
       52, 18, 40, 24, 36, 28, 58, 16, 60, 30, 36, 32, 48, 20, 66, 32, 44
     };
     for (int i = 1; i <= expected.Length; i++)
@@ -191,7 +191,7 @@ public class NumbersTests
   {
     Numbers.BinPow(a, n).Should().Be(expected);
   }
-  
+
   [TestCase(1, 1, 10, 1)]
   [TestCase(1, 0, 10, 1)]
   [TestCase(1, 1000, 10, 1)]
@@ -206,7 +206,7 @@ public class NumbersTests
   {
     Numbers.BinPow(a, n, mod).Should().Be(expected);
   }
-  
+
   [TestCase(1, 1, 10, 1)]
   [TestCase(1, 0, 10, 1)]
   [TestCase(1, 1000, 10, 1)]
@@ -241,19 +241,19 @@ public class NumbersTests
     {
       RunTest(Numbers.Sieve);
     }
-  
+
     [Test]
     public void BitSieve()
     {
       RunTest(Numbers.BitSieve);
     }
-  
+
     [Test]
     public void EnhancedSieve()
     {
       RunTest(Numbers.EnhancedSieve);
     }
-  
+
     [Test]
     public void LinearSieve()
     {
@@ -275,6 +275,18 @@ public class NumbersTests
       Numbers.IsSquare(n).Should().Be(expected);
     }
 
+    [TestCase(0, 1, 0)]
+    [TestCase(1, 1, 1)]
+    [TestCase(2, 1, 2)]
+    [TestCase(2, 3, 1)]
+    [TestCase(9, 3, 3)]
+    [TestCase(10, 3, 4)]
+    [TestCase(11, 3, 4)]
+    public void CeilDivTest(int value, int div, int expected)
+    {
+      Numbers.CeilDiv(value, div).Should().Be(expected);
+    }
+
     private static void RunTest(Func<int, IReadOnlyList<int>> sieve)
     {
       sieve(0).Should().BeEmpty();
@@ -282,7 +294,7 @@ public class NumbersTests
       sieve(2).Should().BeEquivalentTo(2);
       sieve(3).Should().BeEquivalentTo(2, 3);
       sieve(101).Should().BeEquivalentTo(
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
         53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101);
       sieve(1000000).Should().HaveCount(78498);
     }
