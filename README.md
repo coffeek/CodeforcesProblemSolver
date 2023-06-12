@@ -1,4 +1,5 @@
 ![Unit Tests](https://github.com/coffeek/CodeforcesProblemSolver/actions/workflows/dotnet.yml/badge.svg)
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # What is it?
 
