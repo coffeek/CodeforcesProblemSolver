@@ -1,3 +1,5 @@
+[![Unit Tests](https://github.com/coffeek/CodeforcesProblemSolver/blob/master/.github/workflows/dotnet.yml/badge.svg)](https://github.com/coffeek/CodeforcesProblemSolver/blob/master/.github/workflows/dotnet.yml)
+
 # What is it?
 
 This is a project for solving problems from the site https://codeforces.com/ in the C# language.
