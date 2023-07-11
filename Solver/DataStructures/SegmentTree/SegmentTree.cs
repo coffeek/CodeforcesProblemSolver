@@ -1,85 +1,76 @@
-﻿using static System.Math;
+﻿using System;
+using static System.Math;
 
 namespace Solver.DataStructures.SegmentTree;
 
-public class SegmentTreeNode
+public class SegmentTreeNode<T>
 {
   private readonly int l;
   private readonly int r;
-  private int c;
-  private readonly SegmentTreeNode left;
-  private readonly SegmentTreeNode right;
+  private T data;
+  private readonly SegmentTreeNode<T> left;
+  private readonly SegmentTreeNode<T> right;
+  private readonly Func<T, T, T> aggregateFunc;
 
-  public void Set(int index, char value)
+  public void Update(int pos, T value)
   {
     if (l == r)
     {
-      c = 1 << (value - 'a');
+      data = value;
     }
     else
     {
-      if (index <= left.r)
-        left.Set(index, value);
+      if (pos <= left.r)
+        left.Update(pos, value);
       else
-        right.Set(index, value);
-      c = left.c | right.c;
+        right.Update(pos, value);
+      data = aggregateFunc(left.data, right.data);
     }
   }
 
-  public int GetUsedCharMask(int l, int r)
+  public T Query(int l, int r)
   {
+    if (l > r)
+      return default;
     if (this.l == l && this.r == r)
-      return c;
-
-    var result = 0;
-    if (l <= left.r)
-      result |= left.GetUsedCharMask(l, Min(r, left.r));
-    if (r >= right.l)
-      result |= right.GetUsedCharMask(Max(l, right.l), r);
-
-    return result;
+      return data;
+    return aggregateFunc(left.Query(l, Min(r, left.r)), right.Query(Max(l, right.l), r));
   }
 
-  public SegmentTreeNode(char[] s, int l, int r)
+  public SegmentTreeNode(T[] data, int l, int r, Func<T, T, T> aggregateFunc)
   {
     this.l = l;
     this.r = r;
+    this.aggregateFunc = aggregateFunc;
 
     if (l != r)
     {
       var m = l + (r - l) / 2;
-      left = new SegmentTreeNode(s, l, m);
-      right = new SegmentTreeNode(s, m + 1, r);
+      left = new SegmentTreeNode<T>(data, l, m, aggregateFunc);
+      right = new SegmentTreeNode<T>(data, m + 1, r, aggregateFunc);
     }
 
     for (int i = l; i <= r; i++)
-      Set(i, s[i]);
+      Update(i, data[i]);
   }
 }
 
-internal class SegmentTree
+public class SegmentTree<T>
 {
-  private readonly SegmentTreeNode root;
+  private readonly SegmentTreeNode<T> root;
 
-  public void Set(int index, char value)
+  public void Update(int pos, T value)
   {
-    root.Set(index, value);
+    root.Update(pos, value);
   }
 
-  public int GetUniqueCharCount(int l, int r)
+  public T Query(int l, int r)
   {
-    var c = root.GetUsedCharMask(l, r);
-    var result = 0;
-    while (c != 0)
-    {
-      result += c & 1;
-      c >>= 1;
-    }
-    return result;
+    return root.Query(l, r);
   }
 
-  public SegmentTree(char[] s)
+  public SegmentTree(T[] data, Func<T, T, T> aggregate)
   {
-    root = new SegmentTreeNode(s, 0, s.Length - 1);
+    root = new SegmentTreeNode<T>(data, 0, data.Length - 1, aggregate);
   }
 }
