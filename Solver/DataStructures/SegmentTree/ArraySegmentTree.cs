@@ -4,8 +4,8 @@ namespace Solver.DataStructures.SegmentTree;
 
 public class ArraySegmentTree<T>
 {
-  private readonly Func<T, T, T> func;
-  private readonly T[] t;
+  private readonly Func<T, T, T> aggregateFunc;
+  private readonly T[] tree;
   private readonly int n;
 
   public T Query(int l, int r)
@@ -18,9 +18,9 @@ public class ArraySegmentTree<T>
     if (l > r)
       return default;
     if (l == tl && r == tr)
-      return t[v];
+      return tree[v];
     int tm = tl + (tr - tl) / 2;
-    return func(Query(v * 2, tl, tm, l, Math.Min(r, tm)),
+    return aggregateFunc(Query(v * 2, tl, tm, l, Math.Min(r, tm)),
       Query(v * 2 + 1, tm + 1, tr, Math.Max(l, tm + 1), r));
   }
 
@@ -43,11 +43,11 @@ public class ArraySegmentTree<T>
         tl = tm + 1;
       }
     }
-    t[v] = value;
+    tree[v] = value;
     while (v != 1)
     {
       v /= 2;
-      t[v] = func(t[v * 2], t[v * 2 + 1]);
+      tree[v] = aggregateFunc(tree[v * 2], tree[v * 2 + 1]);
     }
   }
 
@@ -60,7 +60,7 @@ public class ArraySegmentTree<T>
   {
     if (tl == tr)
     {
-      t[v] = value;
+      tree[v] = value;
     }
     else
     {
@@ -69,7 +69,7 @@ public class ArraySegmentTree<T>
         Update(v * 2, tl, tm, pos, value);
       else
         Update(v * 2 + 1, tm + 1, tr, pos, value);
-      t[v] = func(t[v * 2], t[v * 2 + 1]);
+      tree[v] = aggregateFunc(tree[v * 2], tree[v * 2 + 1]);
     }
   }
 
@@ -77,22 +77,22 @@ public class ArraySegmentTree<T>
   {
     if (tl == tr)
     {
-      t[v] = data[tl];
+      tree[v] = data[tl];
     }
     else
     {
       int tm = tl + (tr - tl) / 2;
       Build(data, v * 2, tl, tm);
       Build(data, v * 2 + 1, tm + 1, tr);
-      t[v] = func(t[v * 2], t[v * 2 + 1]);
+      tree[v] = aggregateFunc(tree[v * 2], tree[v * 2 + 1]);
     }
   }
 
-  public ArraySegmentTree(T[] data, Func<T, T, T> f)
+  public ArraySegmentTree(T[] data, Func<T, T, T> aggregate)
   {
-    func = f;
+    aggregateFunc = aggregate;
     n = data.Length;
-    t = new T[4 * n];
+    tree = new T[4 * n];
     Build(data, 1, 0, n - 1);
   }
 }
