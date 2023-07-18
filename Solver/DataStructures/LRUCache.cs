@@ -2,6 +2,10 @@ using System.Collections.Generic;
 
 namespace Solver.DataStructures;
 
+/// <summary>
+/// Least recently used (LRU) cache.
+/// https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU
+/// </summary>
 public class LRUCache<TKey, TValue>
 {
   private readonly struct CacheItem
@@ -46,6 +50,7 @@ public class LRUCache<TKey, TValue>
     return true;
   }
 
+  /// <remarks>If the number of keys exceeds the capacity, evict the least recently used key.</remarks>
   public void Put(TKey key, TValue value)
   {
     if (dict.TryGetValue(key, out var node))
