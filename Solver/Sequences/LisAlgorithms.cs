@@ -6,10 +6,13 @@ namespace Solver.Sequences;
 public static class LisAlgorithms
 {
   /// <summary>
-  /// return the length of the longest strictly increasing subsequence.
+  /// Return the length of the longest strictly increasing subsequence.
   /// </summary>
   public static int LengthOfLis(int[] numbers)
   {
+    if (numbers is null || numbers.Length == 0)
+      return 0;
+
     var n = numbers.Length;
     var length = new int[n];
     Array.Fill(length, 1);
@@ -24,13 +27,14 @@ public static class LisAlgorithms
     return length.Max();
   }
 
-
-
   /// <summary>
   /// Return the number of longest increasing subsequences.
   /// </summary>
   public static int FindNumberOfLis(int[] numbers)
   {
+    if (numbers is null || numbers.Length == 0)
+      return 0;
+
     var n = numbers.Length;
     var length = new int[n];
     var count = new int[n];
