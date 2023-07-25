@@ -83,4 +83,10 @@ public class SelectionTests
     f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
     f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
   }
+
+  [Test]
+  public void TernarySearchMaxTests()
+  {
+    Selection.TernarySearchMax(x => 2 - Math.Pow(x - 2, 2), 0, 3.5).Should().BeApproximately(2, 1e-6);
+  }
 }

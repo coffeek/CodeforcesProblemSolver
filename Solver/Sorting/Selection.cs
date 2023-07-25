@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Solver.Sorting;
 
@@ -125,6 +126,24 @@ public static class Selection
   public static int UpperBound(int[] a, int value)
   {
     return UpperBound(a, 0, a.Length, value);
+  }
+  
+  /// <summary>
+  /// Find maximum of unimodal function f() within [left, right].
+  /// </summary>
+  public static double TernarySearchMax(Func<double, double> f, double left, double right, double precision = 1e-10)
+  {
+    while (Math.Abs(right - left) >= precision)
+    {
+      var d = (right - left) / 3.0;
+      var m1 = left + d;
+      var m2 = right - d;
+      if (f(m1) < f(m2))
+        left = m1;
+      else
+        right = m2;
+    }
+    return (left + right) / 2.0;
   }
   
   /// <summary>
