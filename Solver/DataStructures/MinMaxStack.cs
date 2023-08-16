@@ -8,6 +8,7 @@ public class MinMaxStack
   private readonly record struct StackElement(int Value, int Min, int Max);
 
   private readonly Stack<StackElement> s;
+  
   public int Count => s.Count;
 
   public int Min => s.TryPeek(out var top) ? top.Min : int.MaxValue;
@@ -24,8 +25,5 @@ public class MinMaxStack
 
   public int Pop() => s.Pop().Value;
 
-  public MinMaxStack(int capacity)
-  {
-    s = new Stack<StackElement>(capacity);
-  }
+  public MinMaxStack(int capacity) => s = new Stack<StackElement>(capacity);
 }
