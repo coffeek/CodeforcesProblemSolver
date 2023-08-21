@@ -17,6 +17,19 @@ public class FunctionsTests
     Functions.IsPalindrome("aac").Should().BeFalse();
     Functions.IsPalindrome("abcdef").Should().BeFalse();
   }
+
+  [TestCase("", "")]
+  [TestCase("a", "a")]
+  [TestCase("abc", "a")]
+  [TestCase("abccba", "abccba")]
+  [TestCase("baba", "bab")]
+  [TestCase("bababc", "babab")]
+  [TestCase("cababc", "aba")]
+  [TestCase("cababa", "ababa")]
+  public void LongestPalindromeTest(string s, string expected)
+  {
+    Functions.LongestPalindrome(s).Should().Be(expected);
+  }
   
   [Test]
   public void FastIntJoinTest()
