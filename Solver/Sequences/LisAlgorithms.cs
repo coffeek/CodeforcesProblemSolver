@@ -8,6 +8,7 @@ public static class LisAlgorithms
   /// <summary>
   /// Return the length of the longest strictly increasing subsequence.
   /// </summary>
+  /// <remarks>Complexity O(n^2).</remarks>
   public static int LengthOfLis(int[] numbers)
   {
     if (numbers is null || numbers.Length == 0)
