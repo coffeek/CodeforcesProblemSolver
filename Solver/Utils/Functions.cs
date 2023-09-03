@@ -70,4 +70,24 @@ public static class Functions
     }
     yield return lastA;
   }
+  
+  /// <summary>
+  /// Calculate binomial coefficient (https://en.wikipedia.org/wiki/Binomial_coefficient).
+  /// </summary>
+  public static long Combinations(int n, int k)
+  {
+    if (k < 0 || k > n)
+      return 0;
+
+    if (k > n - k)
+      k = n - k;
+
+    var c = 1L;
+    for (var i = 0; i < k; i++)
+    {
+      c *= n - i;
+      c /= i + 1;
+    }
+    return c;
+  }
 }

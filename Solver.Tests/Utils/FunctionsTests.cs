@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -54,5 +53,18 @@ public class FunctionsTests
     var actual = new List<string>();
     Functions.Permute(new[] { 1, 2, 3 }, 0, 3, p => actual.Add(string.Join(" ", p)));
     CollectionAssert.AreEqual(expected, actual);
+  }
+
+  [TestCase(1, 0, 1)]
+  [TestCase(1, 1, 1)]
+  [TestCase(0, 1, 0)]
+  [TestCase(2, 3, 0)]
+  [TestCase(2, 1, 2)]
+  [TestCase(20, 1, 20)]
+  [TestCase(20, 19, 20)]
+  [TestCase(20, 10, 184756)]
+  public void CombinationsTest(int n, int k, long expected)
+  {
+    Functions.Combinations(n, k).Should().Be(expected);
   }
 }
