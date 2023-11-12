@@ -37,6 +37,24 @@ public class DijkstraTests
     new Dijkstra().ShortestDistance(g, 0, 2).Should().Be(3);
     new Dijkstra().ShortestDistance(g, 2, 3).Should().Be(-1);
   }
+  
+  [Test]
+  public void ShortestDistanceUsingQueueTest_EdgeList()
+  {
+    var g = new List<(int to, int w)>[]
+    {
+      new() { (2, 5), (1, 2) }, // 0
+      new() { (2, 1) }, // 1
+      new(), // 2
+      new() { (0, 3) } // 3
+    };
+    new Dijkstra().ShortestDistanceUsingQueue(g, 3, 3).Should().Be(0);
+    new Dijkstra().ShortestDistanceUsingQueue(g, 3, 0).Should().Be(3);
+    new Dijkstra().ShortestDistanceUsingQueue(g, 3, 1).Should().Be(5);
+    new Dijkstra().ShortestDistanceUsingQueue(g, 3, 2).Should().Be(6);
+    new Dijkstra().ShortestDistanceUsingQueue(g, 0, 2).Should().Be(3);
+    new Dijkstra().ShortestDistanceUsingQueue(g, 2, 3).Should().Be(-1);
+  }
 
   [Test]
   public void ShortestPathTest_EdgeList()
