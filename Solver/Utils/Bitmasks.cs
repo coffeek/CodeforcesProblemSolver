@@ -50,7 +50,7 @@ public static class Bitmasks
 
   public static uint LargestPower(uint n)
   {
-    const uint maxPow = 1u << 31; 
+    const uint maxPow = 1u << 31;
     if ((n & maxPow) != 0)
       return maxPow;
     // Fill trailing zeros with ones, eg 00010010 becomes 00011111.
@@ -65,5 +65,16 @@ public static class Bitmasks
   public static uint LargestPower2(uint n)
   {
     return n == 0 ? 0 : 1u << BitOperations.Log2(n);
+  }
+  
+  /// <remarks>Same as <see cref="BitOperations.IsPow2(int)"/></remarks>
+  public static bool IsPowerOfTwo(int n)
+  {
+    return n > 0 && (n & (n - 1)) == 0;
+  }
+
+  public static bool IsPowerOfFour(int n)
+  {
+    return n > 0 && (n & (n - 1)) == 0 && (n & 0x55555555) != 0;
   }
 }

@@ -39,4 +39,38 @@ public class BitmasksTests
     Bitmasks.HammingWeight(n).Should().Be(expected);
     Bitmasks.HammingWeight2(n).Should().Be(expected);
   }
+
+  [TestCase(1, true)]
+  [TestCase(2, true)]
+  [TestCase(3, false)]
+  [TestCase(4, true)]
+  [TestCase(0b001000000, true)]
+  [TestCase(0b001011000, false)]
+  [TestCase(0, false)]
+  [TestCase(-1, false)]
+  [TestCase(-64, false)]
+  [TestCase(int.MaxValue, false)]
+  [TestCase(1 << 31, false)]
+  [TestCase(1 << 30, true)]
+  public void IsPowerOfTwo(int n, bool expected)
+  {
+    Bitmasks.IsPowerOfTwo(n).Should().Be(expected);
+  }
+  
+  [TestCase(1, true)]
+  [TestCase(2, false)]
+  [TestCase(3, false)]
+  [TestCase(4, true)]
+  [TestCase(0b001010100, false)]
+  [TestCase(0b001000000, true)]
+  [TestCase(0b010000000, false)]
+  [TestCase(0, false)]
+  [TestCase(-1, false)]
+  [TestCase(-64, false)]
+  [TestCase(int.MaxValue, false)]
+  [TestCase(1 << 31, false)]
+  public void IsPowerOfFour(int n, bool expected)
+  {
+    Bitmasks.IsPowerOfFour(n).Should().Be(expected);
+  }
 }
