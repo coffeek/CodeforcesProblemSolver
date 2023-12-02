@@ -28,4 +28,15 @@ public class BitmasksTests
     Bitmasks.LargestPower(n).Should().Be(expected);
     Bitmasks.LargestPower2(n).Should().Be(expected);
   }
+
+  [TestCase(0u, 0)]
+  [TestCase(0b1u, 1)]
+  [TestCase(0b10u, 1)]
+  [TestCase(0b111011101110u, 9)]
+  [TestCase(uint.MaxValue, 32)]
+  public void HammingWeight(uint n, int expected)
+  {
+    Bitmasks.HammingWeight(n).Should().Be(expected);
+    Bitmasks.HammingWeight2(n).Should().Be(expected);
+  }
 }

@@ -5,6 +5,28 @@ namespace Solver.Utils;
 
 public static class Bitmasks
 {
+  /// <summary>
+  /// Number of 1 Bits.
+  /// </summary>
+  public static int HammingWeight(uint n)
+  {
+    int count = 0;
+    while (n != 0)
+    {
+      n &= (n - 1);
+      count++;
+    }
+    return count;
+  }
+
+  /// <summary>
+  /// Number of 1 Bits.
+  /// </summary>
+  public static int HammingWeight2(uint n)
+  {
+    return BitOperations.PopCount(n);
+  }
+
   public static uint ReverseBits(uint n)
   {
     uint result = 0;
@@ -28,7 +50,7 @@ public static class Bitmasks
 
   public static uint LargestPower(uint n)
   {
-    const uint maxPow = 1u << 31;
+    const uint maxPow = 1u << 31; 
     if ((n & maxPow) != 0)
       return maxPow;
     // Fill trailing zeros with ones, eg 00010010 becomes 00011111.
