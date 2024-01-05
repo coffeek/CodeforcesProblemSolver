@@ -56,7 +56,7 @@ public class BitmasksTests
   {
     Bitmasks.IsPowerOfTwo(n).Should().Be(expected);
   }
-  
+
   [TestCase(1, true)]
   [TestCase(2, false)]
   [TestCase(3, false)]
@@ -72,5 +72,39 @@ public class BitmasksTests
   public void IsPowerOfFour(int n, bool expected)
   {
     Bitmasks.IsPowerOfFour(n).Should().Be(expected);
+  }
+
+  [TestCase(0b1001011100, 0b100)]
+  [TestCase(0, 0)]
+  [TestCase(1, 1)]
+  [TestCase(0b111, 1)]
+  [TestCase(0b10, 0b10)]
+  [TestCase(int.MaxValue, 1)]
+  public void LsoTests(int n, int expected)
+  {
+    Bitmasks.Lso(n).Should().Be(expected);
+  }
+  
+  [TestCase(0b1001011100u, 0b100u)]
+  [TestCase(0u, 0u)]
+  [TestCase(1u, 1u)]
+  [TestCase(0b111u, 1u)]
+  [TestCase(0b10u, 0b10u)]
+  [TestCase(uint.MaxValue, 1u)]
+  [TestCase(uint.MaxValue - 1, 0b10u)]
+  public void LsoTests(uint n, uint expected)
+  {
+    Bitmasks.Lso(n).Should().Be(expected);
+  }
+
+  [TestCase(0b1001011100u, 0b1000000000u)]
+  [TestCase(0u, 0u)]
+  [TestCase(1u, 1u)]
+  [TestCase(0b111u, 0b100u)]
+  [TestCase(0b10u, 0b10u)]
+  [TestCase(uint.MaxValue, 1u << 31)]
+  public void MsoTests(uint n, uint expected)
+  {
+    Bitmasks.Mso(n).Should().Be(expected);
   }
 }

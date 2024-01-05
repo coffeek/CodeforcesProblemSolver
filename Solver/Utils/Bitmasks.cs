@@ -48,6 +48,12 @@ public static class Bitmasks
     return n;
   }
 
+  /// <summary>
+  /// Return most significant 1-bit (MSb).
+  /// </summary>
+  /// <remarks>
+  /// e.g. Msb(101101100) = 100000000.
+  /// </remarks>
   public static uint LargestPower(uint n)
   {
     const uint maxPow = 1u << 31;
@@ -62,9 +68,48 @@ public static class Bitmasks
     return (n + 1) >> 1;
   }
 
+  /// <summary>
+  /// Return most significant 1-bit (MSb).
+  /// </summary>
+  /// <remarks>
+  /// e.g. Msb(101101100) = 100000000.
+  /// </remarks>
   public static uint LargestPower2(uint n)
   {
     return n == 0 ? 0 : 1u << BitOperations.Log2(n);
+  }
+  
+  /// <summary>
+  /// Return least significant 1-bit (LSb).
+  /// </summary>
+  /// <remarks>
+  /// e.g. Lso(101101100) = 100.
+  /// </remarks>
+  public static int Lso(int n)
+  {
+    return n & -n;
+  }
+  
+  /// <summary>
+  /// Return least significant 1-bit (LSb).
+  /// </summary>
+  /// <remarks>
+  /// e.g. Lso(101101100) = 100.
+  /// </remarks>
+  public static uint Lso(uint n)
+  {
+    return n & (~n + 1);
+  }
+
+  /// <summary>
+  /// Return most significant 1-bit (MSb).
+  /// </summary>
+  /// <remarks>
+  /// e.g. Msb(101101100) = 100000000.
+  /// </remarks>
+  public static uint Mso(uint n)
+  {
+    return LargestPower2(n);
   }
   
   /// <remarks>Same as <see cref="BitOperations.IsPow2(int)"/></remarks>
