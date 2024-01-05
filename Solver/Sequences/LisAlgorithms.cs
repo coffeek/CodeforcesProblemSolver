@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Solver.Sequences;
@@ -8,7 +9,7 @@ public static class LisAlgorithms
   /// <summary>
   /// Return the length of the longest strictly increasing subsequence.
   /// </summary>
-  /// <remarks>Complexity O(n^2).</remarks>
+  /// <remarks>Complexity O(n^2), memory = O(n).</remarks>
   public static int LengthOfLis(int[] numbers)
   {
     if (numbers is null || numbers.Length == 0)
@@ -27,6 +28,36 @@ public static class LisAlgorithms
     }
     return length.Max();
   }
+  
+  /// <summary>
+  /// Return the length of the longest strictly increasing subsequence.
+  /// </summary>
+  /// <remarks>
+  /// Complexity O(n*log(n)), memory = O(n).
+  /// <see ref="https://leetcode.com/problems/longest-increasing-subsequence/solutions/1326308/c-python-dp-binary-search-bit-segment-tree-solutions-picture-explain-o-nlogn"/>
+  /// </remarks>
+  public static int LengthOfLisBinarySearch(int[] numbers)
+  {
+    if (numbers is null || numbers.Length == 0)
+      return 0;
+    
+    var seq = new List<int>(numbers.Length) { numbers[0] };
+    foreach (var x in numbers)
+    {
+      if (seq[^1] < x)
+      {
+        seq.Add(x);
+      }
+      else
+      {
+        var pos = seq.BinarySearch(x);
+        if (pos < 0)
+          pos = ~pos;
+        seq[pos] = x;
+      }
+    }
+    return seq.Count;
+  } 
 
   /// <summary>
   /// Return the number of longest increasing subsequences.

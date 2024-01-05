@@ -8,23 +8,36 @@ namespace Solver.Tests.Sequences;
 [TestFixture]
 public class LisAlgorithmsTests
 {
-  [Test]
-  public void LengthOfLis()
+  [TestCase(new[] { 1, 3, 5, 4, 7 }, 4)]
+  [TestCase(new[] { 2, 2, 2, 2, 2 }, 1)]
+  [TestCase(new[] { 1, 2, 4, 3, 5, 4, 7, 2 }, 5)]
+  [TestCase(new[] { 4 }, 1)]
+  [TestCase(new[] { 4, 5 }, 2)]
+  [TestCase(new int[0], 0)]
+  public void LengthOfLis(int[] numbers, int expected)
   {
-    LisAlgorithms.LengthOfLis(Array.Empty<int>()).Should().Be(0);
-    LisAlgorithms.LengthOfLis(new[] { 1 }).Should().Be(1);
-    LisAlgorithms.LengthOfLis(new[] { 1, 3, 5, 4, 7 }).Should().Be(4);
-    LisAlgorithms.LengthOfLis(new[] { 2, 2, 2, 2, 2 }).Should().Be(1);
-    LisAlgorithms.LengthOfLis(new[] { 1, 2, 4, 3, 5, 4, 7, 2 }).Should().Be(5);
+    LisAlgorithms.LengthOfLis(numbers).Should().Be(expected);
   }
 
-  [Test]
-  public void FindNumberOfLis()
+  [TestCase(new[] { 1}, 1)]
+  [TestCase(new[] { 1, 3, 5, 4, 7 }, 2)]
+  [TestCase(new[] { 2, 2, 2, 2, 2 }, 5)]
+  [TestCase(new[] { 1, 2, 4, 3, 5, 4, 7, 2 }, 3)]
+  [TestCase(new[] { 4, 5 }, 1)]
+  [TestCase(new int[0], 0)]
+  public void FindNumberOfLis(int[] numbers, int expected)
   {
-    LisAlgorithms.FindNumberOfLis(Array.Empty<int>()).Should().Be(0);
-    LisAlgorithms.FindNumberOfLis(new[] { 1 }).Should().Be(1);
-    LisAlgorithms.FindNumberOfLis(new[] { 1, 3, 5, 4, 7 }).Should().Be(2);
-    LisAlgorithms.FindNumberOfLis(new[] { 2, 2, 2, 2, 2 }).Should().Be(5);
-    LisAlgorithms.FindNumberOfLis(new[] { 1, 2, 4, 3, 5, 4, 7, 2 }).Should().Be(3);
+    LisAlgorithms.FindNumberOfLis(numbers).Should().Be(expected);
+  }
+  
+  [TestCase(new[] { 1, 3, 5, 4, 7 }, 4)]
+  [TestCase(new[] { 2, 2, 2, 2, 2 }, 1)]
+  [TestCase(new[] { 1, 2, 4, 3, 5, 4, 7, 2 }, 5)]
+  [TestCase(new[] { 4 }, 1)]
+  [TestCase(new[] { 4, 5 }, 2)]
+  [TestCase(new int[0], 0)]
+  public void LengthOfLisBinarySearch(int[] numbers, int expected)
+  {
+    LisAlgorithms.LengthOfLisBinarySearch(numbers).Should().Be(expected);
   }
 }
