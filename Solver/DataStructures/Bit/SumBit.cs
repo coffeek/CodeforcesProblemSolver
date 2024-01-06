@@ -1,6 +1,9 @@
-namespace Solver.DataStructures;
+namespace Solver.DataStructures.Bit;
 
-public class Bit
+/// <summary>
+/// Binary indexed tree (Fenwick tree) for sum.
+/// </summary>
+public class SumBit
 {
   private readonly int n;
   private readonly int[] bit;
@@ -24,13 +27,13 @@ public class Bit
       bit[index] += value;
   }
 
-  public Bit(int n)
+  public SumBit(int n)
   {
     this.n = n;
     bit = new int[n];
   }
 
-  public Bit(int[] a) : this(a.Length)
+  public SumBit(int[] a) : this(a.Length)
   {
     for (int i = 0; i < a.Length; i++)
       Add(i, a[i]);
