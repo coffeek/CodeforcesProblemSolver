@@ -39,49 +39,49 @@ public class SelectionTests
   [Test]
   public void LowerBoundTests()
   {
-    Assert.That(Selection.LowerBound(Array.Empty<int>(), 1), Is.EqualTo(0));
+    Selection.LowerBound(Array.Empty<int>(), 1).Should().Be(0);
 
-    var f = (Action<int[]>)(a =>
+    void F(int[] a)
     {
       Assert.That(Selection.LowerBound(a, -1), Is.EqualTo(0));
       for (int i = 0; i < 10; i++)
       {
         var expected = Enumerable.Range(0, a.Length).Cast<int?>().FirstOrDefault(j => a[j.Value] >= i) ?? a.Length;
-        Assert.That(Selection.LowerBound(a, i), Is.EqualTo(expected), $"a: [{string.Join(" ", a)}], value: {i}");
+        Selection.LowerBound(a, i).Should().Be(expected, $"a: [{string.Join(" ", a)}], value: {i}");
       }
-    });
+    }
 
-    f(new[] { 0 });
-    f(new[] { 9 });
-    f(new[] { 0, 0 });
-    f(new[] { 1, 1, 1 });
-    f(new[] { 1, 2, 3 });
-    f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
-    f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
+    F(new[] { 0 });
+    F(new[] { 9 });
+    F(new[] { 0, 0 });
+    F(new[] { 1, 1, 1 });
+    F(new[] { 1, 2, 3 });
+    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
+    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
   }
   
   [Test]
   public void UpperBoundTests()
   {
-    Assert.That(Selection.UpperBound(Array.Empty<int>(), 1), Is.EqualTo(0));
+    Selection.UpperBound(Array.Empty<int>(), 1).Should().Be(0);
 
-    var f = (Action<int[]>)(a =>
+    void F(int[] a)
     {
       Assert.That(Selection.UpperBound(a, -1), Is.EqualTo(0));
       for (int i = 0; i < 10; i++)
       {
         var expected = Enumerable.Range(0, a.Length).Cast<int?>().FirstOrDefault(j => a[j.Value] > i) ?? a.Length;
-        Assert.That(Selection.UpperBound(a, i), Is.EqualTo(expected), $"a: [{string.Join(" ", a)}], value: {i}");
+        Selection.UpperBound(a, i).Should().Be(expected, $"a: [{string.Join(" ", a)}], value: {i}");
       }
-    });
+    }
 
-    f(new[] { 0 });
-    f(new[] { 9 });
-    f(new[] { 0, 0 });
-    f(new[] { 1, 1, 1 });
-    f(new[] { 1, 2, 3 });
-    f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
-    f(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
+    F(new[] { 0 });
+    F(new[] { 9 });
+    F(new[] { 0, 0 });
+    F(new[] { 1, 1, 1 });
+    F(new[] { 1, 2, 3 });
+    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
+    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
   }
 
   [Test]
