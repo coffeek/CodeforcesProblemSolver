@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Solver.Utils;
 
 namespace Solver.Strings;
@@ -71,10 +72,7 @@ public static class Functions
       return n;
     }
 
-    var n = 0;
-    for (int i = 0; i < data.Length; i++)
-      n += Len(data[i]);
-    n += sep.Length * (data.Length - 1);
+    var n = data.Sum(Len) + sep.Length * (data.Length - 1);
 
     return string.Create<object>(n, null, (s, _) =>
     {
