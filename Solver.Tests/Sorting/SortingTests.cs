@@ -9,55 +9,44 @@ namespace Solver.Tests.Sorting;
 [TestFixture]
 public class SortingTests
 {
-  [Test]
-  public void QuickSortTest()
+  private static readonly object[] TestArrays =
   {
-    TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Solver.Sorting.Sorting.QuickSort);
-    TestSort(new int[] { }, Solver.Sorting.Sorting.QuickSort);
-    TestSort(new[] { 1 }, Solver.Sorting.Sorting.QuickSort);
-    TestSort(new[] { -1, -99 }, Solver.Sorting.Sorting.QuickSort);
-    TestSort(new[] { 1, 5, -10 }, Solver.Sorting.Sorting.QuickSort);
-    TestSort(new[] { 6, 5, 4, 1, 2, 3 }, Solver.Sorting.Sorting.QuickSort);
+    new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 },
+    Array.Empty<int>(),
+    new[] { 1 },
+    new[] { -1, -99 },
+    new[] { 1, 5, -10 },
+    new[] { 6, 5, 4, 1, 2, 3 }
+  };
+  
+  [TestCaseSource(nameof(TestArrays))]
+  public void QuickSortTest(int[] array)
+  {
+    TestSort(array, Solver.Sorting.Sorting.QuickSort);
   }
     
-  [Test]
-  public void QuickSortLomutoTest()
+  [TestCaseSource(nameof(TestArrays))]
+  public void QuickSortLomutoTest(int[] array)
   {
-    TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Solver.Sorting.Sorting.QuickSortLomuto);
-    TestSort(new int[] { }, Solver.Sorting.Sorting.QuickSortLomuto);
-    TestSort(new[] { 1 }, Solver.Sorting.Sorting.QuickSortLomuto);
-    TestSort(new[] { -1, -99 }, Solver.Sorting.Sorting.QuickSortLomuto);
-    TestSort(new[] { 1, 5, -10 }, Solver.Sorting.Sorting.QuickSortLomuto);
-    TestSort(new[] { 6, 5, 4, 1, 2, 3 }, Solver.Sorting.Sorting.QuickSortLomuto);
+    TestSort(array, Solver.Sorting.Sorting.QuickSortLomuto);
   }
     
-  [Test]
-  public void HeapSortTest()
+  [TestCaseSource(nameof(TestArrays))]
+  public void HeapSortTest(int[] array)
   {
-    TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Solver.Sorting.Sorting.HeapSort);
-    TestSort(new int[] { }, Solver.Sorting.Sorting.HeapSort);
-    TestSort(new[] { 1 }, Solver.Sorting.Sorting.HeapSort);
-    TestSort(new[] { -1, -99 }, Solver.Sorting.Sorting.HeapSort);
-    TestSort(new[] { 1, 5, -10 }, Solver.Sorting.Sorting.HeapSort);
-    TestSort(new[] { 6, 5, 4, 1, 2, 3 }, Solver.Sorting.Sorting.HeapSort);
+    TestSort(array, Solver.Sorting.Sorting.HeapSort);
   }
     
-  [Test]
-  public void HeapSortGenericTest()
+  [TestCaseSource(nameof(TestArrays))]
+  public void HeapSortGenericTest(int[] array)
   {
-    void HeapSort(int[] a) => Solver.Sorting.Sorting.HeapSort(a, Comparer<int>.Default.Compare);
-    TestSort(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, HeapSort);
-    TestSort(new int[] { }, HeapSort);
-    TestSort(new[] { 1 }, HeapSort);
-    TestSort(new[] { -1, -99 }, HeapSort);
-    TestSort(new[] { 1, 5, -10 }, HeapSort);
-    TestSort(new[] { 6, 5, 4, 1, 2, 3 }, HeapSort);
+    TestSort(array, a => Solver.Sorting.Sorting.HeapSort(a, Comparer<int>.Default.Compare));
   }
     
   private static void TestSort(int[] a, Action<int[]> sort)
   {
     var expected = a.OrderBy(x => x).ToArray();
     sort(a);
-    a.Should().BeEquivalentTo(expected);
+    a.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
   }
 }
