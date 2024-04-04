@@ -9,24 +9,26 @@ namespace Solver.Tests.Sorting;
 [TestFixture]
 public class SelectionTests
 {
-  [Test]
-  public void QuickSelectTest()
+  private static readonly object[] QuickSelectTestArrays =
   {
-    TestSelect(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Selection.QuickSelect);
-    TestSelect(new[] { 1 }, Selection.QuickSelect);
-    TestSelect(new[] { -1, -99 }, Selection.QuickSelect);
-    TestSelect(new[] { 1, 5, -10 }, Selection.QuickSelect);
-    TestSelect(new[] { 6, 5, 4, 1, 2, 3 }, Selection.QuickSelect);
+    new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 },
+    Array.Empty<int>(),
+    new[] { 1 },
+    new[] { -1, -99 },
+    new[] { 1, 5, -10 },
+    new[] { 6, 5, 4, 1, 2, 3 }
+  };
+  
+  [TestCaseSource(nameof(QuickSelectTestArrays))]
+  public void QuickSelectTest(int[] array)
+  {
+    TestSelect(array, Selection.QuickSelect);
   }
   
-  [Test]
-  public void QuickSelectEMaxxTest()
+  [TestCaseSource(nameof(QuickSelectTestArrays))]
+  public void QuickSelectEMaxxTest(int[] array)
   {
-    TestSelect(new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 }, Selection.QuickSelectEMaxx);
-    TestSelect(new[] { 1 }, Selection.QuickSelectEMaxx);
-    TestSelect(new[] { -1, -99 }, Selection.QuickSelectEMaxx);
-    TestSelect(new[] { 1, 5, -10 }, Selection.QuickSelectEMaxx);
-    TestSelect(new[] { 6, 5, 4, 1, 2, 3 }, Selection.QuickSelectEMaxx);
+    TestSelect(array, Selection.QuickSelectEMaxx);
   }
 
   private static void TestSelect(int[] a, Func<int[], int, int> select)
@@ -36,52 +38,38 @@ public class SelectionTests
       select(a, i).Should().Be(b[i]);
   }
   
-  [Test]
-  public void LowerBoundTests()
+  private static readonly object[] SearchBoundariesTestArrays =
   {
-    Selection.LowerBound(Array.Empty<int>(), 1).Should().Be(0);
-
-    void F(int[] a)
+    Array.Empty<int>(),
+    new[] { 0 },
+    new[] { 9 },
+    new[] { 0, 0 },
+    new[] { 1, 1, 1 },
+    new[] { 1, 2, 3 },
+    new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 },
+    new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 },
+  };
+  
+  [TestCaseSource(nameof(SearchBoundariesTestArrays))]
+  public void LowerBoundTests(int[] array)
+  {
+    Selection.LowerBound(array, -1).Should().Be(0);
+    for (int i = 0; i < 10; i++)
     {
-      Assert.That(Selection.LowerBound(a, -1), Is.EqualTo(0));
-      for (int i = 0; i < 10; i++)
-      {
-        var expected = Enumerable.Range(0, a.Length).Cast<int?>().FirstOrDefault(j => a[j.Value] >= i) ?? a.Length;
-        Selection.LowerBound(a, i).Should().Be(expected, $"a: [{string.Join(" ", a)}], value: {i}");
-      }
+      var expected = Enumerable.Range(0, array.Length).Cast<int?>().FirstOrDefault(j => array[j.Value] >= i) ?? array.Length;
+      Selection.LowerBound(array, i).Should().Be(expected, $"a: [{string.Join(" ", array)}], value: {i}");
     }
-
-    F(new[] { 0 });
-    F(new[] { 9 });
-    F(new[] { 0, 0 });
-    F(new[] { 1, 1, 1 });
-    F(new[] { 1, 2, 3 });
-    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
-    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
   }
   
-  [Test]
-  public void UpperBoundTests()
+  [TestCaseSource(nameof(SearchBoundariesTestArrays))]
+  public void UpperBoundTests(int[] array)
   {
-    Selection.UpperBound(Array.Empty<int>(), 1).Should().Be(0);
-
-    void F(int[] a)
+    Selection.UpperBound(array, -1).Should().Be(0);
+    for (int i = 0; i < 10; i++)
     {
-      Assert.That(Selection.UpperBound(a, -1), Is.EqualTo(0));
-      for (int i = 0; i < 10; i++)
-      {
-        var expected = Enumerable.Range(0, a.Length).Cast<int?>().FirstOrDefault(j => a[j.Value] > i) ?? a.Length;
-        Selection.UpperBound(a, i).Should().Be(expected, $"a: [{string.Join(" ", a)}], value: {i}");
-      }
+      var expected = Enumerable.Range(0, array.Length).Cast<int?>().FirstOrDefault(j => array[j.Value] > i) ?? array.Length;
+      Selection.UpperBound(array, i).Should().Be(expected, $"a: [{string.Join(" ", array)}], value: {i}");
     }
-
-    F(new[] { 0 });
-    F(new[] { 9 });
-    F(new[] { 0, 0 });
-    F(new[] { 1, 1, 1 });
-    F(new[] { 1, 2, 3 });
-    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9 });
-    F(new[] { 0, 1, 1, 3, 4, 6, 6, 7, 8, 9, 9 });
   }
 
   [Test]
