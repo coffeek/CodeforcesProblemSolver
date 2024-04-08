@@ -1,6 +1,3 @@
-using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
 using Solver.DataStructures.Bit;
 
 namespace Solver.Tests.DataStructures.Bit;

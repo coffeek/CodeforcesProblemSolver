@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
-using Solver.Utils;
+﻿using Solver.Utils;
 
 namespace Solver.Tests.Utils;
 

@@ -1,6 +1,3 @@
-using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
 using Solver.DataStructures.SegmentTree;
 
 namespace Solver.Tests.DataStructures.SegmentTree;

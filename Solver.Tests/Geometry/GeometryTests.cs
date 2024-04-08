@@ -1,6 +1,4 @@
 ﻿using System.Numerics;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Solver.Tests.Geometry;
 
