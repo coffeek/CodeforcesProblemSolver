@@ -1,7 +1,4 @@
-﻿using System;
-using System.Numerics;
-
-namespace Solver.Utils;
+﻿namespace Solver.Utils;
 
 public static class Bitmasks
 {

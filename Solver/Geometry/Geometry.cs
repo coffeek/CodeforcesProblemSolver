@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
-using static System.Math;
+﻿using static System.Math;
 
 namespace Solver.Geometry;
 

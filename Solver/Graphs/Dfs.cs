@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Solver.Graphs;
+﻿namespace Solver.Graphs;
 
 /// <summary>
 /// Depth-First Search.

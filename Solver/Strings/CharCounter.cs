@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Solver.Strings;
+﻿namespace Solver.Strings;
 
 public class CharCounter
 {

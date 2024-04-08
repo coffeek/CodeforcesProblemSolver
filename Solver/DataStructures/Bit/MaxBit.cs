@@ -1,5 +1,3 @@
-using System;
-
 namespace Solver.DataStructures.Bit;
 
 /// <summary>

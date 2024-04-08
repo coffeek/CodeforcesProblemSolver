@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Solver.DataStructures;
+﻿namespace Solver.DataStructures;
 
 public static class Heap
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Solver.DataStructures;
+﻿namespace Solver.DataStructures;
 
 /// <summary>
 /// Simple bit array without index checking.
