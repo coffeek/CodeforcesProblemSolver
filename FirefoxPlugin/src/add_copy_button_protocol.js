@@ -50,10 +50,8 @@ function addPopupCopyButton() {
                 `[Test]
       public void Case${testNumber}()
       {
-        Assert.AreEqual(
-          @"${answer}",
-          GetResult(
-            @"${input}"));
+        var result = GetResult(@"${input}");
+        result.Should().Be(@"${output}");
       }`;
 
         navigator.clipboard.writeText(testMethod).then(function () {

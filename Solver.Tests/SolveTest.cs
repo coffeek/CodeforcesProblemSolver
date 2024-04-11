@@ -6,10 +6,8 @@ public class SolveTest
   // [Test]
   // public void Case1()
   // {
-  //   Assert.AreEqual(
-  //     @"",
-  //     GetResult(
-  //       @""));
+  //   var result = GetResult(@"");
+  //   result.Should().Be(@"");
   // }
 
   private static string GetResult(string inputData)
