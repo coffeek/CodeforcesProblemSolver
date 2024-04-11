@@ -51,7 +51,7 @@ function addPopupCopyButton() {
       public void Case${testNumber}()
       {
         var result = GetResult(@"${input}");
-        result.Should().Be(@"${output}");
+        result.Should().Be(@"${answer}");
       }`;
 
         navigator.clipboard.writeText(testMethod).then(function () {
