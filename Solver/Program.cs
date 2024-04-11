@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.IO;
-using static System.Array;
+﻿using static System.Array;
 using static System.Math;
 
 namespace Solver;
