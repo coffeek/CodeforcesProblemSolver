@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Solver.Tests;
+﻿namespace Solver.Tests;
 
 [TestFixture]
 public class SolveTest

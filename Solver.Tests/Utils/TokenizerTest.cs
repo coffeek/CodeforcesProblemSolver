@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Solver.Tests.Utils;
+﻿namespace Solver.Tests.Utils;
 
 [TestFixture]
 public class TokenizerTest
