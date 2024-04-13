@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Solver.Utils;
+﻿namespace Solver.Utils;
 
 public static class Counter
 {

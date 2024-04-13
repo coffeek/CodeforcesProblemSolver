@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Solver.DataStructures;
+﻿namespace Solver.DataStructures;
 
 public class Multiset<T>
 {

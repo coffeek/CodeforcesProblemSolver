@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Solver.DataStructures;
+﻿namespace Solver.DataStructures;
 
 public class MinMaxQueue
 {

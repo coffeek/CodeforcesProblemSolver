@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
-using Solver.Sorting;
+﻿using Solver.Sorting;
 
 namespace Solver.Tests.Sorting;
 

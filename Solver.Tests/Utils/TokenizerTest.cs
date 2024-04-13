@@ -1,7 +1,4 @@
-﻿using System.IO;
-using NUnit.Framework;
-
-namespace Solver.Tests.Utils;
+﻿namespace Solver.Tests.Utils;
 
 [TestFixture]
 public class TokenizerTest

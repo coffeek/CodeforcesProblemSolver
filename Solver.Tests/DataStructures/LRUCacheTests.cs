@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Solver.DataStructures;
 
 namespace Solver.Tests.DataStructures;

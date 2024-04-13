@@ -24,18 +24,13 @@ if (sampleTestsElement) {
               `  [Test]
     public void Case${i + 1}()
     {
-      Assert.AreEqual(
-        @"${output}",
-        GetResult(
-          @"${input}"));
+      var result = GetResult(@"${input}");
+      result.Should().Be(@"${output}");
     }`;
           testMethods.push(testMethod);
       }
 
-      const testModule = `using System.IO;
-  using NUnit.Framework;
-
-  namespace Solver.Tests;
+      const testModule = `namespace Solver.Tests;
 
   [TestFixture]
   public class SolveTest

@@ -1,7 +1,4 @@
-﻿using System.IO;
-using NUnit.Framework;
-
-namespace Solver.Tests;
+﻿namespace Solver.Tests;
 
 [TestFixture]
 public class SolveTest
@@ -9,10 +6,8 @@ public class SolveTest
   // [Test]
   // public void Case1()
   // {
-  //   Assert.AreEqual(
-  //     @"",
-  //     GetResult(
-  //       @""));
+  //   var result = GetResult(@"");
+  //   result.Should().Be(@"");
   // }
 
   private static string GetResult(string inputData)

@@ -1,5 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Solver.Sequences;
 
 namespace Solver.Tests.Sequences;
