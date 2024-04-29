@@ -24,14 +24,15 @@ public class NumbersTests
     {
       var expected = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
       var actual = Numbers.ToBase(i, 2);
-      CollectionAssert.AreEqual(expected, actual);
+      actual.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
     }
-    CollectionAssert.AreEqual(new[] { 0 }, Numbers.ToBase(0, 3));
-    CollectionAssert.AreEqual(new[] { 1 }, Numbers.ToBase(1, 3));
-    CollectionAssert.AreEqual(new[] { 2 }, Numbers.ToBase(2, 3));
-    CollectionAssert.AreEqual(new[] { 1, 0 }, Numbers.ToBase(3, 3));
-    CollectionAssert.AreEqual(new[] { 2, 2, 2 }, Numbers.ToBase(26, 3));
-    CollectionAssert.AreEqual(new[] { 1, 0, 0, 0 }, Numbers.ToBase(27, 3));
+
+    Numbers.ToBase(0, 3).Should().BeEquivalentTo(new[] { 0 }, o => o.WithStrictOrdering());
+    Numbers.ToBase(1, 3).Should().BeEquivalentTo(new[] { 1 }, o => o.WithStrictOrdering());
+    Numbers.ToBase(2, 3).Should().BeEquivalentTo(new[] { 2 }, o => o.WithStrictOrdering());
+    Numbers.ToBase(3, 3).Should().BeEquivalentTo(new[] { 1, 0 }, o => o.WithStrictOrdering());
+    Numbers.ToBase(26, 3).Should().BeEquivalentTo(new[] { 2, 2, 2 }, o => o.WithStrictOrdering());
+    Numbers.ToBase(27, 3).Should().BeEquivalentTo(new[] { 1, 0, 0, 0 }, o => o.WithStrictOrdering());
   }
 
   [Test]
@@ -40,65 +41,65 @@ public class NumbersTests
     for (int i = 0; i < 1024; i++)
     {
       var arg = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
-      Assert.AreEqual(i, Numbers.ToLong(arg, 2));
+      Numbers.ToLong(arg, 2).Should().Be(i);
     }
 
-    Assert.AreEqual(0, Numbers.ToLong(new[] { 0 }, 3));
-    Assert.AreEqual(1, Numbers.ToLong(new[] { 1 }, 3));
-    Assert.AreEqual(2, Numbers.ToLong(new[] { 2 }, 3));
-    Assert.AreEqual(3, Numbers.ToLong(new[] { 1, 0 }, 3));
-    Assert.AreEqual(26, Numbers.ToLong(new[] { 2, 2, 2 }, 3));
-    Assert.AreEqual(27, Numbers.ToLong(new[] { 1, 0, 0, 0 }, 3));
+    Numbers.ToLong(new[] { 0 }, 3).Should().Be(0);
+    Numbers.ToLong(new[] { 1 }, 3).Should().Be(1);
+    Numbers.ToLong(new[] { 2 }, 3).Should().Be(2);
+    Numbers.ToLong(new[] { 1, 0 }, 3).Should().Be(3);
+    Numbers.ToLong(new[] { 2, 2, 2 }, 3).Should().Be(26);
+    Numbers.ToLong(new[] { 1, 0, 0, 0 }, 3).Should().Be(27);
   }
 
   [Test]
   public void IsPrimeTests()
   {
-    Assert.IsFalse(Numbers.IsPrime(-199));
-    Assert.IsFalse(Numbers.IsPrime(-1));
-    Assert.IsFalse(Numbers.IsPrime(0));
-    Assert.IsFalse(Numbers.IsPrime(1));
-    Assert.IsTrue(Numbers.IsPrime(2));
-    Assert.IsTrue(Numbers.IsPrime(3));
-    Assert.IsFalse(Numbers.IsPrime(4));
-    Assert.IsTrue(Numbers.IsPrime(199));
-    Assert.IsFalse(Numbers.IsPrime(200));
+    Numbers.IsPrime(-199).Should().BeFalse();
+    Numbers.IsPrime(-1).Should().BeFalse();
+    Numbers.IsPrime(0).Should().BeFalse();
+    Numbers.IsPrime(1).Should().BeFalse();
+    Numbers.IsPrime(2).Should().BeTrue();
+    Numbers.IsPrime(3).Should().BeTrue();
+    Numbers.IsPrime(4).Should().BeFalse();
+    Numbers.IsPrime(199).Should().BeTrue();
+    Numbers.IsPrime(200).Should().BeFalse();
   }
 
   [Test]
   public void EvenIntTests()
   {
     foreach (var value in new[] { 0, 2, -2, 16, -1024, int.MinValue })
-      Assert.IsTrue(Numbers.Even(value), $"\"{value}\" should be even");
+      Numbers.Even(value).Should().BeTrue($"\"{value}\" should be even");
     foreach (var value in new[] { 1, -1, 3, 1023, -31, int.MaxValue })
-      Assert.IsFalse(Numbers.Even(value), $"\"{value}\" should not be even");
+      Numbers.Even(value).Should().BeFalse($"\"{value}\" should not be even");
   }
 
   [Test]
   public void OddIntTests()
   {
     foreach (var value in new[] { 0, 2, -2, 16, -1024, int.MinValue })
-      Assert.IsFalse(Numbers.Odd(value), $"\"{value}\" should not be odd");
+      Numbers.Odd(value).Should().BeFalse($"\"{value}\" should not be odd");
     foreach (var value in new[] { 1, -1, 3, 1023, -31, int.MaxValue })
-      Assert.IsTrue(Numbers.Odd(value), $"\"{value}\" should be odd");
+      Numbers.Odd(value).Should().BeTrue($"\"{value}\" should be odd");
   }
 
   [Test]
   public void EvenLongTests()
   {
     foreach (var value in new[] { 0, 2, -2, 16, -1024, long.MinValue })
-      Assert.IsTrue(Numbers.Even(value), $"\"{value}\" should be even");
+      Numbers.Even(value).Should().BeTrue($"\"{value}\" should be even");
     foreach (var value in new[] { 1, -1, 3, 1023, -31, long.MaxValue })
-      Assert.IsFalse(Numbers.Even(value), $"\"{value}\" should not be even");
+      Numbers.Even(value).Should().BeFalse($"\"{value}\" should not be even");
   }
 
   [Test]
   public void OddLongTests()
   {
     foreach (var value in new[] { 0, 2, -2, 16, -1024, long.MinValue })
-      Assert.IsFalse(Numbers.Odd(value), $"\"{value}\" should not be odd");
+      Numbers.Odd(value).Should().BeFalse($"\"{value}\" should not be odd");
     foreach (var value in new[] { 1, -1, 3, 1023, -31, long.MaxValue })
-      Assert.IsTrue(Numbers.Odd(value), $"\"{value}\" should be odd");
+      Numbers.Odd(value).Should().BeTrue($"\"{value}\" should be odd");
   }
 
   public static void TestDigitsCount(Func<int, int> digitsCount)
@@ -151,10 +152,9 @@ public class NumbersTests
     // https://oeis.org/A000010
     var expected = new[]
     {
-      1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8,
-      12, 10, 22, 8, 20, 12, 18, 12, 28, 8, 30, 16, 20, 16, 24, 12,
-      36, 18, 24, 16, 40, 12, 42, 20, 24, 22, 46, 16, 42, 20, 32, 24,
-      52, 18, 40, 24, 36, 28, 58, 16, 60, 30, 36, 32, 48, 20, 66, 32, 44
+      1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8, 12, 10, 22, 8, 20, 12, 18, 12, 28, 8, 30, 16,
+      20, 16, 24, 12, 36, 18, 24, 16, 40, 12, 42, 20, 24, 22, 46, 16, 42, 20, 32, 24, 52, 18, 40, 24, 36, 28, 58, 16,
+      60, 30, 36, 32, 48, 20, 66, 32, 44
     };
     for (int i = 1; i <= expected.Length; i++)
     {
