@@ -5,145 +5,169 @@ namespace Solver.Tests.Utils;
 [TestFixture]
 public class NumbersTests
 {
-  [Test]
-  public void FastDigitsCountTest()
+  [TestCase(0, 1)]
+  [TestCase(-1, 1)]
+  [TestCase(1, 1)]
+  [TestCase(-18, 2)]
+  [TestCase(18, 2)]
+  [TestCase(-1024, 4)]
+  [TestCase(99999999, 8)]
+  [TestCase(int.MaxValue, 10)]
+  [TestCase(int.MinValue, 10)]
+  public void FastDigitsCountTest(int n, int expected)
   {
-    TestDigitsCount(Numbers.FastDigitsCount);
+    Numbers.FastDigitsCount(n).Should().Be(expected);
+  }
+
+  [TestCase(0, 1)]
+  [TestCase(-1, 1)]
+  [TestCase(1, 1)]
+  [TestCase(-18, 2)]
+  [TestCase(18, 2)]
+  [TestCase(-1024, 4)]
+  [TestCase(99999999, 8)]
+  [TestCase(int.MaxValue, 10)]
+  [TestCase(int.MinValue, 10)]
+  public void DigitsCountTest(int n, int expected)
+  {
+    Numbers.DigitsCount(n).Should().Be(expected);
   }
 
   [Test]
-  public void DigitsCountTest()
+  public void ToBaseTests_Base2([Range(0, 1024)] int n)
   {
-    TestDigitsCount(Numbers.DigitsCount);
+    var expected = Convert.ToString(n, 2).Select(c => c - '0').ToArray();
+    Numbers.ToBase(n, 2).Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
+  }
+
+  [TestCase(0, new[] { 0 })]
+  [TestCase(1, new[] { 1 })]
+  [TestCase(2, new[] { 2 })]
+  [TestCase(3, new[] { 1, 0 })]
+  [TestCase(26, new[] { 2, 2, 2 })]
+  [TestCase(27, new[] { 1, 0, 0, 0 })]
+  public void ToBaseTests_Base3(int n, int[] expected)
+  {
+    Numbers.ToBase(n, 3).Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
   }
 
   [Test]
-  public void ToBaseTests()
+  public void ToLongTests_Base2([Range(0, 1024)] int n)
   {
-    for (int i = 0; i < 1024; i++)
-    {
-      var expected = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
-      var actual = Numbers.ToBase(i, 2);
-      actual.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
-    }
+    var arg = Convert.ToString(n, 2).Select(c => c - '0').ToArray();
+    Numbers.ToLong(arg, 2).Should().Be(n);
+  }
 
-    Numbers.ToBase(0, 3).Should().BeEquivalentTo(new[] { 0 }, o => o.WithStrictOrdering());
-    Numbers.ToBase(1, 3).Should().BeEquivalentTo(new[] { 1 }, o => o.WithStrictOrdering());
-    Numbers.ToBase(2, 3).Should().BeEquivalentTo(new[] { 2 }, o => o.WithStrictOrdering());
-    Numbers.ToBase(3, 3).Should().BeEquivalentTo(new[] { 1, 0 }, o => o.WithStrictOrdering());
-    Numbers.ToBase(26, 3).Should().BeEquivalentTo(new[] { 2, 2, 2 }, o => o.WithStrictOrdering());
-    Numbers.ToBase(27, 3).Should().BeEquivalentTo(new[] { 1, 0, 0, 0 }, o => o.WithStrictOrdering());
+  [TestCase(new[] { 0 }, 0)]
+  [TestCase(new[] { 1 }, 1)]
+  [TestCase(new[] { 2 }, 2)]
+  [TestCase(new[] { 1, 0 }, 3)]
+  [TestCase(new[] { 2, 2, 2 }, 26)]
+  [TestCase(new[] { 1, 0, 0, 0 }, 27)]
+  public void ToLongTests_Base3(int[] n, int expected)
+  {
+    Numbers.ToLong(n, 3).Should().Be(expected);
+  }
+
+  [TestCase(-199, false)]
+  [TestCase(-1, false)]
+  [TestCase(0, false)]
+  [TestCase(1, false)]
+  [TestCase(2, true)]
+  [TestCase(3, true)]
+  [TestCase(4, false)]
+  [TestCase(199, true)]
+  [TestCase(200, false)]
+  public void IsPrimeTests(int x, bool expected)
+  {
+    Numbers.IsPrime(x).Should().Be(expected);
   }
 
   [Test]
-  public void ToLongTests()
+  public void Even_ForEvenIntegers_ReturnsTrue([Values(0, 2, -2, 16, -1024, int.MinValue)] int value)
   {
-    for (int i = 0; i < 1024; i++)
-    {
-      var arg = Convert.ToString(i, 2).Select(c => c - '0').ToArray();
-      Numbers.ToLong(arg, 2).Should().Be(i);
-    }
-
-    Numbers.ToLong(new[] { 0 }, 3).Should().Be(0);
-    Numbers.ToLong(new[] { 1 }, 3).Should().Be(1);
-    Numbers.ToLong(new[] { 2 }, 3).Should().Be(2);
-    Numbers.ToLong(new[] { 1, 0 }, 3).Should().Be(3);
-    Numbers.ToLong(new[] { 2, 2, 2 }, 3).Should().Be(26);
-    Numbers.ToLong(new[] { 1, 0, 0, 0 }, 3).Should().Be(27);
+    Numbers.Even(value).Should().BeTrue($"\"{value}\" should be even");
   }
 
   [Test]
-  public void IsPrimeTests()
+  public void Even_ForOddIntegers_ReturnsFalse([Values(1, -1, 3, 1023, -31, int.MaxValue)] int value)
   {
-    Numbers.IsPrime(-199).Should().BeFalse();
-    Numbers.IsPrime(-1).Should().BeFalse();
-    Numbers.IsPrime(0).Should().BeFalse();
-    Numbers.IsPrime(1).Should().BeFalse();
-    Numbers.IsPrime(2).Should().BeTrue();
-    Numbers.IsPrime(3).Should().BeTrue();
-    Numbers.IsPrime(4).Should().BeFalse();
-    Numbers.IsPrime(199).Should().BeTrue();
-    Numbers.IsPrime(200).Should().BeFalse();
+    Numbers.Even(value).Should().BeFalse($"\"{value}\" should not be even");
   }
 
   [Test]
-  public void EvenIntTests()
+  public void Odd_ForOddIntegers_ReturnsTrue([Values(1, -1, 3, 1023, -31, int.MaxValue)] int value)
   {
-    foreach (var value in new[] { 0, 2, -2, 16, -1024, int.MinValue })
-      Numbers.Even(value).Should().BeTrue($"\"{value}\" should be even");
-    foreach (var value in new[] { 1, -1, 3, 1023, -31, int.MaxValue })
-      Numbers.Even(value).Should().BeFalse($"\"{value}\" should not be even");
+    Numbers.Odd(value).Should().BeTrue($"\"{value}\" should be odd");
   }
 
   [Test]
-  public void OddIntTests()
+  public void Odd_ForEvenIntegers_ReturnsFalse([Values(0, 2, -2, 16, -1024, int.MinValue)] int value)
   {
-    foreach (var value in new[] { 0, 2, -2, 16, -1024, int.MinValue })
-      Numbers.Odd(value).Should().BeFalse($"\"{value}\" should not be odd");
-    foreach (var value in new[] { 1, -1, 3, 1023, -31, int.MaxValue })
-      Numbers.Odd(value).Should().BeTrue($"\"{value}\" should be odd");
+    Numbers.Odd(value).Should().BeFalse($"\"{value}\" should not be odd");
   }
 
   [Test]
-  public void EvenLongTests()
+  public void Even_ForEvenLongs_ReturnsTrue([Values(0, 2, -2, 16, -1024, long.MinValue)] long value)
   {
-    foreach (var value in new[] { 0, 2, -2, 16, -1024, long.MinValue })
-      Numbers.Even(value).Should().BeTrue($"\"{value}\" should be even");
-    foreach (var value in new[] { 1, -1, 3, 1023, -31, long.MaxValue })
-      Numbers.Even(value).Should().BeFalse($"\"{value}\" should not be even");
+    Numbers.Even(value).Should().BeTrue($"\"{value}\" should be even");
   }
 
   [Test]
-  public void OddLongTests()
+  public void Even_ForOddLongs_ReturnsFalse([Values(1, -1, 3, 1023, -31, long.MaxValue)] long value)
   {
-    foreach (var value in new[] { 0, 2, -2, 16, -1024, long.MinValue })
-      Numbers.Odd(value).Should().BeFalse($"\"{value}\" should not be odd");
-    foreach (var value in new[] { 1, -1, 3, 1023, -31, long.MaxValue })
-      Numbers.Odd(value).Should().BeTrue($"\"{value}\" should be odd");
-  }
-
-  public static void TestDigitsCount(Func<int, int> digitsCount)
-  {
-    digitsCount(0).Should().Be(1);
-    digitsCount(-1).Should().Be(1);
-    digitsCount(1).Should().Be(1);
-    digitsCount(-18).Should().Be(2);
-    digitsCount(18).Should().Be(2);
-    digitsCount(-1024).Should().Be(4);
-    digitsCount(99999999).Should().Be(8);
-    digitsCount(int.MaxValue).Should().Be(10);
-    digitsCount(int.MinValue).Should().Be(10);
+    Numbers.Even(value).Should().BeFalse($"\"{value}\" should not be even");
   }
 
   [Test]
-  public void GcdTest()
+  public void Odd_ForOddLongs_ReturnsTrue([Values(1, -1, 3, 1023, -31, long.MaxValue)] long value)
   {
-    Numbers.Gcd(0, 0).Should().Be(0);
-    Numbers.Gcd(0, 1).Should().Be(0);
-    Numbers.Gcd(1, 0).Should().Be(0);
-    Numbers.Gcd(1, 1).Should().Be(1);
-    Numbers.Gcd(12, 4).Should().Be(4);
-    Numbers.Gcd(12, 9).Should().Be(3);
-    Numbers.Gcd(12, 7).Should().Be(1);
-
-    Numbers.Gcd().Should().Be(0);
-    Numbers.Gcd(16).Should().Be(16);
-    Numbers.Gcd(12, 24, 6).Should().Be(6);
-    Numbers.Gcd(10, 7, 13, 1024).Should().Be(1);
+    Numbers.Odd(value).Should().BeTrue($"\"{value}\" should be odd");
   }
 
   [Test]
-  public void LcmTest()
+  public void Odd_ForEvenLongs_ReturnsFalse([Values(0, 2, -2, 16, -1024, long.MinValue)] long value)
   {
-    Numbers.Lcm(1, 1).Should().Be(1);
-    Numbers.Lcm(12, 4).Should().Be(12);
-    Numbers.Lcm(12, 9).Should().Be(36);
-    Numbers.Lcm(12, 7).Should().Be(84);
+    Numbers.Odd(value).Should().BeFalse($"\"{value}\" should not be odd");
+  }
 
-    Numbers.Lcm().Should().Be(0);
-    Numbers.Lcm(16).Should().Be(16);
-    Numbers.Lcm(12, 24, 6).Should().Be(24);
-    Numbers.Lcm(10, 5, 13, 130).Should().Be(130);
+  [TestCase(0, 0, 0)]
+  [TestCase(0, 1, 0)]
+  [TestCase(1, 0, 0)]
+  [TestCase(1, 1, 1)]
+  [TestCase(12, 4, 4)]
+  [TestCase(12, 9, 3)]
+  [TestCase(12, 7, 1)]
+  public void Gcd_Of2Numbers(int a, int b, int expected)
+  {
+    Numbers.Gcd(a, b).Should().Be(expected);
+  }
+
+  [TestCase(new int[] { }, 0)]
+  [TestCase(new[] { 16 }, 16)]
+  [TestCase(new[] { 12, 24, 6 }, 6)]
+  [TestCase(new[] { 10, 7, 13, 1024 }, 1)]
+  public void Gcd_OfMultipleNumbers(int[] values, int expected)
+  {
+    Numbers.Gcd(values).Should().Be(expected);
+  }
+
+  [TestCase(1, 1, 1)]
+  [TestCase(12, 4, 12)]
+  [TestCase(12, 9, 36)]
+  [TestCase(12, 7, 84)]
+  public void Lcm_Of2Numbers(int a, int b, int expected)
+  {
+    Numbers.Lcm(a, b).Should().Be(expected);
+  }
+
+  [TestCase(new int[] { }, 0)]
+  [TestCase(new[] { 16 }, 16)]
+  [TestCase(new[] { 12, 24, 6 }, 24)]
+  [TestCase(new[] { 10, 5, 13, 130 }, 130)]
+  public void Lcm_OfMultipleNumbers(int[] values, int expected)
+  {
+    Numbers.Lcm(values).Should().Be(expected);
   }
 
   [Test]
@@ -162,17 +186,17 @@ public class NumbersTests
     }
   }
 
-  [Test]
-  public void FactorizeTest()
+  [TestCase(0, new int[] { })]
+  [TestCase(1, new int[] { })]
+  [TestCase(5, new[] { 5 })]
+  [TestCase(10, new[] { 2, 5 })]
+  [TestCase(12, new[] { 2, 2, 3 })]
+  [TestCase(36, new[] { 2, 2, 3, 3 })]
+  [TestCase(1024, new[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 })]
+  [TestCase(1000009, new[] { 293, 3413 })]
+  public void FactorizeTest(int n, int[] expected)
   {
-    Numbers.Factorize(0).Should().BeEmpty();
-    Numbers.Factorize(1).Should().BeEmpty();
-    Numbers.Factorize(5).Should().BeEquivalentTo(5);
-    Numbers.Factorize(10).Should().BeEquivalentTo(2, 5);
-    Numbers.Factorize(12).Should().BeEquivalentTo(2, 2, 3);
-    Numbers.Factorize(36).Should().BeEquivalentTo(2, 2, 3, 3);
-    Numbers.Factorize(1024).Should().BeEquivalentTo(2, 2, 2, 2, 2, 2, 2, 2, 2, 2);
-    Numbers.Factorize(1000009).Should().BeEquivalentTo(293, 3413);
+    Numbers.Factorize(n).Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
   }
 
   [TestCase(1, 1, 1)]
@@ -228,6 +252,33 @@ public class NumbersTests
     Numbers.BinMul(x, y, mod).Should().Be(expected);
   }
 
+  [TestCase(-4, false)]
+  [TestCase(0, true)]
+  [TestCase(1, true)]
+  [TestCase(2, false)]
+  [TestCase(3, false)]
+  [TestCase(4, true)]
+  [TestCase(9, true)]
+  [TestCase(10, false)]
+  [TestCase(111, false)]
+  [TestCase(1024, true)]
+  public void IsSquareTest(int n, bool expected)
+  {
+    Numbers.IsSquare(n).Should().Be(expected);
+  }
+
+  [TestCase(0, 1, 0)]
+  [TestCase(1, 1, 1)]
+  [TestCase(2, 1, 2)]
+  [TestCase(2, 3, 1)]
+  [TestCase(9, 3, 3)]
+  [TestCase(10, 3, 4)]
+  [TestCase(11, 3, 4)]
+  public void CeilDivTest(int value, int div, int expected)
+  {
+    Numbers.CeilDiv(value, div).Should().Be(expected);
+  }
+
   [TestFixture]
   public class SieveTests
   {
@@ -253,33 +304,6 @@ public class NumbersTests
     public void LinearSieve()
     {
       RunTest(Numbers.LinearSieve);
-    }
-
-    [TestCase(-4, false)]
-    [TestCase(0, true)]
-    [TestCase(1, true)]
-    [TestCase(2, false)]
-    [TestCase(3, false)]
-    [TestCase(4, true)]
-    [TestCase(9, true)]
-    [TestCase(10, false)]
-    [TestCase(111, false)]
-    [TestCase(1024, true)]
-    public void IsSquareTest(int n, bool expected)
-    {
-      Numbers.IsSquare(n).Should().Be(expected);
-    }
-
-    [TestCase(0, 1, 0)]
-    [TestCase(1, 1, 1)]
-    [TestCase(2, 1, 2)]
-    [TestCase(2, 3, 1)]
-    [TestCase(9, 3, 3)]
-    [TestCase(10, 3, 4)]
-    [TestCase(11, 3, 4)]
-    public void CeilDivTest(int value, int div, int expected)
-    {
-      Numbers.CeilDiv(value, div).Should().Be(expected);
     }
 
     private static void RunTest(Func<int, IReadOnlyList<int>> sieve)
