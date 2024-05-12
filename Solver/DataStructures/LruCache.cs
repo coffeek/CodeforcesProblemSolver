@@ -4,7 +4,7 @@ namespace Solver.DataStructures;
 /// Least recently used (LRU) cache.
 /// https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU
 /// </summary>
-public class LRUCache<TKey, TValue>
+public class LruCache<TKey, TValue>
 {
   private readonly struct CacheItem
   {
@@ -22,7 +22,7 @@ public class LRUCache<TKey, TValue>
   private readonly LinkedList<CacheItem> list = new();
   private readonly Dictionary<TKey, LinkedListNode<CacheItem>> dict = new();
 
-  public LRUCache(int capacity)
+  public LruCache(int capacity)
   {
     this.capacity = capacity;
   }
