@@ -5,19 +5,17 @@ namespace Solver.Tests.Utils;
 [TestFixture]
 public class FunctionsTests
 {
-  [Test]
-  public void CompactTests()
+  [TestCase(new[] { 0 }, new[] { 0 })]
+  [TestCase(new[] { 1 }, new[] { 1 })]
+  [TestCase(new[] { 0, 0, 0 }, new[] { 0 })]
+  [TestCase(new[] { 1, 0, 1 }, new[] { 1, 0, 1 })]
+  [TestCase(new[] { 1, 0, 1, 1, 1, 0 }, new[] { 1, 0, 1, 0 })]
+  [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 })]
+  [TestCase(new[] { 1, 1, 1, 2, 2, 2, 0, 0, 3, 1, 2 }, new[] { 1, 2, 0, 3, 1, 2 })]
+  [TestCase(new[] { 0, 0, 1, 1, 1, 0 }, new[] { 0, 1, 0 })]
+  public void CompactTests(int[] a, int[] expected)
   {
-    static int[] Call(IEnumerable<int> a) => Functions.Compact(a).ToArray();
-
-    Assert.That(Call(new[] { 0 }), Is.EquivalentTo(new[] { 0 }));
-    Assert.That(Call(new[] { 1 }), Is.EquivalentTo(new[] { 1 }));
-    Assert.That(Call(new[] { 0, 0, 0 }), Is.EquivalentTo(new[] { 0 }));
-    Assert.That(Call(new[] { 1, 0, 1 }), Is.EquivalentTo(new[] { 1, 0, 1 }));
-    Assert.That(Call(new[] { 1, 0, 1, 1, 1, 0 }), Is.EquivalentTo(new[] { 1, 0, 1, 0 }));
-    Assert.That(Call(new[] { 1, 2, 3, 4, 5 }), Is.EquivalentTo(new[] { 1, 2, 3, 4, 5 }));
-    Assert.That(Call(new[] { 1, 1, 1, 2, 2, 2, 0, 0, 3, 1, 2 }), Is.EquivalentTo(new[] { 1, 2, 0, 3, 1, 2 }));
-    Assert.That(Call(new[] { 0, 0, 1, 1, 1, 0 }), Is.EquivalentTo(new[] { 0, 1, 0 }));
+    Functions.Compact(a).Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
   }
 
   [TestCase(new[] { 1, 1, 1, 2, 2, -2, 0, 0, 3, 1, 2 })]
@@ -45,10 +43,11 @@ public class FunctionsTests
   [Test]
   public void PermuteTest()
   {
-    var expected = new[] { "1 2 3", "1 3 2", "2 1 3", "2 3 1", "3 2 1", "3 1 2" };
     var actual = new List<string>();
     Functions.Permute(new[] { 1, 2, 3 }, 0, 3, p => actual.Add(string.Join(" ", p)));
-    CollectionAssert.AreEqual(expected, actual);
+    actual.Should().BeEquivalentTo(
+      new[] { "1 2 3", "1 3 2", "2 1 3", "2 3 1", "3 2 1", "3 1 2" }, 
+      o => o.WithStrictOrdering());
   }
 
   [TestCase(1, 0, 1)]
