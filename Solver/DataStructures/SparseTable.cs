@@ -2,6 +2,10 @@
 
 namespace Solver.DataStructures;
 
+/// <summary>
+/// Sparse Table https://cp-algorithms.com/data_structures/sparse-table.html
+/// Allows answering Range Minimum Queries (RMQ) in O(1) time.
+/// </summary>
 public class SparseTable
 {
   private readonly int N;
