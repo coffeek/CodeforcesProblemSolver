@@ -8,7 +8,7 @@ public class TokenizerTest
   {
     var input = new StringReader("");
     var tokenizer = new Tokenizer(input);
-    Assert.IsNull(tokenizer.ReadToken());
+    tokenizer.ReadToken().Should().BeNull();
   }
 
   [Test]
@@ -16,14 +16,14 @@ public class TokenizerTest
   {
     var input = new StringReader(" aSdf A 1234 *.%()(JFLD __   ad   a  \t");
     var tokenizer = new Tokenizer(input);
-    Assert.AreEqual("aSdf", tokenizer.ReadToken());
-    Assert.AreEqual("A", tokenizer.ReadToken());
-    Assert.AreEqual("1234", tokenizer.ReadToken());
-    Assert.AreEqual("*.%()(JFLD", tokenizer.ReadToken());
-    Assert.AreEqual("__", tokenizer.ReadToken());
-    Assert.AreEqual("ad", tokenizer.ReadToken());
-    Assert.AreEqual("a", tokenizer.ReadToken());
-    Assert.IsNull(tokenizer.ReadToken());
+    tokenizer.ReadToken().Should().Be("aSdf");
+    tokenizer.ReadToken().Should().Be("A");
+    tokenizer.ReadToken().Should().Be("1234");
+    tokenizer.ReadToken().Should().Be("*.%()(JFLD");
+    tokenizer.ReadToken().Should().Be("__");
+    tokenizer.ReadToken().Should().Be("ad");
+    tokenizer.ReadToken().Should().Be("a");
+    tokenizer.ReadToken().Should().BeNull();
   }
 
   [Test]
@@ -34,31 +34,31 @@ public class TokenizerTest
 
 a");
     var tokenizer = new Tokenizer(input);
-    Assert.AreEqual("aSdf", tokenizer.ReadToken());
-    Assert.AreEqual("A", tokenizer.ReadToken());
-    Assert.AreEqual("123", tokenizer.ReadToken());
-    Assert.AreEqual("4", tokenizer.ReadToken());
-    Assert.AreEqual("*.%()(JFLD", tokenizer.ReadToken());
-    Assert.AreEqual("__", tokenizer.ReadToken());
-    Assert.AreEqual("ad", tokenizer.ReadToken());
-    Assert.AreEqual("a", tokenizer.ReadToken());
-    Assert.IsNull(tokenizer.ReadToken());
+    tokenizer.ReadToken().Should().Be("aSdf");
+    tokenizer.ReadToken().Should().Be("A");
+    tokenizer.ReadToken().Should().Be("123");
+    tokenizer.ReadToken().Should().Be("4");
+    tokenizer.ReadToken().Should().Be("*.%()(JFLD");
+    tokenizer.ReadToken().Should().Be("__");
+    tokenizer.ReadToken().Should().Be("ad");
+    tokenizer.ReadToken().Should().Be("a");
+    tokenizer.ReadToken().Should().BeNull();
   }
 
   [Test]
   public void TestParseInt()
   {
-    Assert.AreEqual(-1, new Tokenizer(new StringReader("-1")).ReadInt());
-    Assert.AreEqual(1, new Tokenizer(new StringReader("+01")).ReadInt());
-    Assert.AreEqual(0, new Tokenizer(new StringReader("-00")).ReadInt());
+    new Tokenizer(new StringReader("-1")).ReadInt().Should().Be(-1);
+    new Tokenizer(new StringReader("+01")).ReadInt().Should().Be(1);
+    new Tokenizer(new StringReader("-00")).ReadInt().Should().Be(0);
   }
   
   [Test]
   public void TestParseLong()
   {
-    Assert.AreEqual(-59829934957459, new Tokenizer(new StringReader("-59829934957459")).ReadLong());
-    Assert.AreEqual(59829934957459, new Tokenizer(new StringReader("+059829934957459")).ReadLong());
-    Assert.AreEqual(0, new Tokenizer(new StringReader("-00")).ReadLong());
+    new Tokenizer(new StringReader("-59829934957459")).ReadLong().Should().Be(-59829934957459);
+    new Tokenizer(new StringReader("+059829934957459")).ReadLong().Should().Be(59829934957459);
+    new Tokenizer(new StringReader("-00")).ReadLong().Should().Be(0);
   }
 
   [Test]
@@ -68,13 +68,13 @@ a");
 0 -00000
 ");
     var tokenizer = new Tokenizer(input);
-    Assert.AreEqual(-1, tokenizer.ReadInt());
-    Assert.AreEqual(135, tokenizer.ReadInt());
-    Assert.AreEqual(4390, tokenizer.ReadInt());
-    Assert.AreEqual(987654321, tokenizer.ReadInt());
-    Assert.AreEqual(0, tokenizer.ReadInt());
-    Assert.AreEqual(0, tokenizer.ReadInt());
-    Assert.IsNull(tokenizer.ReadToken());
+    tokenizer.ReadInt().Should().Be(-1);
+    tokenizer.ReadInt().Should().Be(135);
+    tokenizer.ReadInt().Should().Be(4390);
+    tokenizer.ReadInt().Should().Be(987654321);
+    tokenizer.ReadInt().Should().Be(0);
+    tokenizer.ReadInt().Should().Be(0);
+    tokenizer.ReadToken().Should().BeNull();
   }
   
   [Test]
@@ -84,13 +84,13 @@ a");
 0 -00000
 ");
     var tokenizer = new Tokenizer(input);
-    Assert.AreEqual(-1, tokenizer.ReadLong());
-    Assert.AreEqual(135, tokenizer.ReadLong());
-    Assert.AreEqual(439056812903734939, tokenizer.ReadLong());
-    Assert.AreEqual(9876543218589493, tokenizer.ReadLong());
-    Assert.AreEqual(0, tokenizer.ReadLong());
-    Assert.AreEqual(0, tokenizer.ReadLong());
-    Assert.IsNull(tokenizer.ReadToken());
+    tokenizer.ReadLong().Should().Be(-1);
+    tokenizer.ReadLong().Should().Be(135);
+    tokenizer.ReadLong().Should().Be(439056812903734939);
+    tokenizer.ReadLong().Should().Be(9876543218589493);
+    tokenizer.ReadLong().Should().Be(0);
+    tokenizer.ReadLong().Should().Be(0);
+    tokenizer.ReadToken().Should().BeNull();
   }
 
   [Test]
@@ -102,15 +102,15 @@ a");
     var tokenizer = new Tokenizer(input);
 
     var a = tokenizer.ReadIntArray(6);
-    Assert.AreEqual(-1, a[0]);
-    Assert.AreEqual(135, a[1]);
-    Assert.AreEqual(4390, a[2]);
-    Assert.AreEqual(987654321, a[3]);
-    Assert.AreEqual(0, a[4]);
-    Assert.AreEqual(0, a[5]);
+    a[0].Should().Be(-1);
+    a[1].Should().Be(135);
+    a[2].Should().Be(4390);
+    a[3].Should().Be(987654321);
+    a[4].Should().Be(0);
+    a[5].Should().Be(0);
 
-    Assert.AreEqual(100500, tokenizer.ReadInt());
-    Assert.IsNull(tokenizer.ReadToken());
+    tokenizer.ReadInt().Should().Be(100500);
+    tokenizer.ReadToken().Should().BeNull();
   }
 
   [Test]
@@ -122,9 +122,9 @@ a");
 9");
     var tokenizer = new Tokenizer(input);
 
-    Assert.AreEqual((1, 2), tokenizer.Read2Int());
-    Assert.AreEqual((3, 4, 5), tokenizer.Read3Int());
-    Assert.AreEqual((6, 7, 8, 9), tokenizer.Read4Int());
+    tokenizer.Read2Int().Should().Be((1, 2));
+    tokenizer.Read3Int().Should().Be((3, 4, 5));
+    tokenizer.Read4Int().Should().Be((6, 7, 8, 9));
   }
 
   [Test]
@@ -135,10 +135,10 @@ as s
 d 
  ");
     var tokenizer = new Tokenizer(input);
-    Assert.AreEqual("", tokenizer.ReadLine());
-    Assert.AreEqual("as s", tokenizer.ReadLine());
-    Assert.AreEqual("d ", tokenizer.ReadLine());
-    Assert.AreEqual(" ", tokenizer.ReadLine());
-    Assert.IsNull(tokenizer.ReadLine());
+    tokenizer.ReadLine().Should().Be("");
+    tokenizer.ReadLine().Should().Be("as s");
+    tokenizer.ReadLine().Should().Be("d ");
+    tokenizer.ReadLine().Should().Be(" ");
+    tokenizer.ReadLine().Should().BeNull();
   }
 }
