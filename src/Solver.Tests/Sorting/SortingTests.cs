@@ -3,38 +3,44 @@ namespace Solver.Tests.Sorting;
 [TestFixture]
 public class SortingTests
 {
-  private static readonly object[] TestArrays =
+  private static IEnumerable<int[]> GetTestArrays()
   {
-    new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 },
-    Array.Empty<int>(),
-    new[] { 1 },
-    new[] { -1, -99 },
-    new[] { 1, 5, -10 },
-    new[] { 6, 5, 4, 1, 2, 3 }
-  };
+    yield return new[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 };
+    yield return Array.Empty<int>();
+    yield return new[] { 1 };
+    yield return new[] { -1, -99 };
+    yield return new[] { 1, 5, -10 };
+    yield return new[] { 6, 5, 4, 1, 2, 3 };
+  }
 
-  [TestCaseSource(nameof(TestArrays))]
+  [TestCaseSource(nameof(GetTestArrays))]
   public void QuickSortTest(int[] array)
   {
     TestSort(array, Solver.Sorting.Sorting.QuickSort);
   }
 
-  [TestCaseSource(nameof(TestArrays))]
+  [TestCaseSource(nameof(GetTestArrays))]
   public void QuickSortLomutoTest(int[] array)
   {
     TestSort(array, Solver.Sorting.Sorting.QuickSortLomuto);
   }
 
-  [TestCaseSource(nameof(TestArrays))]
+  [TestCaseSource(nameof(GetTestArrays))]
   public void HeapSortTest(int[] array)
   {
     TestSort(array, Solver.Sorting.Sorting.HeapSort);
   }
 
-  [TestCaseSource(nameof(TestArrays))]
+  [TestCaseSource(nameof(GetTestArrays))]
   public void HeapSortGenericTest(int[] array)
   {
     TestSort(array, a => Solver.Sorting.Sorting.HeapSort(a, Comparer<int>.Default.Compare));
+  }
+
+  [TestCaseSource(nameof(GetTestArrays))]
+  public void ShellSortTest(int[] array)
+  {
+    TestSort(array, Solver.Sorting.Sorting.ShellSort);
   }
 
   [TestCase(new[] { 2, 0, 2, 1, 1, 0 }, 1, new[] { 0, 0, 1, 1, 2, 2 })]

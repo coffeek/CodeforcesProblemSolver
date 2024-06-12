@@ -117,6 +117,24 @@ public static class Sorting
     }
   }
 
+  public static void ShellSort(int[] a)
+  {
+    var n = a.Length;
+    var nextPass = true;
+    for (int gap = (n + 1) / 2; nextPass || gap > 1; gap = (gap + 1) / 2)
+    {
+      nextPass = false;
+      for (int i = 0; i + gap < n; i++)
+      {
+        if (a[i] > a[i + gap])
+        {
+          Swap(a, i, i + gap);
+          nextPass = true;
+        }
+      }
+    }
+  }
+
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   private static void Swap(int[] a, int i, int j)
   {

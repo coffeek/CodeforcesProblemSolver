@@ -8,87 +8,113 @@ namespace Benchmarks.Benchmarks;
 
 public class SortRandomNumbersBenchmark
 {
-  public int N = 1_000_000;
+  [Params(100, 1_000, 10_000)]
+  public int N;
 
-  private readonly int[] data;
+  private int[] source;
+  private int[] data;
 
-  public SortRandomNumbersBenchmark()
+  [GlobalSetup]
+  public void Setup()
   {
     data = new int[N];
-  }
-
-  [IterationSetup]
-  public void IterationSetup()
-  {
-    var bytes = MemoryMarshal.AsBytes(data.AsSpan());
+    source = new int[N];
+    var bytes = MemoryMarshal.AsBytes(source.AsSpan());
     new Random().NextBytes(bytes);
   }
 
   [Benchmark(Baseline = true)]
   public void ArraySort()
   {
+    source.AsSpan().CopyTo(data);
     Array.Sort(data);
   }
 
   [Benchmark]
   public void QuickSortHoare()
   {
+    source.AsSpan().CopyTo(data);
     Sorting.QuickSort(data);
   }
     
   [Benchmark]
   public void QuickSortLomuto()
   {
+    source.AsSpan().CopyTo(data);
     Sorting.QuickSortLomuto(data);
   }
     
   [Benchmark]
   public void HeapSort()
   {
+    source.AsSpan().CopyTo(data);
     Sorting.HeapSort(data);
   }
-    
+  
   [Benchmark]
-  public void HeapSortWithComparer()
+  public void ShellSort()
   {
-    Sorting.HeapSort(data, Comparer<int>.Default.Compare);
+    source.AsSpan().CopyTo(data);
+    Sorting.ShellSort(data);
   }
+    
+  // [Benchmark]
+  // public void HeapSortWithComparer()
+  // {
+  //   source.AsSpan().CopyTo(data);
+  //   Sorting.HeapSort(data, Comparer<int>.Default.Compare);
+  // }
 }
   
 public class SortOrderedNumbersBenchmark
 {
-  public int N = 2_000_000;
+  [Params(100, 1_000, 10_000)]
+  public int N;
 
-  private readonly int[] data;
-
-  public SortOrderedNumbersBenchmark()
+  private int[] source;
+  private int[] data;
+  
+  [GlobalSetup]
+  public void Setup()
   {
     data = new int[N];
+    source = new int[N];
     for (int i = 0; i < N; i++)
-      data[i] = i;
+      source[i] = i;
   }
 
   [Benchmark(Baseline = true)]
   public void ArraySort()
   {
+    source.AsSpan().CopyTo(data);
     Array.Sort(data);
   }
 
-  [Benchmark]
-  public void QuickSortHoare()
-  {
-    Sorting.QuickSort(data);
-  }
+  // [Benchmark]
+  // public void QuickSortHoare()
+  // {
+  //   source.AsSpan().CopyTo(data);
+  //   Sorting.QuickSort(data);
+  // }
     
   // [Benchmark]
   // public void QuickSortLomuto()
   // {
+  //   source.AsSpan().CopyTo(data);
   //   Sorting.QuickSortLomuto(data);
   // }
     
   [Benchmark]
   public void HeapSort()
   {
+    source.AsSpan().CopyTo(data);
     Sorting.HeapSort(data);
+  }
+  
+  [Benchmark]
+  public void ShellSort()
+  {
+    source.AsSpan().CopyTo(data);
+    Sorting.ShellSort(data);
   }
 }
