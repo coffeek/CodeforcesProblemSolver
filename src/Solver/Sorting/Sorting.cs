@@ -89,6 +89,34 @@ public static class Sorting
     }
   }
 
+  /// <summary>
+  /// Dutch national flag problem
+  /// https://en.wikipedia.org/wiki/Dutch_national_flag_problem
+  /// </summary>
+  public static void TreeWayPartition(int[] a, int mid)
+  {
+    var n = a.Length;
+    var (i, j, k) = (0, 0, n - 1);
+    while (j <= k)
+    {
+      if (a[j] < mid)
+      {
+        Swap(a, i, j);
+        i++;
+        j++;
+      }
+      else if (a[j] > mid)
+      {
+        Swap(a, j, k);
+        k--;
+      }
+      else
+      {
+        j++;
+      }
+    }
+  }
+
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   private static void Swap(int[] a, int i, int j)
   {
