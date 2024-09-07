@@ -1,7 +1,7 @@
 namespace Solver.DataStructures.Bit;
 
 /// <summary>
-/// Binary indexed tree (Fenwick tree) for sum.
+/// Binary indexed tree (Fenwick tree) for sum (0-indexed).
 /// </summary>
 public class SumBit
 {

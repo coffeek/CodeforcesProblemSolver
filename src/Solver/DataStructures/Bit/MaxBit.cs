@@ -1,7 +1,7 @@
 namespace Solver.DataStructures.Bit;
 
 /// <summary>
-/// Binary indexed tree (Fenwick tree) for Max/Min operations.
+/// Binary indexed tree (Fenwick tree) for Max/Min operations (1-indexed).
 /// </summary>
 /// <remarks>
 /// The Max() method can get the maximum only for the prefix [0;r].  
