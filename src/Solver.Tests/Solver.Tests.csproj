@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Solver.Geometry\Solver.Geometry.csproj" />
+    <ProjectReference Include="..\Solver.Graphs\Solver.Graphs.csproj" />
+    <ProjectReference Include="..\Solver.Sequences\Solver.Sequences.csproj" />
+    <ProjectReference Include="..\Solver.Sorting\Solver.Sorting.csproj" />
+    <ProjectReference Include="..\Solver.Strings\Solver.Strings.csproj" />
     <ProjectReference Include="..\Solver\Solver.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using Solver.Utils;
 
 namespace Benchmarks.Benchmarks;

@@ -7,4 +7,8 @@
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj" />
+  </ItemGroup>
+
 </Project>

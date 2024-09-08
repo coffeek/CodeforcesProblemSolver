@@ -25,7 +25,7 @@ public static class Counter
     return counter.TryGetValue(item, out var count) ? count : 0;
   }
 
-  public static Dictionary<T, int> Counts<T>(params T[] a)
+  public static Dictionary<T, int> Counts<T>(params T[] a) where T : notnull
   {
     var c = new Dictionary<T, int>();
     foreach (var t in a)

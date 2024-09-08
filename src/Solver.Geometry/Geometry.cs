@@ -1,6 +1,4 @@
-﻿using static System.Math;
-
-namespace Solver.Geometry;
+﻿namespace Solver.Geometry;
 
 public static class Geometry
 {

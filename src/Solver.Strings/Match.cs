@@ -1,6 +1,4 @@
-﻿using static System.Math;
-
-namespace Solver.Strings;
+﻿namespace Solver.Strings;
 
 public static class Match
 {
