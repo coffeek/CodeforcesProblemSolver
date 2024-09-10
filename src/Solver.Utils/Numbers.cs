@@ -59,10 +59,7 @@ public static class Numbers
     if (a <= 0 || b <= 0)
       return 0;
     while (b != 0)
-    {
-      a %= b;
-      (b, a) = (a, b);
-    }
+      (b, a) = (a % b, b);
     return a;
   }
 
