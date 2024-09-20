@@ -1,11 +1,8 @@
-﻿using Solver.Utils;
+﻿namespace Solver.Utils.Tests;
 
-namespace Solver.Tests.Utils;
-
-[TestFixture]
 public class CounterTests
 {
-  [Test]
+  [Fact]
   public void CountsTest()
   {
     Counter.Counts(Array.Empty<int>()).Should().BeEquivalentTo(new Dictionary<int, int>());
