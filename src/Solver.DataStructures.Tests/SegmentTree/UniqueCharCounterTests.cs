@@ -1,7 +1,6 @@
-using System.Text;
 using Solver.DataStructures.SegmentTree;
 
-namespace Solver.Tests.DataStructures.SegmentTree;
+namespace Solver.DataStructures.Tests.SegmentTree;
 
 [TestFixture]
 public class UniqueCharCounterTests

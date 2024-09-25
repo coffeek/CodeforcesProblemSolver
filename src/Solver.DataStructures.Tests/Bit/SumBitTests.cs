@@ -1,6 +1,6 @@
 using Solver.DataStructures.Bit;
 
-namespace Solver.Tests.DataStructures.Bit;
+namespace Solver.DataStructures.Tests.Bit;
 
 [TestFixture]
 public class SumBitTests

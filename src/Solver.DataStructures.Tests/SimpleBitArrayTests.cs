@@ -1,6 +1,4 @@
-﻿using Solver.DataStructures;
-
-namespace Solver.Tests.DataStructures;
+﻿namespace Solver.DataStructures.Tests;
 
 [TestFixture]
 public class SimpleBitArrayTests

@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solver.Sequences", "Solver.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solver.Sorting", "Solver.Sorting\Solver.Sorting.csproj", "{73A1624E-465B-40E5-9C7E-D0F6FF0E5521}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solver.DataStructures.Tests", "Solver.DataStructures.Tests\Solver.DataStructures.Tests.csproj", "{FB7E86EF-4085-456B-8216-D3D515E67902}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,14 @@ Global
 		{73A1624E-465B-40E5-9C7E-D0F6FF0E5521}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73A1624E-465B-40E5-9C7E-D0F6FF0E5521}.Release|x86.ActiveCfg = Release|Any CPU
 		{73A1624E-465B-40E5-9C7E-D0F6FF0E5521}.Release|x86.Build.0 = Release|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB7E86EF-4085-456B-8216-D3D515E67902}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
