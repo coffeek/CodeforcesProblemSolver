@@ -321,4 +321,22 @@ public static class Numbers
   {
     return (value + div - 1) / div;
   }
+  
+  /// <summary>
+  /// Digital root of number (https://en.wikipedia.org/wiki/Digital_root).
+  /// </summary>
+  /// <remarks>
+  /// Iterative process of summing digits, on each iteration using the result from
+  /// the previous iteration to compute a digit sum. The process continues until a single-digit
+  /// number is reached.
+  /// This is O(1) time implementation.
+  /// </remarks>
+  public static int DigitalRoot(int n)
+  {
+    if (n == 0)
+      return 0;
+    if (n % 9 == 0)
+      return 9;
+    return n % 9;
+  }
 }

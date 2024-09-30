@@ -278,6 +278,16 @@ public class NumbersTests
   {
     Numbers.CeilDiv(value, div).Should().Be(expected);
   }
+  
+  [TestCase(38, 2)]
+  [TestCase(0, 0)]
+  [TestCase(9999, 9)]
+  [TestCase(3333, 3)]
+  [TestCase(179, 8)]
+  public void DigitalRootTest(int num, int expected)
+  {
+    Numbers.DigitalRoot(num).Should().Be(expected);
+  }
 
   [TestFixture]
   public class SieveTests
