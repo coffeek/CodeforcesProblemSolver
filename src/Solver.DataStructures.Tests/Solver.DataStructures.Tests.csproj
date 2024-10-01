@@ -24,5 +24,8 @@
     <Compile Include="..\GlobalUsings.cs">
       <Link>GlobalUsings.cs</Link>
     </Compile>
+    <Compile Include="..\GlobalUsings.Tests.cs">
+      <Link>GlobalUsings.Tests.cs</Link>
+    </Compile>
   </ItemGroup>
 </Project>
