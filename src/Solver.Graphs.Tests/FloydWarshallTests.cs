@@ -1,6 +1,4 @@
-using Solver.Graphs;
-
-namespace Solver.Tests.Graphs;
+namespace Solver.Graphs.Tests;
 
 [TestFixture]
 public class FloydWarshallTests
@@ -32,7 +30,7 @@ public class FloydWarshallTests
   [Test]
   public void FindDistance_ForListOfEdgesGraph()
   {
-    var graph = new List<(int to, int w)>[4]
+    var graph = new List<(int to, int w)>[]
     {
       new() { (1, 3), }, 
       new() { (0, 3), (2, 1), (3, 4) }, 

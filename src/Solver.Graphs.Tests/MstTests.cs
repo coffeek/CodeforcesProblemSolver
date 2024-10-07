@@ -1,6 +1,4 @@
-using Solver.Graphs;
-
-namespace Solver.Tests.Graphs;
+namespace Solver.Graphs.Tests;
 
 [TestFixture]
 public class MstTests
