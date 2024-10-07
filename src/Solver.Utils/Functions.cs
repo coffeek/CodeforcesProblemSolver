@@ -47,6 +47,49 @@ public static class Functions
       }
     }
   }
+  
+  public static void NextPermutation(int[] nums)
+  {
+    var n = nums.Length;
+    for (var i = n - 2; i >= 0; i--)
+    {
+      if (nums[i] >= nums[i + 1])
+        continue;
+      for (var j = n - 1; j > i; j--)
+      {
+        if (nums[j] > nums[i])
+        {
+          (nums[i], nums[j]) = (nums[j], nums[i]);
+          nums.AsSpan(i + 1).Reverse();
+          return;
+        }
+      }
+    }
+    nums.AsSpan().Reverse();
+  }
+  
+  public static void NextPermutationBinarySearch(int[] nums)
+  {
+    var i = nums.Length - 2;
+    while (i >= 0 && nums[i] >= nums[i + 1])
+      i--;
+
+    if (i >= 0)
+    {
+      var l = i + 1;
+      var r = nums.Length;
+      while (l < r)
+      {
+        var m = l + (r - l) / 2;
+        if (nums[m] > nums[i])
+          l = m + 1;
+        else
+          r = m;
+      }
+      (nums[i], nums[r - 1]) = (nums[r - 1], nums[i]);
+    }
+    nums.AsSpan(i + 1).Reverse();
+  }
 
   public static bool IsVovel(char c) => "aeiouy".Contains(c);
 

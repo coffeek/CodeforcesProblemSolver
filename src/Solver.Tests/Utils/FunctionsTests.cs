@@ -62,4 +62,32 @@ public class FunctionsTests
   {
     Functions.Combinations(n, k).Should().Be(expected);
   }
+  
+  [TestCase(new[] { 1, 2, 3 }, new[] { 1, 3, 2 })]
+  [TestCase(new[] { 3, 2, 1 }, new[] { 1, 2, 3 })]
+  [TestCase(new[] { 1, 1, 5 }, new[] { 1, 5, 1 })]
+  [TestCase(new[] { 1, 3, 2 }, new[] { 2, 1, 3 })]
+  [TestCase(new[] { 2, 3, 1 }, new[] { 3, 1, 2 })]
+  [TestCase(new[] { 1, 2 }, new[] { 2, 1 })]
+  [TestCase(new[] { 2, 1 }, new[] { 1, 2 })]
+  [TestCase(new[] { 2 }, new[] { 2 })]
+  public void NextPermutationTest(int[] nums, int[] expected)
+  {
+    Functions.NextPermutation(nums);
+    nums.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
+  }
+  
+  [TestCase(new[] { 1, 2, 3 }, new[] { 1, 3, 2 })]
+  [TestCase(new[] { 3, 2, 1 }, new[] { 1, 2, 3 })]
+  [TestCase(new[] { 1, 1, 5 }, new[] { 1, 5, 1 })]
+  [TestCase(new[] { 1, 3, 2 }, new[] { 2, 1, 3 })]
+  [TestCase(new[] { 2, 3, 1 }, new[] { 3, 1, 2 })]
+  [TestCase(new[] { 1, 2 }, new[] { 2, 1 })]
+  [TestCase(new[] { 2, 1 }, new[] { 1, 2 })]
+  [TestCase(new[] { 2 }, new[] { 2 })]
+  public void NextPermutationBinarySearchTest(int[] nums, int[] expected)
+  {
+    Functions.NextPermutationBinarySearch(nums);
+    nums.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
+  }
 }
