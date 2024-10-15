@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solver.Geometry.Tests", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solver.Graphs.Tests", "Solver.Graphs.Tests\Solver.Graphs.Tests.csproj", "{8BC48A38-E75D-4406-A8B9-193B6ED02E01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solver.Sequences.Tests", "Solver.Sequences.Tests\Solver.Sequences.Tests.csproj", "{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,14 @@ Global
 		{8BC48A38-E75D-4406-A8B9-193B6ED02E01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8BC48A38-E75D-4406-A8B9-193B6ED02E01}.Release|x86.ActiveCfg = Release|Any CPU
 		{8BC48A38-E75D-4406-A8B9-193B6ED02E01}.Release|x86.Build.0 = Release|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Debug|x86.Build.0 = Debug|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{4F0A88CA-E6EA-43CF-88A0-BE4344B255AB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

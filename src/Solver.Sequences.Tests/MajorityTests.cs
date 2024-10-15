@@ -1,6 +1,4 @@
-using Solver.Sequences;
-
-namespace Solver.Tests.Sequences;
+namespace Solver.Sequences.Tests;
 
 [TestFixture]
 public class MajorityTests
