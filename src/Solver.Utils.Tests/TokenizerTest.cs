@@ -1,4 +1,4 @@
-﻿namespace Solver.Tests.Utils;
+﻿namespace Solver.Utils.Tests;
 
 [TestFixture]
 public class TokenizerTest

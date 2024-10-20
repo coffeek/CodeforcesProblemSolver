@@ -1,27 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <ProjectGuid>{E4984BB2-6633-4A77-A835-CB75B75E71A3}</ProjectGuid>
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <OutputType>Library</OutputType>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Solver.Geometry\Solver.Geometry.csproj" />
-    <ProjectReference Include="..\Solver.Graphs\Solver.Graphs.csproj" />
-    <ProjectReference Include="..\Solver.Sequences\Solver.Sequences.csproj" />
     <ProjectReference Include="..\Solver.Sorting\Solver.Sorting.csproj" />
     <ProjectReference Include="..\Solver.Strings\Solver.Strings.csproj" />
     <ProjectReference Include="..\Solver\Solver.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Using Include="FluentAssertions"/>
+    <Using Include="NUnit.Framework"/>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.2" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
-
 </Project>

@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <ProjectGuid>{7719CB81-73F5-4FE2-8687-6FEF14989735}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj" />
+    <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj"/>
   </ItemGroup>
-
 </Project>

@@ -1,6 +1,4 @@
-﻿using Solver.Utils;
-
-namespace Solver.Tests.Utils;
+﻿namespace Solver.Utils.Tests;
 
 [TestFixture]
 public class CounterTests

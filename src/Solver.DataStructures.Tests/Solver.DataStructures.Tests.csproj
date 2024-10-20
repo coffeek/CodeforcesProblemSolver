@@ -15,6 +15,7 @@
     <PackageReference Include="FluentAssertions" Version="5.10.2"/>
   </ItemGroup>
   <ItemGroup>
+    <Using Include="FluentAssertions"/>
     <Using Include="NUnit.Framework"/>
   </ItemGroup>
   <ItemGroup>
@@ -23,9 +24,6 @@
   <ItemGroup>
     <Compile Include="..\GlobalUsings.cs">
       <Link>GlobalUsings.cs</Link>
-    </Compile>
-    <Compile Include="..\GlobalUsings.Tests.cs">
-      <Link>GlobalUsings.Tests.cs</Link>
     </Compile>
   </ItemGroup>
 </Project>

@@ -1,14 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="3.2.0"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0"/>
@@ -17,22 +14,16 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2"/>
     <PackageReference Include="FluentAssertions" Version="5.10.2"/>
   </ItemGroup>
-
   <ItemGroup>
+    <Using Include="FluentAssertions"/>
     <Using Include="NUnit.Framework"/>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\GlobalUsings.cs">
       <Link>GlobalUsings.cs</Link>
     </Compile>
-    <Compile Include="..\GlobalUsings.Tests.cs">
-      <Link>GlobalUsings.Tests.cs</Link>
-    </Compile>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Solver.Graphs\Solver.Graphs.csproj" />
+    <ProjectReference Include="..\Solver.Graphs\Solver.Graphs.csproj"/>
   </ItemGroup>
-
 </Project>
