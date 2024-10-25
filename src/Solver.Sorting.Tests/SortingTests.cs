@@ -1,4 +1,4 @@
-namespace Solver.Tests.Sorting;
+namespace Solver.Sorting.Tests;
 
 [TestFixture]
 public class SortingTests
