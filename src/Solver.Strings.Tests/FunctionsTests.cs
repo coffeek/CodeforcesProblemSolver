@@ -1,6 +1,4 @@
-﻿using Solver.Strings;
-
-namespace Solver.Tests.Strings;
+﻿namespace Solver.Strings.Tests;
 
 public class FunctionsTests
 {

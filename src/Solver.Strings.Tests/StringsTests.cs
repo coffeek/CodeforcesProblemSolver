@@ -1,6 +1,4 @@
-﻿using Solver.Strings;
-
-namespace Solver.Tests.Strings;
+﻿namespace Solver.Strings.Tests;
 
 [TestFixture]
 public class StringsTests

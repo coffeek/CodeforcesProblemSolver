@@ -20,4 +20,9 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalUsings.cs">
+      <Link>GlobalUsings.cs</Link>
+    </Compile>
+  </ItemGroup>
 </Project>
