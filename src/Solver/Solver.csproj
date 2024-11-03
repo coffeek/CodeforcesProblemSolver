@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>disable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="..\GlobalUsings.cs"/>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj"/>
   </ItemGroup>

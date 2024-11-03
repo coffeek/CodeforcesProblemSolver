@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.1"/>
@@ -12,10 +10,5 @@
     <ProjectReference Include="..\Solver.Utils\Solver.Utils.csproj"/>
     <ProjectReference Include="..\Solver.Strings\Solver.Strings.csproj"/>
     <ProjectReference Include="..\Solver\Solver.csproj"/>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\GlobalUsings.cs">
-      <Link>GlobalUsings.cs</Link>
-    </Compile>
   </ItemGroup>
 </Project>

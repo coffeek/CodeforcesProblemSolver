@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <LangVersion>10</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)\GlobalUsings.cs">
+      <Link>GlobalUsings.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup Condition="$(ProjectName.EndsWith('.Tests'))">
+    <PackageReference Include="coverlet.collector" Version="3.2.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0"/>
+    <PackageReference Include="NUnit" Version="3.13.3"/>
+    <PackageReference Include="NUnit3TestAdapter" Version="4.4.2"/>
+    <PackageReference Include="FluentAssertions" Version="5.10.2"/>
+  </ItemGroup>
+  <ItemGroup Condition="$(ProjectName.EndsWith('.Tests'))">
+    <Using Include="FluentAssertions"/>
+    <Using Include="NUnit.Framework"/>
+  </ItemGroup>
+</Project> 

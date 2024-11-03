@@ -1,19 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Include="..\GlobalUsings.cs">
-        <Link>GlobalUsings.cs</Link>
-      </Compile>
-    </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj"/>
+  </ItemGroup>
 </Project>
