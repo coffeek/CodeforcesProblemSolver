@@ -119,4 +119,12 @@ public static class Bitmasks
   {
     return n > 0 && (n & (n - 1)) == 0 && (n & 0x55555555) != 0;
   }
+
+  /// <summary>
+  /// Return 1 if <see cref="n"/> is not zero, 0 else.
+  /// </summary>
+  public static int IsNotZero(int n)
+  {
+    return (n | (~n + 1)) >> 31 & 1;
+  }
 }

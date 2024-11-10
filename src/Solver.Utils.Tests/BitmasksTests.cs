@@ -103,4 +103,15 @@ public class BitmasksTests
   {
     Bitmasks.Mso(n).Should().Be(expected);
   }
+
+  [TestCase(0, 0)]
+  [TestCase(1,1)]
+  [TestCase(2,1)]
+  [TestCase(619874,1)]
+  [TestCase(int.MaxValue,1)]
+  [TestCase(int.MinValue,0)]
+  public void IsNotZeroTests(int n, int expected)
+  {
+    Bitmasks.IsNotZero(n).Should().Be(expected);
+  }
 }
