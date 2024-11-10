@@ -109,7 +109,7 @@ public class BitmasksTests
   [TestCase(2,1)]
   [TestCase(619874,1)]
   [TestCase(int.MaxValue,1)]
-  [TestCase(int.MinValue,0)]
+  [TestCase(int.MinValue,1)]
   public void IsNotZeroTests(int n, int expected)
   {
     Bitmasks.IsNotZero(n).Should().Be(expected);
