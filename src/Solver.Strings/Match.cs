@@ -22,6 +22,7 @@ public static class Match
         r = i + z[i] - 1;
       }
     }
+
     return z;
   }
 
@@ -49,6 +50,7 @@ public static class Match
         r = i + z[i] - 1;
       }
     }
+
     return -1;
   }
 
@@ -68,6 +70,7 @@ public static class Match
         k++;
       pi[i] = k;
     }
+
     return pi;
   }
 
@@ -88,6 +91,51 @@ public static class Match
       if (q == m)
         return i - m + 1;
     }
+
     return -1;
+  }
+
+  public static List<int> KmpMatchAll(string text, string pattern)
+  {
+    var occurrences = new List<int>();
+    var prefixFunc = PiFunc2(pattern);
+    int i = 0, j = 0;
+    while (i < text.Length)
+    {
+      if (text[i] == pattern[j])
+      {
+        i++;
+        j++;
+        if (j == pattern.Length)
+        {
+          occurrences.Add(i - j);
+          j = prefixFunc[j - 1];
+        }
+      }
+      else if (j > 0)
+        j = prefixFunc[j - 1];
+      else
+        i++;
+    }
+
+    return occurrences;
+  }
+
+  // Same as PiFunc(), just a different implementation.
+  private static int[] PiFunc2(string pattern)
+  {
+    var lps = new int[pattern.Length];
+    int len = 0, i = 1;
+    while (i < pattern.Length)
+    {
+      if (pattern[i] == pattern[len])
+        lps[i++] = ++len;
+      else if (len > 0)
+        len = lps[len - 1];
+      else
+        lps[i++] = 0;
+    }
+
+    return lps;
   }
 }
