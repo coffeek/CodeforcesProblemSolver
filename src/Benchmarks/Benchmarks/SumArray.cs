@@ -1,3 +1,6 @@
+using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 
@@ -44,14 +47,14 @@ public class SumArray
   //   return result;
   // }
   
-  [Benchmark]
-  public int LinqSum()
-  {
-    var result = a.Sum();
-    if (result != expected)
-      throw new InvalidOperationException();
-    return result;
-  }
+  // [Benchmark]
+  // public int LinqSum()
+  // {
+  //   var result = a.Sum();
+  //   if (result != expected)
+  //     throw new InvalidOperationException();
+  //   return result;
+  // }
 
   [Benchmark]
   public int VectorSum()
@@ -66,6 +69,22 @@ public class SumArray
       result += a[i];
     if (result != expected)
       throw new InvalidOperationException();
+    return result;
+  }
+  
+  [Benchmark]
+  public int SumIntrinsics()
+  {
+    var vectors = MemoryMarshal.Cast<int, Vector256<int>>(a);
+    var acc = Vector256<int>.Zero;
+    foreach (var v in vectors)
+      acc = Avx2.Add(acc, v);
+    var acc2 = Sse2.Add(acc.GetLower(), acc.GetUpper());
+    var result = 0;
+    for (int i = 0; i < 4; i++)
+      result += acc2.GetElement(i);
+    for (var i = vectors.Length * Vector256<int>.Count; i < a.Length; i++)
+      result += a[i];
     return result;
   }
 }
